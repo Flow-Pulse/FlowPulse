@@ -127,7 +127,7 @@ export function Shell({ route, onRoute, children }: { route: Route; onRoute: (r:
       <header className="sticky top-0 z-30 border-b border-line bg-paper/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2.5 md:px-6">
           <a href="#/streams" className="flex min-w-0 items-center gap-2.5">
-            <img src="/favicon.svg" alt="" className="size-8 shrink-0" />
+            <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" className="size-8 shrink-0" />
             <div className="min-w-0">
               <div className="font-display text-lg font-semibold leading-tight tracking-tight text-ink">FlowPulse</div>
               <div className="flex items-center gap-1.5 truncate font-mono text-[10px] uppercase tracking-wide text-lead">

@@ -11,6 +11,8 @@ Most open-source funding still arrives as one-off grants. FlowPulse gives sponso
 | **CI/CD bounties** | Rules that watch a repo for merged, labeled PRs. Contributors opt in with `stellar: G…` in the PR description and are paid as a bounty stream in one click. | [`frontend/src/lib/ci.ts`](frontend/src/lib/ci.ts) |
 | **Audit receipts** | Every transaction yields an RFC-8785 (JCS) receipt with a SHA-256 digest, an Ed25519-signed envelope, and a Horizon ledger anchor. Anyone can verify it client-side. | [`frontend/src/lib/receipts.ts`](frontend/src/lib/receipts.ts) |
 
+**Live demo:** https://flow-pulse.github.io/FlowPulse/ (Stellar testnet; use [Freighter](https://freighter.app) set to Testnet)
+
 > **Status:** v0.1, **testnet only**. The contracts have not been audited, so don't point them at real funds.
 
 ## Live testnet deployment
