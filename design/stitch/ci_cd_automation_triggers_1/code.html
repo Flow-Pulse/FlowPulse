@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#0c1324;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary": "#003824", "secondary-fixed": "#e1e0ff", "on-primary": "#00363a", "surface-bright": "#33394c", "surface-variant": "#2e3447", "on-primary-fixed": "#002022", "outline-variant": "#3b494b", "error": "#ffb4ab", "on-secondary-fixed-variant": "#2f2ebe", "inverse-surface": "#dce1fb", "error-container": "#93000a", "on-background": "#dce1fb", "on-tertiary-fixed": "#002113", "inverse-on-surface": "#2a3043", "background": "#0c1324", "primary-fixed-dim": "#00dbe9", "surface-container-lowest": "#070d1f", "primary-fixed": "#7df4ff", "tertiary-fixed-dim": "#4edea3", "primary-container": "#00f0ff", "surface-container-highest": "#2e3447", "surface-container": "#191f31", "on-secondary-container": "#b0b2ff", "surface-tint": "#00dbe9", "on-error": "#690005", "on-surface": "#dce1fb", "inverse-primary": "#006970", "surface-container-low": "#151b2d", "on-primary-fixed-variant": "#004f54", "on-primary-container": "#006970", "on-secondary-fixed": "#07006c", "secondary": "#c0c1ff", "tertiary": "#d8ffe7", "surface": "#0c1324", "primary": "#dbfcff", "secondary-container": "#3131c0", "secondary-fixed-dim": "#c0c1ff", "tertiary-container": "#65f2b5", "on-error-container": "#ffdad6", "surface-dim": "#0c1324", "on-secondary": "#1000a9", "outline": "#849495", "on-tertiary-container": "#006d4a", "on-surface-variant": "#b9cacb", "on-tertiary-fixed-variant": "#005236", "tertiary-fixed": "#6ffbbe", "surface-container-high": "#23293c" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-mobile": "1rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "gutter-mobile": "0.75rem", "space-xl": "2.5rem", "margin": "2rem", "gutter": "1.5rem", "space-md": "1rem" }, "fontFamily": { "code-lg": ["JetBrains Mono"], "headline-sm": ["Space Grotesk"], "body-lg": ["Geist"], "display-lg": ["Space Grotesk"], "body-md": ["Geist"], "code-sm": ["JetBrains Mono"], "code-md": ["JetBrains Mono"], "display-lg-mobile": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "body-sm": ["Geist"], "headline-md": ["Space Grotesk"], "label-md": ["JetBrains Mono"] }, "fontSize": { "code-lg": ["15px", { "lineHeight": "22px", "fontWeight": "500" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }], "code-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" }], "code-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }], "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 w-full z-50 pt-safe bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_12px_rgba(0,240,255,0.06)]"><div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="FlowPulse Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WHhUV56vebTBvPJK68DHOZgt7gdm9Tx_KC3LC7tXcijtHhBh6YQS8SMmwMhgX46NqqJp-eFOPc4vmWAdMj1HirFVQjBNSWvfflENS8Y945lDxAHIbf7APuzsAhYq8gwcAvt0RNVt86JFqmbKjlgRihiFFzfDzgEzfJh6Jh6fhaXjvc-cgFQvhL4OUp4WDt2hBIUYhYzEWRE35VSyFYyyjTqz5sGb7RgYkL3mqoODWb"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary truncate tracking-tight">FlowPulse</span></div><div class="flex items-center gap-1.5"><span class="inline-block w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse shadow-[0_0_8px_#00F0FF]"></span><span class="font-code-sm text-code-sm text-on-surface-variant truncate uppercase tracking-wider">Soroban Mainnet · Active</span></div></div></div><div class="flex items-center gap-space-sm flex-shrink-0"><div class="hidden sm:flex flex-col items-end"><span class="font-code-sm text-code-sm text-primary-fixed">Cicd Repos</span></div><button aria-label="Account profile" class="w-11 h-11 rounded-full p-0.5 flex items-center justify-center bg-surface-container-high/60 active:scale-95 transition-transform" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz4gj-U3t3oqr7THxxZbOcKADhEl5nMjRjHuid1FbAT60Trl6PWVbSwu0BmYhuWJPEk8sEmDrkSfH9U8lCd2_Bqt70TitFli5afF3bsUoywP-TxO1q2KtsJxPxXtFezoA-GV5eysfh2OayG2H7-HeBoL_euU8cvM_40Hr8ofUlqG95Yp_krAZ1ItV0_FV1nZkPqFbiNx8cPvQINXitsV2VLN_YMAsbsYpgpSd9L7E"/></button></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface flex-1"><div class="flex flex-col w-full px-gutter-mobile py-space-sm space-y-space-md">
+<!-- Overview Telemetry & Synced State -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low p-space-md shadow-md">
+<div class="absolute -right-10 -top-10 w-36 h-36 rounded-full bg-primary-container/10 blur-2xl pointer-events-none"></div>
+<div class="flex flex-col space-y-space-sm relative z-10">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-primary-container" style="font-variation-settings: 'FILL' 1;">hub</span>
+<span class="font-code-sm text-code-sm text-primary uppercase tracking-wider">CI/CD Automation Matrix</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container-highest">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-ping"></span>
+<span class="font-code-sm text-code-sm text-tertiary">Live Webhook</span>
+</div>
+</div>
+<!-- Quick Metrics Counters -->
+<div class="grid grid-cols-2 gap-space-xs pt-1">
+<div class="p-space-sm rounded-lg bg-surface-container flex flex-col justify-center">
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-md text-headline-md text-primary">3</span>
+<span class="font-label-md text-label-md text-on-surface-variant">REPOS</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Connected via GitHub App</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container flex flex-col justify-center">
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-md text-headline-md text-primary-fixed-dim">8</span>
+<span class="font-label-md text-label-md text-on-surface-variant">RULES</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Active Automation Triggers</span>
+</div>
+</div>
+<!-- Telemetry Health Ribbon -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest text-on-surface-variant">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">verified</span>
+<span class="font-code-sm text-code-sm text-on-surface truncate">GitHub App Connected</span>
+</div>
+<div class="flex items-center gap-1 font-code-sm text-code-sm text-on-surface-variant shrink-0">
+<span class="material-symbols-outlined text-[14px] text-primary-container">speed</span>
+<span>Latency: <strong class="text-primary font-code-sm text-code-sm">142ms</strong></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Automated Trigger Rules Section -->
+<div class="flex flex-col space-y-space-sm">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[20px] text-primary">dynamic_form</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Automated Trigger Rules</h2>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high font-code-sm text-code-sm text-primary-fixed">3 Running</span>
+</div>
+<!-- Rule 1: PR Merge Bounty Drip -->
+<div class="rounded-xl bg-surface-container-low p-space-md shadow-sm space-y-space-sm transition-all duration-200 hover:bg-surface-container">
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-8 h-8 rounded-lg bg-secondary-container/50 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px] text-secondary">call_merge</span>
+</div>
+<div class="min-w-0">
+<h3 class="font-headline-sm text-headline-sm text-primary truncate leading-tight">PR Merge Bounty Drip</h3>
+<div class="flex items-center gap-1 text-on-surface-variant font-code-sm text-code-sm truncate">
+<span class="material-symbols-outlined text-[13px]">emoji_symbols</span>
+<span>flowpulse/soroban-streamer</span>
+</div>
+</div>
+</div>
+<!-- Status Pill -->
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-highest text-tertiary-fixed-dim font-code-sm text-code-sm shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span>
+          Active
+        </span>
+</div>
+<!-- Logic Pipeline Specs -->
+<div class="space-y-1.5 rounded-lg bg-surface-container-lowest p- space-xs p-2.5">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant shrink-0 w-16">EVENT</span>
+<code class="font-code-sm text-code-sm text-primary-fixed bg-surface-variant/60 px-1.5 py-0.5 rounded truncate">pull_request.closed == merged</code>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant shrink-0 w-16">FILTER</span>
+<div class="flex items-center gap-1 min-w-0 truncate">
+<span class="font-code-sm text-code-sm text-on-surface-variant">Labels include</span>
+<span class="px-1.5 py-0.2 rounded font-code-sm text-code-sm bg-secondary-fixed/10 text-secondary-fixed">bounty-approved</span>
+</div>
+</div>
+<div class="flex items-start gap-2 pt-0.5">
+<span class="font-label-md text-label-md text-primary-container shrink-0 w-16">ACTION</span>
+<span class="font-body-sm text-body-sm text-on-surface">Stream 150 XLM over 48h to PR author GitHub Stellar address</span>
+</div>
+</div>
+<!-- Footer Micro-Status -->
+<div class="flex items-center justify-between text-on-surface-variant pt-0.5 px-0.5">
+<div class="flex items-center gap-1 font-code-sm text-code-sm text-on-tertiary-fixed-dim truncate">
+<span class="material-symbols-outlined text-[14px] text-tertiary-container">schedule</span>
+<span>Fired 14 mins ago for <span class="text-primary font-code-sm text-code-sm">@alex_dev</span></span>
+</div>
+<button aria-label="Configure rule" class="w-7 h-7 rounded-lg flex items-center justify-center bg-surface-container-high text-on-surface-variant hover:text-primary active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+</button>
+</div>
+</div>
+<!-- Rule 2: Continuous Test Pass Streaming -->
+<div class="rounded-xl bg-surface-container-low p-space-md shadow-sm space-y-space-sm transition-all duration-200 hover:bg-surface-container">
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px] text-primary-container">speed</span>
+</div>
+<div class="min-w-0">
+<h3 class="font-headline-sm text-headline-sm text-primary truncate leading-tight">Continuous Test Pass Streaming</h3>
+<div class="flex items-center gap-1 text-on-surface-variant font-code-sm text-code-sm truncate">
+<span class="material-symbols-outlined text-[13px]">emoji_symbols</span>
+<span>stellar-org/soroban-tools</span>
+</div>
+</div>
+</div>
+<!-- Status Pill -->
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-highest text-primary font-code-sm text-code-sm shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+          Running
+        </span>
+</div>
+<!-- Logic Pipeline Specs -->
+<div class="space-y-1.5 rounded-lg bg-surface-container-lowest p-2.5">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant shrink-0 w-16">EVENT</span>
+<code class="font-code-sm text-code-sm text-primary-fixed bg-surface-variant/60 px-1.5 py-0.5 rounded truncate">workflow_run.conclusion == success</code>
+</div>
+<div class="flex items-start gap-2 pt-0.5">
+<span class="font-label-md text-label-md text-primary-container shrink-0 w-16">ACTION</span>
+<span class="font-body-sm text-body-sm text-on-surface">Increase streaming velocity by <strong class="text-tertiary font-code-sm text-code-sm">+0.0005 XLM/sec</strong> to core contributors</span>
+</div>
+</div>
+<!-- Footer Micro-Status -->
+<div class="flex items-center justify-between text-on-surface-variant pt-0.5 px-0.5">
+<div class="flex items-center gap-1 font-code-sm text-code-sm text-on-surface-variant truncate">
+<span class="material-symbols-outlined text-[14px] text-primary-fixed-dim">sync</span>
+<span>12 CI jobs verified today</span>
+</div>
+<button aria-label="Configure rule" class="w-7 h-7 rounded-lg flex items-center justify-center bg-surface-container-high text-on-surface-variant hover:text-primary active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+</button>
+</div>
+</div>
+<!-- Rule 3: Security Patch Instant Milestone -->
+<div class="rounded-xl bg-surface-container-low p-space-md shadow-sm space-y-space-sm transition-all duration-200 hover:bg-surface-container">
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-8 h-8 rounded-lg bg-error-container/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px] text-error">shield_lock</span>
+</div>
+<div class="min-w-0">
+<h3 class="font-headline-sm text-headline-sm text-primary truncate leading-tight">Security Patch Instant Milestone</h3>
+<div class="flex items-center gap-1 text-on-surface-variant font-code-sm text-code-sm truncate">
+<span class="material-symbols-outlined text-[13px]">emoji_symbols</span>
+<span>flowpulse/core-contracts</span>
+</div>
+</div>
+</div>
+<!-- Status Pill -->
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface-variant font-code-sm text-code-sm shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+          Standby
+        </span>
+</div>
+<!-- Logic Pipeline Specs -->
+<div class="space-y-1.5 rounded-lg bg-surface-container-lowest p-2.5">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant shrink-0 w-16">EVENT</span>
+<code class="font-code-sm text-code-sm text-primary-fixed bg-surface-variant/60 px-1.5 py-0.5 rounded truncate">dependabot / security advisory resolved</code>
+</div>
+<div class="flex items-start gap-2 pt-0.5">
+<span class="font-label-md text-label-md text-primary-container shrink-0 w-16">ACTION</span>
+<span class="font-body-sm text-body-sm text-on-surface">Immediate 250 USDC milestone payout from Soroban Escrow</span>
+</div>
+</div>
+<!-- Footer Micro-Status -->
+<div class="flex items-center justify-between text-on-surface-variant pt-0.5 px-0.5">
+<div class="flex items-center gap-1 font-code-sm text-code-sm text-on-surface-variant truncate">
+<span class="material-symbols-outlined text-[14px]">lock_clock</span>
+<span>Escrow Vault: #0921-Soroban</span>
+</div>
+<button aria-label="Configure rule" class="w-7 h-7 rounded-lg flex items-center justify-center bg-surface-container-high text-on-surface-variant hover:text-primary active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Trigger History Feed -->
+<div class="flex flex-col space-y-space-sm pt-space-xs">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary">history_toggle_off</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Execution Audit Log</h2>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface-variant uppercase">Real-time Stream</span>
+</div>
+<!-- History Feed Cards -->
+<div class="flex flex-col space-y-2">
+<!-- Item 1: Disbursed / Streaming Initiation -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col space-y-1.5 shadow-sm">
+<div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+<span class="font-body-md text-body-md text-primary truncate font-medium">PR #104 merged by @mariana_rs</span>
+</div>
+<!-- Green Disbursed Badge -->
+<span class="px-2 py-0.5 rounded-full bg-on-tertiary font-code-sm text-code-sm text-tertiary-container shrink-0">
+            Disbursed
+          </span>
+</div>
+<div class="flex items-center justify-between pl-6 text-on-surface-variant font-code-sm text-code-sm">
+<span class="text-tertiary">+50 XLM stream initiated</span>
+<div class="flex items-center gap-1">
+<span>Tx:</span>
+<span class="font-code-sm text-code-sm text-primary-fixed bg-surface-container px-1 py-0.2 rounded">9a41...c10b</span>
+</div>
+</div>
+</div>
+<!-- Item 2: Release Cascaded Streaming -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col space-y-1.5 shadow-sm">
+<div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="material-symbols-outlined text-[16px] text-primary-container">waves</span>
+<span class="font-body-md text-body-md text-primary truncate font-medium">Release v1.2.0 Tagged</span>
+</div>
+<!-- Cyan Streaming Badge -->
+<span class="px-2 py-0.5 rounded-full bg-surface-variant font-code-sm text-code-sm text-primary-container shrink-0">
+            Streaming
+          </span>
+</div>
+<div class="flex items-center justify-between pl-6 text-on-surface-variant font-code-sm text-code-sm">
+<span class="text-on-surface truncate">Cascaded 500 XLM down Cargo.lock tree</span>
+<span class="text-primary-fixed-dim shrink-0">16 splits</span>
+</div>
+</div>
+<!-- Item 3: Queued Dependabot Event -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col space-y-1.5 shadow-sm">
+<div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="material-symbols-outlined text-[16px] text-secondary">pending_actions</span>
+<span class="font-body-md text-body-md text-primary truncate font-medium">CVE-2024-814 Mitigation PR</span>
+</div>
+<!-- Yellow Queued Badge (styled with secondary-container / warning style) -->
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/40 font-code-sm text-code-sm text-secondary-fixed shrink-0">
+            Queued
+          </span>
+</div>
+<div class="flex items-center justify-between pl-6 text-on-surface-variant font-code-sm text-code-sm">
+<span class="text-on-surface truncate">Awaiting CI check pass verification</span>
+<span class="text-on-surface-variant shrink-0">ETA ~4m</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Action Section -->
+<div class="pt-space-xs flex flex-col items-center space-y-space-xs">
+<button class="w-full py-3 px-space-md rounded-xl bg-primary-container text-on-primary-fixed flex items-center justify-center gap-2 font-headline-sm text-headline-sm font-semibold active:scale-[0.98] transition-transform shadow-[0_0_20px_rgba(0,240,255,0.25)]" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span>Create GitHub Action Trigger</span>
+</button>
+<a class="inline-flex items-center gap-1 py-1 px-2 text-on-surface-variant hover:text-primary transition-colors font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[16px] text-primary-container">menu_book</span>
+<span>Read the Soroban Webhook Integration Guide</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+</div>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.5)]" data-active-classes="text-primary-container bg-surface-variant/40"><div class="h-20 px-space-xs grid grid-cols-4 items-center"><a class="min-h-[44px] py-1 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors" data-path="live-streams" href="#"><span class="material-symbols-outlined text-[22px]">bolt</span><span class="font-code-sm text-code-sm tracking-tight text-center truncate w-full px-0.5">Live Streams</span></a><a class="min-h-[44px] py-1 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors" data-path="cascades" href="#"><span class="material-symbols-outlined text-[22px]">layers</span><span class="font-code-sm text-code-sm tracking-tight text-center truncate w-full px-0.5">Cascades</span></a><a aria-current="page" class="min-h-[44px] py-1 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 transition-colors text-primary-container bg-surface-variant/40" data-path="cicd-repos" href="#"><span class="material-symbols-outlined text-[22px]">terminal</span><span class="font-code-sm text-code-sm tracking-tight text-center truncate w-full px-0.5">CI/CD Repos</span></a><a class="min-h-[44px] py-1 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors" data-path="earnings" href="#"><span class="material-symbols-outlined text-[22px]">account_balance_wallet</span><span class="font-code-sm text-code-sm tracking-tight text-center truncate w-full px-0.5">Earnings</span></a></div></nav></body></html>

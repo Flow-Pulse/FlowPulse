@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;margin:0;padding:0;min-height:100%;background-color:#0c1324;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "outline": "#849495", "on-secondary": "#1000a9", "surface-container": "#191f31", "surface-dim": "#0c1324", "inverse-on-surface": "#2a3043", "on-surface": "#dce1fb", "secondary-fixed": "#e1e0ff", "error-container": "#93000a", "surface-bright": "#33394c", "on-background": "#dce1fb", "on-primary-fixed-variant": "#004f54", "on-secondary-container": "#b0b2ff", "on-primary-container": "#006970", "surface-variant": "#2e3447", "on-tertiary": "#003824", "secondary": "#c0c1ff", "on-primary": "#00363a", "tertiary-container": "#65f2b5", "error": "#ffb4ab", "on-secondary-fixed": "#07006c", "tertiary-fixed": "#6ffbbe", "primary-container": "#00f0ff", "inverse-primary": "#006970", "on-tertiary-fixed": "#002113", "on-secondary-fixed-variant": "#2f2ebe", "on-error": "#690005", "surface": "#0c1324", "inverse-surface": "#dce1fb", "tertiary": "#d8ffe7", "outline-variant": "#3b494b", "primary": "#dbfcff", "secondary-fixed-dim": "#c0c1ff", "tertiary-fixed-dim": "#4edea3", "surface-container-highest": "#2e3447", "surface-tint": "#00dbe9", "surface-container-lowest": "#070d1f", "background": "#0c1324", "surface-container-high": "#23293c", "primary-fixed": "#7df4ff", "on-error-container": "#ffdad6", "on-primary-fixed": "#002022", "surface-container-low": "#151b2d", "on-tertiary-container": "#006d4a", "primary-fixed-dim": "#00dbe9", "on-tertiary-fixed-variant": "#005236", "secondary-container": "#3131c0", "on-surface-variant": "#b9cacb" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xs": "0.25rem", "space-xl": "2.5rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-md": "1rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "gutter": "1.5rem", "margin": "2rem" }, "fontFamily": { "body-sm": ["Geist"], "code-md": ["JetBrains Mono"], "headline-lg": ["Space Grotesk"], "body-lg": ["Geist"], "display-lg": ["Space Grotesk"], "headline-md": ["Space Grotesk"], "headline-sm": ["Space Grotesk"], "display-lg-mobile": ["Space Grotesk"], "label-md": ["JetBrains Mono"], "code-lg": ["JetBrains Mono"], "body-md": ["Geist"], "code-sm": ["JetBrains Mono"] }, "fontSize": { "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }], "code-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }], "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }], "code-lg": ["15px", { "lineHeight": "22px", "fontWeight": "500" }], "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }], "code-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary"><header class="fixed top-0 inset-x-0 z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><div class="w-2 h-2 rounded-full bg-tertiary-fixed shadow-[0_0_8px_#10B981] animate-pulse shrink-0"></div><h1 class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate">Cli Verification Modal</h1></div><div class="flex items-center gap-space-sm shrink-0"><button class="w-11 h-11 flex items-center justify-center rounded-xl bg-surface-container-high/60 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">terminal</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface"><div class="flex flex-col w-full">
+<!-- Subtle Ambient Top Conduits -->
+<div class="relative w-full px-margin-mobile pt-space-xs pb-space-lg space-y-space-md">
+<!-- Modal Elevation Card Layer -->
+<div class="relative w-full rounded-xl bg-surface-container/95 backdrop-blur-2xl shadow-2xl p-space-md md:p-space-lg flex flex-col space-y-space-md overflow-hidden">
+<!-- Top Decorative Aura Glow -->
+<div class="absolute -top-24 -right-12 w-64 h-64 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-24 -left-12 w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Drag Handle & Window Dismiss Bar -->
+<div class="flex items-center justify-between w-full">
+<div class="flex items-center space-x-space-xs">
+<div class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></div>
+<span class="font-code-sm text-code-sm uppercase tracking-widest text-primary-fixed-dim">CLI AUTH WRAPPER v1.0.4</span>
+</div>
+<div class="w-10 h-1 rounded-full bg-surface-bright self-center"></div>
+<button aria-label="Close dialog" class="w-7 h-7 rounded-lg bg-surface-container-high/80 text-on-surface-variant flex items-center justify-center hover:bg-surface-variant hover:text-on-surface transition-all active:scale-95" id="close-modal-dummy">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Modal Header -->
+<div class="flex flex-col space-y-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-code-sm text-code-sm bg-tertiary-container/15 text-tertiary-fixed shadow-sm"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed mr-1.5 shadow-[0_0_8px_#10B981] animate-pulse"></span>DOWNLOAD COMPLETED • SHA-256 VERIFIED</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-code-sm text-code-sm bg-surface-container-high text-on-surface-variant">
+            POSIX COMPLIANT
+          </span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-code-sm text-code-sm bg-secondary-container/30 text-secondary-fixed">
+            BASH 5.0+
+          </span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight mt-1">
+          Download Verification Script
+        </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Automated POSIX / Bash Audit Wrapper for localized cryptographic attestations and continuous pipeline streams.
+        </p>
+</div>
+<!-- Section 1: Target Script Configuration Card -->
+<div class="w-full rounded-lg bg-surface-container-lowest/80 p-space-sm space-y-space-sm shadow-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div class="flex items-center space-x-space-xs min-w-0">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container shrink-0 shadow-inner">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center space-x-1.5">
+<span class="font-code-md text-code-md text-on-surface font-semibold truncate">verify-flowpulse-grant.sh</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">· 3.8 KB</span>
+</div>
+<p class="font-code-sm text-code-sm text-primary-fixed-dim flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">verified_user</span>
+                chmod +x flagged (0755)
+              </p>
+</div>
+</div>
+<div class="flex items-center self-start sm:self-auto shrink-0">
+<span class="px-2 py-0.5 rounded-full font-code-sm text-code-sm bg-primary-container/10 text-primary-container">
+              POSIX EXEC
+            </span>
+</div>
+</div>
+<!-- Target Environment Pill Selector -->
+<div class="flex flex-col space-y-1">
+<label class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant text-[10px]">Target Execution Environment</label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 p-1 bg-surface-container-high/40 rounded-lg" id="env-selector-group">
+<button class="env-tab active flex items-center justify-center space-x-1.5 py-1.5 px-2 rounded-md font-label-md text-label-md transition-all text-on-primary bg-primary-container shadow-[0_0_12px_rgba(0,240,255,0.35)]" data-target="local" type="button">
+<span class="material-symbols-outlined text-[14px]">laptop_mac</span>
+<span class="truncate">Local Terminal</span>
+</button>
+<button class="env-tab flex items-center justify-center space-x-1.5 py-1.5 px-2 rounded-md font-label-md text-label-md transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/40" data-target="ci" type="button">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+<span class="truncate">GitHub Actions CI</span>
+</button>
+<button class="env-tab flex items-center justify-center space-x-1.5 py-1.5 px-2 rounded-md font-label-md text-label-md transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/40" data-target="sandbox" type="button">
+<span class="material-symbols-outlined text-[14px]">view_in_ar</span>
+<span class="truncate">Stellar CLI Box</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Section 2: Script Options & Flags Checklist -->
+<div class="w-full flex flex-col space-y-2">
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant">Runtime Configuration Flags</span>
+<div class="grid grid-cols-1 gap-2">
+<!-- Flag 1 -->
+<label class="flex items-start gap-space-xs p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high/60 transition-colors cursor-pointer group">
+<input checked="" class="mt-0.5 h-4 w-4 rounded bg-surface-container-highest text-primary-container focus:ring-0 focus:ring-offset-0 transition checked:bg-primary-container checked:hover:bg-primary-container cursor-pointer" type="checkbox"/>
+<div class="flex flex-col min-w-0">
+<span class="font-code-sm text-code-sm text-on-surface group-hover:text-primary transition-colors font-medium">Auto-install stellar-cli if missing (via cargo/brew)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Checks PATH and offers unattended binary fetch before verification cycle.</span>
+</div>
+</label>
+<!-- Flag 2 -->
+<label class="flex items-start gap-space-xs p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high/60 transition-colors cursor-pointer group">
+<input checked="" class="mt-0.5 h-4 w-4 rounded bg-surface-container-highest text-primary-container focus:ring-0 focus:ring-offset-0 transition checked:bg-primary-container checked:hover:bg-primary-container cursor-pointer" type="checkbox"/>
+<div class="flex flex-col min-w-0">
+<span class="font-code-sm text-code-sm text-on-surface group-hover:text-primary transition-colors font-medium">Strict exit on mismatch (set -euo pipefail)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Deterministic zero-tolerance security mode. Aborts pipeline on untrusted hashes.</span>
+</div>
+</label>
+<!-- Flag 3 -->
+<label class="flex items-start gap-space-xs p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high/60 transition-colors cursor-pointer group">
+<input checked="" class="mt-0.5 h-4 w-4 rounded bg-surface-container-highest text-primary-container focus:ring-0 focus:ring-offset-0 transition checked:bg-primary-container checked:hover:bg-primary-container cursor-pointer" type="checkbox"/>
+<div class="flex flex-col min-w-0">
+<span class="font-code-sm text-code-sm text-on-surface group-hover:text-primary transition-colors font-medium">Generate audit receipt log (./audit-receipt.json)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Structured JSON for CI/CD artifact archiving and Soroban ledger proofs.</span>
+</div>
+</label>
+<!-- Flag 4 -->
+<label class="flex items-start gap-space-xs p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high/60 transition-colors cursor-pointer group">
+<input class="mt-0.5 h-4 w-4 rounded bg-surface-container-highest text-primary-container focus:ring-0 focus:ring-offset-0 transition checked:bg-primary-container checked:hover:bg-primary-container cursor-pointer" type="checkbox"/>
+<div class="flex flex-col min-w-0">
+<span class="font-code-sm text-code-sm text-on-surface group-hover:text-primary transition-colors font-medium">Include Soroban RPC testnet fallback endpoint</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Direct queries via public Standalone Testnet RPC node if primary is offline.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Section 3: Terminal Script Preview Container -->
+<div class="w-full flex flex-col space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant">Generated Execution Script</span>
+<span class="font-code-sm text-code-sm text-primary-fixed-dim">Preview</span>
+</div>
+<div class="w-full rounded-xl bg-surface-container-lowest overflow-hidden shadow-xl">
+<!-- Terminal Titlebar with Traffic Lights -->
+<div class="flex items-center justify-between px-3 py-2 bg-surface-container-high/70">
+<div class="flex items-center space-x-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-error inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-secondary inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed inline-block"></span>
+<span class="ml-2 font-code-sm text-code-sm text-on-surface-variant">verify-flowpulse-grant.sh</span>
+</div>
+<button class="flex items-center space-x-1 px-2 py-0.5 rounded font-label-md text-label-md bg-surface-container text-on-surface-variant hover:text-primary-container hover:bg-surface-variant transition-colors" id="copy-snippet-inline-btn" title="Copy script block">
+<span class="material-symbols-outlined text-[13px]">content_copy</span>
+<span>Copy Snippet</span>
+</button>
+</div>
+<!-- Code Snippet Area -->
+<div class="p-space-sm font-code-sm text-code-sm overflow-x-auto text-on-surface leading-relaxed max-h-56">
+<pre class="font-code-sm text-code-sm"><span class="text-on-surface-variant">#!/usr/bin/env bash</span>
+<span class="text-secondary-fixed">set</span> -euo pipefail
+<span class="text-on-surface-variant"># FlowPulse Drips Grant Verification Script v1.0.4</span>
+<span class="text-primary-container">PUBKEY</span>=<span class="text-tertiary-container">"GB8X7K2M9N6L3Q5V8T1W4Y7Z0A2C5E8G1J4L7O9P42MW"</span>
+<span class="text-primary-container">SIG_HEX</span>=<span class="text-tertiary-container">"0x8f3c71a9e205391d1e4..."</span>
+<span class="text-primary-container">DOSSIER_SHA</span>=<span class="text-tertiary-container">"7f4a8c9b2e3d1a0f92b1..."</span>
+
+<span class="text-secondary-fixed">echo</span> <span class="text-tertiary-container">"==&gt; Verifying Ed25519 signature via stellar tx..."</span>
+stellar tx verify \
+  --signature <span class="text-tertiary-container">"${SIG_HEX}"</span> \
+  --public-key <span class="text-tertiary-container">"${PUBKEY}"</span> \
+  --data-file <span class="text-tertiary-container">"./dossier-flowpulse-v1.0.md"</span>
+<span class="text-secondary-fixed">echo</span> <span class="text-tertiary-container">"[✓] Dossier verified. Integrity exit 0."</span></pre>
+</div>
+</div>
+</div>
+<!-- Section 4: Checksum & Security Attestation -->
+<div class="w-full rounded-xl bg-surface-container-lowest/80 border border-tertiary-container/20 p-space-sm space-y-space-sm shadow-xl"><div class="flex items-center justify-between"><div class="flex items-center space-x-2"><div class="w-7 h-7 rounded-lg bg-tertiary-container/15 flex items-center justify-center text-tertiary-fixed shadow-[0_0_8px_#10B981]"><span class="material-symbols-outlined text-[18px]">verified</span></div><div><div class="font-code-md text-code-md text-on-surface font-semibold flex items-center gap-1.5">verify-flowpulse-grant.sh<span class="px-1.5 py-0.2 rounded font-code-sm text-[10px] bg-tertiary-container/20 text-tertiary-fixed">100% READY</span></div><p class="font-code-sm text-code-sm text-on-surface-variant text-[11px]">Saved to ~/Downloads/verify-flowpulse-grant.sh</p></div></div><span class="px-2 py-0.5 rounded-full font-code-sm text-code-sm bg-tertiary-container/15 text-tertiary-fixed shadow-[0_0_6px_#10B981] flex items-center gap-1 shrink-0"><span class="material-symbols-outlined text-[12px]">check_circle</span>HASH INTEGRITY MATCHED</span></div><div class="space-y-1"><div class="flex items-center justify-between text-code-sm font-code-sm text-on-surface-variant"><span class="text-tertiary-fixed font-medium">3.8 KB / 3.8 KB • 18ms transfer time</span><span class="text-primary-container font-semibold">100%</span></div><div class="w-full h-1.5 rounded-full bg-surface-container-highest overflow-hidden"><div class="h-full w-full bg-gradient-to-r from-primary-container to-tertiary-fixed rounded-full shadow-[0_0_8px_#00F0FF]"></div></div></div><div class="p-2.5 rounded-lg bg-surface-container-high/40 space-y-2 border border-outline-variant/30"><div class="flex items-center justify-between"><span class="font-label-md text-[10px] uppercase tracking-wider text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-tertiary-fixed">fingerprint</span>Strict Hash Comparison</span><span class="px-1.5 py-0.5 rounded font-code-sm text-[10px] bg-tertiary-container/20 text-tertiary-fixed font-semibold tracking-wider">✓ MATCH 0-BIT DIFF (STRICT OK)</span></div><div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 font-code-sm text-[11px]"><div class="p-1.5 rounded bg-surface-container-lowest/80 flex flex-col min-w-0"><span class="text-on-surface-variant text-[10px] uppercase">Expected Remote</span><span class="text-on-surface truncate font-mono select-all">9e41b2c4fa88...31df</span></div><div class="p-1.5 rounded bg-surface-container-lowest/80 flex flex-col min-w-0"><span class="text-on-surface-variant text-[10px] uppercase">Computed Local</span><span class="text-tertiary-fixed truncate font-mono select-all">9e41b2c4fa88...31df</span></div></div><div class="flex items-center justify-between pt-0.5 text-on-surface-variant text-code-sm"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-primary-fixed-dim">security</span>Permissions: <span class="text-on-surface font-semibold">0755 (-rwxr-xr-x)</span></span><span class="text-[11px] text-primary-fixed-dim">Executable Bit Active</span></div></div></div><div class="w-full rounded-lg bg-surface-container-low p-space-sm space-y-2">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+<div class="flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed">lock_clock</span>
+<span class="font-label-md text-label-md text-on-surface-variant">SHA-256 Digest</span>
+</div>
+<div class="flex items-center space-x-1.5">
+<span class="font-code-sm text-code-sm text-on-surface bg-surface-container-highest px-2 py-0.5 rounded font-mono truncate max-w-[200px]">
+              9e41b2c4fa88...31df
+            </span>
+<button class="w-6 h-6 rounded bg-surface-container-high text-on-surface-variant hover:text-primary-container flex items-center justify-center transition-colors" id="copy-checksum-btn" title="Copy Checksum">
+<span class="material-symbols-outlined text-[14px]">copy_all</span>
+</button>
+</div>
+</div>
+<div class="flex items-center space-x-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-secondary">encrypted</span>
+<p class="font-body-sm text-body-sm text-[12px] truncate">
+            Cryptographically signed by maintainer Freighter enclave (<span class="font-code-sm text-primary-fixed-dim">GB8X...42MW</span>)
+          </p>
+</div>
+</div>
+<!-- Section 5: Export Actions & CTAs -->
+<div class="flex flex-col space-y-2 pt-1"><button class="w-full py-3 px-4 rounded-lg bg-primary-container text-on-primary font-headline-sm text-headline-sm flex items-center justify-center space-x-2 shadow-[0_0_24px_rgba(0,240,255,0.45)] hover:brightness-110 active:scale-[0.99] transition-all" id="execute-script-btn"><span class="material-symbols-outlined text-[20px]">terminal</span><span>Run verify.sh in Terminal</span></button><div class="grid grid-cols-1 sm:grid-cols-2 gap-2"><button class="w-full py-2.5 px-3 rounded-lg bg-secondary-container/20 text-secondary-fixed hover:bg-secondary-container/30 transition-all flex items-center justify-center space-x-1.5 active:scale-[0.99]" id="open-folder-btn"><span class="material-symbols-outlined text-[16px]">folder_open</span><span class="font-code-sm text-code-sm truncate">Open in Finder / Folder</span></button><button class="w-full py-2.5 px-3 rounded-lg bg-surface-container-high/60 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all flex items-center justify-center space-x-1.5 active:scale-[0.99]" id="download-trigger-btn"><span class="material-symbols-outlined text-[16px]">file_download</span><span class="font-code-sm text-code-sm">Re-download (.sh)</span></button></div></div>
+<!-- Curl Quick Banner -->
+<div class="px-3 py-2 rounded-lg bg-tertiary-container/10 border border-tertiary-container/20 flex items-center space-x-2 text-tertiary-fixed"><span class="material-symbols-outlined text-[16px] shrink-0">task_alt</span><p class="font-code-sm text-code-sm truncate text-[11px]">File downloaded successfully • Integrity confirmed via Ed25519 payload digest</p></div><div class="p-2 rounded bg-surface-container-lowest/60 flex items-center justify-between gap-2 overflow-hidden">
+<div class="flex items-center space-x-1.5 min-w-0">
+<span class="font-code-sm text-code-sm text-primary-fixed-dim shrink-0">$</span>
+<code class="font-code-sm text-code-sm text-on-surface-variant truncate">curl -sSL https://flowpulse.org/verify.sh | bash</code>
+</div>
+<button class="p-1 text-on-surface-variant hover:text-primary-container shrink-0 transition-colors" id="quick-curl-copy-icon" title="Copy Command">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Interactive Feedback Toast (Delight Element) -->
+<div class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-300 transform translate-y-4 opacity-0 scale-95" id="copy-toast">
+<div class="flex items-center space-x-2 px-4 py-2.5 rounded-full bg-surface-bright text-on-surface shadow-[0_8px_24px_rgba(0,0,0,0.6)] backdrop-blur-xl">
+<span class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#00F0FF]"></span>
+<span class="font-code-sm text-code-sm text-on-surface font-medium" id="copy-toast-msg">Copied Script to Clipboard</span>
+</div>
+</div>
+<!-- Script for Micro-Interactions -->
+<script>
+    (function () {
+      const toast = document.getElementById('copy-toast');
+      const toastMsg = document.getElementById('copy-toast-msg');
+      let toastTimer = null;
+
+      function showToast(message) {
+        if (!toast) return;
+        if (toastMsg) toastMsg.textContent = message || 'Copied Script to Clipboard';
+        toast.classList.remove('opacity-0', 'translate-y-4', 'scale-95', 'pointer-events-none');
+        toast.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.classList.remove('opacity-100', 'translate-y-0', 'scale-100');
+          toast.classList.add('opacity-0', 'translate-y-4', 'scale-95', 'pointer-events-none');
+        }, 2200);
+      }
+
+      // Tab switcher micro-interaction
+      const envTabs = document.querySelectorAll('.env-tab');
+      envTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          envTabs.forEach(t => {
+            t.classList.remove('active', 'text-on-primary', 'bg-primary-container', 'shadow-[0_0_12px_rgba(0,240,255,0.35)]');
+            t.classList.add('text-on-surface-variant');
+          });
+          tab.classList.add('active', 'text-on-primary', 'bg-primary-container', 'shadow-[0_0_12px_rgba(0,240,255,0.35)]');
+          tab.classList.remove('text-on-surface-variant');
+          showToast(`Target switch: ${tab.textContent.trim()}`);
+        });
+      });
+
+      // Quick Copy Buttons
+      const snippet = `#!/usr/bin/env bash
+set -euo pipefail
+# FlowPulse Drips Grant Verification Script v1.0.4
+PUBKEY="GB8X7K2M9N6L3Q5V8T1W4Y7Z0A2C5E8G1J4L7O9P42MW"
+SIG_HEX="0x8f3c71a9e205391d1e4..."
+DOSSIER_SHA="7f4a8c9b2e3d1a0f92b1..."
+
+echo "==> Verifying Ed25519 signature via stellar tx..."
+stellar tx verify \\
+  --signature "\${SIG_HEX}" \\
+  --public-key "\${PUBKEY}" \\
+  --data-file "./dossier-flowpulse-v1.0.md"
+echo "[✓] Dossier verified. Integrity exit 0."`;
+
+      const curlCmd = 'curl -sSL https://flowpulse.org/verify.sh | bash';
+      const checksum = '9e41b2c4fa88d928a3f789e5c4128f731df';
+
+      function copyText(val, msg) {
+        if (navigator.clipboard && val) {
+          navigator.clipboard.writeText(val).catch(() => {});
+        }
+        showToast(msg);
+      }
+
+      const copySnippetBtn = document.getElementById('copy-snippet-inline-btn');
+      if (copySnippetBtn) {
+        copySnippetBtn.addEventListener('click', () => copyText(snippet, 'Copied Snippet to Clipboard'));
+      }
+
+      const copyCurlBtn = document.getElementById('copy-curl-btn');
+      if (copyCurlBtn) {
+        copyCurlBtn.addEventListener('click', () => copyText(curlCmd, 'Copied cURL Command'));
+      }
+
+      const quickCurlIcon = document.getElementById('quick-curl-copy-icon');
+      if (quickCurlIcon) {
+        quickCurlIcon.addEventListener('click', () => copyText(curlCmd, 'Copied cURL Command'));
+      }
+
+      const copyChecksumBtn = document.getElementById('copy-checksum-btn');
+      if (copyChecksumBtn) {
+        copyChecksumBtn.addEventListener('click', () => copyText(checksum, 'Copied SHA-256 Checksum'));
+      }
+
+      const downloadBtn = document.getElementById('download-trigger-btn');
+      if (downloadBtn) {
+        downloadBtn.addEventListener('click', () => {
+          showToast('Generating & Downloading verify.sh...');
+          const blob = new Blob([snippet], { type: 'text/x-sh' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'verify-flowpulse-grant.sh';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
+      }
+
+      const viewRawBtn = document.getElementById('view-raw-btn');
+      if (viewRawBtn) {
+        viewRawBtn.addEventListener('click', () => {
+          copyText(snippet, 'Raw Script Loaded to Clipboard');
+        });
+      }
+
+      const closeBtn = document.getElementById('close-modal-dummy');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          showToast('Modal dismissal simulation');
+        });
+      }
+    })();
+  </script>
+</div></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/85 backdrop-blur-xl shadow-[0_-1px_12px_rgba(0,0,0,0.12)]" data-active-classes="text-primary-fixed bg-surface-variant/40"><div class="flex justify-around items-center h-16 px-space-xs"><a class="flex flex-col items-center justify-center w-16 h-12 rounded-xl text-on-surface-variant transition-colors hover:text-on-surface" data-path="stream-telemetry" href="#"><span class="material-symbols-outlined text-[22px]">waves</span><span class="font-label-md text-[10px] tracking-wider uppercase mt-0.5">Streams</span></a><a class="flex flex-col items-center justify-center w-16 h-12 rounded-xl text-on-surface-variant transition-colors hover:text-on-surface" data-path="cascade-splits" href="#"><span class="material-symbols-outlined text-[22px]">call_split</span><span class="font-label-md text-[10px] tracking-wider uppercase mt-0.5">Splits</span></a><a class="flex flex-col items-center justify-center w-16 h-12 rounded-xl text-on-surface-variant transition-colors hover:text-on-surface" data-path="cli-verification-modal" href="#"><span class="material-symbols-outlined text-[22px]">verified</span><span class="font-label-md text-[10px] tracking-wider uppercase mt-0.5">CLI Auth</span></a><a class="flex flex-col items-center justify-center w-16 h-12 rounded-xl text-on-surface-variant transition-colors hover:text-on-surface" data-path="ci-cd-pipelines" href="#"><span class="material-symbols-outlined text-[22px]">account_tree</span><span class="font-label-md text-[10px] tracking-wider uppercase mt-0.5">CI/CD</span></a><a class="flex flex-col items-center justify-center w-16 h-12 rounded-xl text-on-surface-variant transition-colors hover:text-on-surface" data-path="soroban-treasury" href="#"><span class="material-symbols-outlined text-[22px]">toll</span><span class="font-label-md text-[10px] tracking-wider uppercase mt-0.5">Vault</span></a></div></nav>
+<script>(function(){let toastTimeout=null;const toast=document.getElementById('copy-toast');window.triggerCopyToast=function(text,btn){if(navigator.clipboard&&text){navigator.clipboard.writeText(text).catch(()=>{});}if(btn){const originalIcon=btn.querySelector('.material-symbols-outlined');if(originalIcon){const origText=originalIcon.textContent;originalIcon.textContent='check';btn.classList.add('text-primary-container');setTimeout(()=>{originalIcon.textContent=origText;btn.classList.remove('text-primary-container');},1600);}}if(!toast)return;toast.classList.remove('opacity-0','translate-y-4','scale-95','pointer-events-none');toast.classList.add('opacity-100','translate-y-0','scale-100');if(toastTimeout)clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>{toast.classList.remove('opacity-100','translate-y-0','scale-100');toast.classList.add('opacity-0','translate-y-4','scale-95','pointer-events-none');},2500);};const primaryCopy=document.getElementById('copy-primary-btn');if(primaryCopy){primaryCopy.addEventListener('click',()=>{window.triggerCopyToast('stellar tx verify \\\n  --signature 0x8f3c71a9e205...bf64 \\\n  --public-key GB8X7K2M9N6L3Q5V8T1W4Y7Z0A2C5E8G1J4L7O9P42MW \\\n  --data-file ./dossier-flowpulse-v1.0.md \\\n  --network mainnet \\\n  --rpc-url https://mainnet.sorobanrpc.com');});}const scriptCopy=document.getElementById('copy-script-main-btn');if(scriptCopy){scriptCopy.addEventListener('click',()=>{window.triggerCopyToast('stellar tx verify \\\n  --signature 0x8f3c71a9e205...bf64 \\\n  --public-key GB8X7K2M9N6L3Q5V8T1W4Y7Z0A2C5E8G1J4L7O9P42MW \\\n  --data-file ./dossier-flowpulse-v1.0.md \\\n  --network mainnet \\\n  --rpc-url https://mainnet.sorobanrpc.com');});}})();</script></body></html>

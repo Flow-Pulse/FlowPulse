@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+/* Architectural Drafting Standard — see design/systems/architectural_drafting_standard/DESIGN.md */
+@theme {
+  --color-paper: #ffffff;
+  --color-vellum: #f6f8fa;
+  --color-canvas: #f7f9ff;
+  --color-line: #d0d7de;
+  --color-line-faint: #e1e4e8;
+  --color-ink: #0f172a;
+  --color-ink-2: #24292f;
+  --color-lead: #57606a;
+  --color-cobalt: #0969da;
+  --color-cobalt-hover: #1f6feb;
+  --color-cobalt-active: #0854af;
+  --color-ok: #1a7f37;
+  --color-ok-bg: #e6f6ec;
+  --color-err: #cf222e;
+  --color-err-bg: #ffebe9;
+  --color-warn: #9a6700;
+  --color-warn-bg: #fff8c5;
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+}
+
+@layer base {
+  html,
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink-2);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  .tnum,
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+  }
+  :focus-visible {
+    outline: 1px solid var(--color-cobalt);
+    outline-offset: 1px;
+  }
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-sm border px-3 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+@layer components {
+  .panel {
+    @apply rounded-md border border-line bg-paper;
+  }
+  .panel-head {
+    @apply flex items-center justify-between gap-3 border-b border-line-faint px-4 py-3;
+  }
+  .label {
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.05em] text-lead;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-sm border border-line bg-vellum px-2 py-0.5 font-mono text-[11px] font-medium text-ink-2;
+  }
+  .chip-accent {
+    @apply inline-flex items-center gap-1 rounded-sm border border-cobalt/30 bg-cobalt/8 px-2 py-0.5 font-mono text-[11px] font-medium text-cobalt;
+  }
+  .chip-ok {
+    @apply inline-flex items-center gap-1 rounded-sm border border-ok/30 bg-ok-bg px-2 py-0.5 font-mono text-[11px] font-medium text-ok;
+  }
+  .chip-err {
+    @apply inline-flex items-center gap-1 rounded-sm border border-err/30 bg-err-bg px-2 py-0.5 font-mono text-[11px] font-medium text-err;
+  }
+  .chip-warn {
+    @apply inline-flex items-center gap-1 rounded-sm border border-warn/30 bg-warn-bg px-2 py-0.5 font-mono text-[11px] font-medium text-warn;
+  }
+  .btn-primary {
+    @apply btn border-cobalt bg-cobalt text-white hover:bg-cobalt-hover active:bg-cobalt-active;
+  }
+  .btn-secondary {
+    @apply btn border-line bg-paper text-ink-2 hover:border-ink hover:bg-vellum;
+  }
+  .btn-ghost {
+    @apply btn border-transparent bg-transparent text-lead hover:bg-vellum hover:text-ink-2;
+  }
+  .btn-danger {
+    @apply btn border-line bg-paper text-err hover:border-err hover:bg-err-bg;
+  }
+  .input {
+    @apply h-10 w-full rounded-sm border border-line bg-paper px-3 text-sm text-ink-2 placeholder:text-lead focus:border-cobalt focus:outline-1 focus:outline-cobalt;
+  }
+  .row {
+    @apply border-b border-line-faint last:border-b-0 hover:bg-vellum;
+  }
+  .floating {
+    border: 1px solid var(--color-ink);
+    box-shadow: 2px 2px 0 0 rgb(15 23 42 / 0.08);
+  }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
+  font-size: 20px;
+  line-height: 1;
+  user-select: none;
+  /* Reserve a fixed box so ligature text never affects layout before the font loads. */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  flex-shrink: 0;
+  color: transparent;
+}
+.icons-ready .material-symbols-outlined {
+  color: inherit;
+}
+
+@keyframes drip {
+  from { transform: scaleY(0.2); }
+  to { transform: scaleY(1); }
+}
+.animate-drip {
+  transform-origin: bottom;
+  animation: drip 400ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-drip { animation: none; }
+}

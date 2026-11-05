@@ -1,0 +1,16 @@
+name: Feature / task
+description: Propose a feature or pick up a scoped task
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution & acceptance criteria
+    validations:
+      required: true

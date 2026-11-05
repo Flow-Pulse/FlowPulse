@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#0c1324;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary": "#003824", "secondary-fixed": "#e1e0ff", "on-primary": "#00363a", "surface-bright": "#33394c", "surface-variant": "#2e3447", "on-primary-fixed": "#002022", "outline-variant": "#3b494b", "error": "#ffb4ab", "on-secondary-fixed-variant": "#2f2ebe", "inverse-surface": "#dce1fb", "error-container": "#93000a", "on-background": "#dce1fb", "on-tertiary-fixed": "#002113", "inverse-on-surface": "#2a3043", "background": "#0c1324", "primary-fixed-dim": "#00dbe9", "surface-container-lowest": "#070d1f", "primary-fixed": "#7df4ff", "tertiary-fixed-dim": "#4edea3", "primary-container": "#00f0ff", "surface-container-highest": "#2e3447", "surface-container": "#191f31", "on-secondary-container": "#b0b2ff", "surface-tint": "#00dbe9", "on-error": "#690005", "on-surface": "#dce1fb", "inverse-primary": "#006970", "surface-container-low": "#151b2d", "on-primary-fixed-variant": "#004f54", "on-primary-container": "#006970", "on-secondary-fixed": "#07006c", "secondary": "#c0c1ff", "tertiary": "#d8ffe7", "surface": "#0c1324", "primary": "#dbfcff", "secondary-container": "#3131c0", "secondary-fixed-dim": "#c0c1ff", "tertiary-container": "#65f2b5", "on-error-container": "#ffdad6", "surface-dim": "#0c1324", "on-secondary": "#1000a9", "outline": "#849495", "on-tertiary-container": "#006d4a", "on-surface-variant": "#b9cacb", "on-tertiary-fixed-variant": "#005236", "tertiary-fixed": "#6ffbbe", "surface-container-high": "#23293c" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-mobile": "1rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "gutter-mobile": "0.75rem", "space-xl": "2.5rem", "margin": "2rem", "gutter": "1.5rem", "space-md": "1rem" }, "fontFamily": { "code-lg": ["JetBrains Mono"], "headline-sm": ["Space Grotesk"], "body-lg": ["Geist"], "display-lg": ["Space Grotesk"], "body-md": ["Geist"], "code-sm": ["JetBrains Mono"], "code-md": ["JetBrains Mono"], "display-lg-mobile": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "body-sm": ["Geist"], "headline-md": ["Space Grotesk"], "label-md": ["JetBrains Mono"] }, "fontSize": { "code-lg": ["15px", { "lineHeight": "22px", "fontWeight": "500" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }], "code-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" }], "code-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }], "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 w-full z-50 pt-safe bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_12px_rgba(0,240,255,0.06)]"><div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="FlowPulse Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WHhUV56vebTBvPJK68DHOZgt7gdm9Tx_KC3LC7tXcijtHhBh6YQS8SMmwMhgX46NqqJp-eFOPc4vmWAdMj1HirFVQjBNSWvfflENS8Y945lDxAHIbf7APuzsAhYq8gwcAvt0RNVt86JFqmbKjlgRihiFFzfDzgEzfJh6Jh6fhaXjvc-cgFQvhL4OUp4WDt2hBIUYhYzEWRE35VSyFYyyjTqz5sGb7RgYkL3mqoODWb"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary truncate tracking-tight">FlowPulse</span></div><div class="flex items-center gap-1.5"><span class="inline-block w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse shadow-[0_0_8px_#00F0FF]"></span><span class="font-code-sm text-code-sm text-on-surface-variant truncate uppercase tracking-wider">Soroban Mainnet · Active</span></div></div></div><div class="flex items-center gap-space-sm flex-shrink-0"><div class="hidden sm:flex flex-col items-end"><span class="font-code-sm text-code-sm text-primary-fixed">Earnings</span></div><button aria-label="Account profile" class="w-11 h-11 rounded-full p-0.5 flex items-center justify-center bg-surface-container-high/60 active:scale-95 transition-transform" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz4gj-U3t3oqr7THxxZbOcKADhEl5nMjRjHuid1FbAT60Trl6PWVbSwu0BmYhuWJPEk8sEmDrkSfH9U8lCd2_Bqt70TitFli5afF3bsUoywP-TxO1q2KtsJxPxXtFezoA-GV5eysfh2OayG2H7-HeBoL_euU8cvM_40Hr8ofUlqG95Yp_krAZ1ItV0_FV1nZkPqFbiNx8cPvQINXitsV2VLN_YMAsbsYpgpSd9L7E"/></button></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface flex-1"><div class="flex flex-col w-full text-on-surface">
+<!-- Ambient Backdrop Graphic Mesh -->
+<div class="relative w-full overflow-hidden px-margin-mobile py-space-md space-y-space-md">
+<!-- Top Meta Ribbon -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/40 text-secondary">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span class="font-code-sm text-code-sm font-semibold tracking-wider uppercase">Drips Grant RFP #2024-D9</span>
+</div>
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-tertiary-container/15 text-tertiary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-ping"></span>
+<span class="font-code-sm text-code-sm font-medium">Export Ready v1.0</span>
+</div>
+</div>
+<!-- Hero Title -->
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight mt-1">
+        FlowPulse: Autonomous CI/CD Micro-Streaming &amp; Algorithmic Cascade Splits on Soroban
+      </h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Production-grade grant dossier evaluating dynamic streaming rates tied to cryptographic CI/CD attestations and recursive dependency pruning on Stellar's native smart contract engine.
+      </p>
+</div>
+<!-- Applicant Identity & Ask Overview Pod -->
+<div class="rounded-xl bg-surface-container-low p-space-md shadow-md space-y-space-sm">
+<div class="flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative w-11 h-11 rounded-lg bg-surface-container flex items-center justify-center text-primary-container overflow-hidden shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[26px]">terminal</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Vanguard Rust Labs</span>
+<span class="material-symbols-outlined text-primary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline truncate">CC7Q9A4X...88XP · Tier-1 Soroban Dev</span>
+</div>
+</div>
+<button class="px-2.5 py-1 rounded-lg bg-surface-container-high text-on-surface hover:text-primary transition-colors flex items-center gap-1 active:scale-95" id="copyAddressBtn" onclick="copyAddress()">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span class="font-code-sm text-code-sm" id="copyLabel">Copy Key</span>
+</button>
+</div>
+<!-- Dual Capital Ask Cards -->
+<div class="grid grid-cols-2 gap-space-xs pt-1">
+<div class="rounded-lg bg-surface-container p-space-sm flex flex-col justify-between">
+<span class="font-code-sm text-code-sm text-on-surface-variant uppercase">Grant Request</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-headline-md text-headline-md text-primary-container">45,000</span>
+<span class="font-code-sm text-code-sm text-primary">USDC</span>
+</div>
+<span class="font-code-sm text-code-sm text-tertiary-container mt-0.5">3 Phased Milestones</span>
+</div>
+<div class="rounded-lg bg-surface-container p-space-sm flex flex-col justify-between">
+<span class="font-code-sm text-code-sm text-on-surface-variant uppercase">Liquidity Pool</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-headline-md text-headline-md text-secondary">350,000</span>
+<span class="font-code-sm text-code-sm text-secondary-fixed">XLM</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline mt-0.5">Non-custodial Escrow</span>
+</div>
+</div>
+</div>
+<!-- Visual Storytelling: Live Flow Archetype -->
+<div class="rounded-xl bg-surface-container-low overflow-hidden shadow-md">
+<div class="p-space-sm bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary-container text-[18px]">account_tree</span>
+<span class="font-code-md text-code-md text-primary font-medium">Pipeline Telemetry Topology</span>
+</div>
+<span class="font-code-sm text-code-sm text-tertiary-container px-2 py-0.5 rounded-full bg-tertiary-container/10">Active Pipeline</span>
+</div>
+<div class="p-space-md space-y-space-sm">
+<!-- Pipeline Diagram Graphic Inline SVG -->
+<div class="w-full bg-surface-container-lowest rounded-lg p-space-sm flex flex-col items-center justify-center">
+<svg class="w-full h-auto text-primary" fill="none" viewbox="0 0 340 110" xmlns="http://www.w3.org/2000/svg">
+<!-- Source Node -->
+<rect fill="#191F31" height="46" rx="6" stroke="#3131C0" stroke-width="1.5" width="70" x="8" y="32"></rect>
+<text fill="#DBFCFF" font-family="JetBrains Mono" font-size="9" font-weight="600" text-anchor="middle" x="43" y="52">CI/CD PR</text>
+<text fill="#B9CACB" font-family="Geist" font-size="7.5" text-anchor="middle" x="43" y="66">Merge Trigger</text>
+<!-- Connection 1 -->
+<path d="M78 55 H128" stroke="#00F0FF" stroke-dasharray="4 2" stroke-width="2">
+<animate attributename="stroke-dashoffset" dur="1.2s" repeatcount="indefinite" values="12;0"></animate>
+</path>
+<polygon fill="#00F0FF" points="126,51 133,55 126,59"></polygon>
+<!-- Core Router Node -->
+<rect fill="#191F31" height="62" rx="6" stroke="#00F0FF" stroke-width="1.5" width="74" x="133" y="24"></rect>
+<text fill="#00F0FF" font-family="JetBrains Mono" font-size="9" font-weight="600" text-anchor="middle" x="170" y="44">Drips Router</text>
+<text fill="#65F2B5" font-family="JetBrains Mono" font-size="8" text-anchor="middle" x="170" y="58">v2.4 Soroban</text>
+<text fill="#B9CACB" font-family="Geist" font-size="7" text-anchor="middle" x="170" y="72">TTL Rent Safe</text>
+<!-- Splitting Paths -->
+<path d="M207 45 C 225 45, 230 26, 248 26" stroke="#65F2B5" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<polygon fill="#65F2B5" points="247,23 253,26 247,29"></polygon>
+<path d="M207 55 H 248" stroke="#00F0FF" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<polygon fill="#00F0FF" points="247,52 253,55 247,58"></polygon>
+<path d="M207 65 C 225 65, 230 84, 248 84" stroke="#C0C1FF" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<polygon fill="#C0C1FF" points="247,81 253,84 247,87"></polygon>
+<!-- Receiver Node 1 -->
+<rect fill="#191F31" height="24" rx="4" stroke="#3B494B" stroke-width="1" width="78" x="253" y="14"></rect>
+<text fill="#65F2B5" font-family="JetBrains Mono" font-size="7.5" text-anchor="middle" x="292" y="29">Maintainer 62%</text>
+<!-- Receiver Node 2 -->
+<rect fill="#191F31" height="24" rx="4" stroke="#3B494B" stroke-width="1" width="78" x="253" y="43"></rect>
+<text fill="#DBFCFF" font-family="JetBrains Mono" font-size="7.5" text-anchor="middle" x="292" y="58">Core Crate 24%</text>
+<!-- Receiver Node 3 -->
+<rect fill="#191F31" height="24" rx="4" stroke="#3B494B" stroke-width="1" width="78" x="253" y="72"></rect>
+<text fill="#C0C1FF" font-family="JetBrains Mono" font-size="7.5" text-anchor="middle" x="292" y="87">Upstream 14%</text>
+</svg>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          End-to-end atomic settlement: verified commit SHA activates Soroban instance escrow, immediately routing non-custodial second-rate streams through algorithmic depth-8 cascades.
+        </p>
+</div>
+</div>
+<!-- Executive Abstract & Innovation Pitch -->
+<div class="rounded-xl bg-surface-container-low p-space-md shadow-md space-y-space-sm">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+<h2 class="font-headline-sm text-headline-sm">Executive Pitch &amp; Core Problem</h2>
+</div>
+<!-- Problem Statement Sub-pod -->
+<div class="rounded-lg bg-surface-container p-space-sm space-y-1">
+<div class="flex items-center gap-1.5 text-error">
+<span class="material-symbols-outlined text-[16px]">crisis_alert</span>
+<span class="font-code-md text-code-md font-semibold uppercase tracking-wider">The Bottleneck</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Open-source library authors maintain critical infrastructure without continuous, deterministic compensation. Traditional periodic payouts require manual multisig interventions. When cascading splits span recursive dependency trees (&gt;4 levels), they exceed Soroban's strict <span class="font-code-sm text-code-sm text-error">100M CPU instruction host limit</span>, throwing execution failure reverts.
+        </p>
+</div>
+<!-- Solution Statement Sub-pod -->
+<div class="rounded-lg bg-surface-container p-space-sm space-y-1">
+<div class="flex items-center gap-1.5 text-tertiary-container">
+<span class="material-symbols-outlined text-[16px]">task_alt</span>
+<span class="font-code-md text-code-md font-semibold uppercase tracking-wider">The FlowPulse Solution</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          FlowPulse bridges GitHub Actions webhooks straight to Soroban event processors, authorizing streaming drips in microsecond precision per successful test suite and pull request merge. An on-chain <span class="font-code-sm text-code-sm text-primary-container">Depth-8 Tree Pruning algorithm</span> aggregates micro-percentages deterministically, slashing gas consumption by <span class="font-code-sm text-code-sm text-tertiary-container font-semibold">46.9%</span>.
+        </p>
+</div>
+</div>
+<!-- Gas & Host Budget Benchmarks Card -->
+<div class="rounded-xl bg-surface-container-low p-space-md shadow-md space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[20px]">speed</span>
+<h2 class="font-headline-sm text-headline-sm">Soroban Host CPU Benchmark</h2>
+</div>
+<span class="font-code-sm text-code-sm text-tertiary-container font-medium">-46.9% Gas Reduction</span>
+</div>
+<!-- CPU Comparison Visual Bars -->
+<div class="space-y-space-sm pt-1">
+<!-- Unoptimized State -->
+<div class="space-y-1">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-code-sm text-code-sm">Unpruned Tree (Depth 8 Revert)</span>
+<span class="font-code-sm text-code-sm text-error font-medium">128.45M CPU (Host Cap Revert)</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-error-container w-[100%] rounded-full"></div>
+</div>
+</div>
+<!-- Optimized FlowPulse State -->
+<div class="space-y-1">
+<div class="flex justify-between items-center text-on-surface">
+<span class="font-code-sm text-code-sm text-primary">FlowPulse Optimized Deterministic</span>
+<span class="font-code-sm text-code-sm text-tertiary-container font-semibold">68.20M CPU (Pass · 120 Stroops)</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-gradient-to-r from-primary-container to-tertiary-container w-[53%] rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container flex items-center justify-between text-outline">
+<span class="font-code-sm text-code-sm">Host Instruction Cap: 100,000,000 CPU</span>
+<span class="font-code-sm text-code-sm text-tertiary-container font-medium">Safely Under Threshold</span>
+</div>
+</div>
+<!-- Technical Architecture Matrix -->
+<div class="rounded-xl bg-surface-container-low p-space-md shadow-md space-y-space-sm">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[20px]">architecture</span>
+<h2 class="font-headline-sm text-headline-sm">Protocol Architecture Matrix</h2>
+</div>
+<!-- Spec Pod 1 -->
+<div class="rounded-lg bg-surface-container p-space-sm space-y-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary-container text-[18px]">stream</span>
+<span class="font-code-md text-code-md text-on-surface font-semibold">Drips Router Contract v2.4</span>
+</div>
+<span class="font-code-sm text-code-sm text-primary px-2 py-0.5 rounded-full bg-surface-variant">0.0025 XLM/s min</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Soroban-native non-custodial time-locked escrow. Emits live second-precision ticks, enabling continuous maintainer drawdown without gas lockups or upfront fees.
+        </p>
+</div>
+<!-- Spec Pod 2 -->
+<div class="rounded-lg bg-surface-container p-space-sm space-y-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]">lan</span>
+<span class="font-code-md text-code-md text-on-surface font-semibold">CI/CD Webhook Oracle Bridge</span>
+</div>
+<span class="font-code-sm text-code-sm text-secondary px-2 py-0.5 rounded-full bg-surface-variant">ED25519 Signed</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Cryptographically binds GitHub <span class="font-code-sm text-code-sm text-primary">workflow_run == success</span> payloads and repository owner signatures straight to contract invocation calls.
+        </p>
+</div>
+<!-- Spec Pod 3 -->
+<div class="rounded-lg bg-surface-container p-space-sm space-y-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-tertiary-container text-[18px]">hub</span>
+<span class="font-code-md text-code-md text-on-surface font-semibold">Automated Tree Pruner (Depth-8)</span>
+</div>
+<span class="font-code-sm text-code-sm text-tertiary-container px-2 py-0.5 rounded-full bg-surface-variant">120 Stroops</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Squashes upstream dependency graphs before storage write operations, eliminating state bloat and ensuring deterministic execution within Soroban TTL constraints.
+        </p>
+</div>
+</div>
+<!-- Grant Milestones & Deliverables Roadmap -->
+<div class="rounded-xl bg-surface-container-low p-space-md shadow-md space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+<h2 class="font-headline-sm text-headline-sm">Milestones &amp; Funding Schedule</h2>
+</div>
+<span class="font-code-sm text-code-sm text-outline">3 Phases</span>
+</div>
+<div class="space-y-space-sm">
+<!-- Milestone 1 -->
+<div class="rounded-lg bg-surface-container p-space-sm space-y-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-tertiary-container text-[18px]">check_circle</span>
+<span class="font-code-md text-code-md text-on-surface font-semibold">Milestone 1: Core Engine &amp; Sim</span>
+</div>
+<span class="font-code-sm text-code-sm text-tertiary-container font-semibold px-2 py-0.5 rounded-full bg-tertiary-container/15">DEMOED / READY</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Soroban rust contracts deployed to Testnet, CLI simulator suite, Depth-8 tree pruning verification, and Freighter browser extension integration.
+          </p>
+<div class="flex items-center gap-space-xs font-code-sm text-code-sm text-outline pt-0.5">
+<span class="text-primary">10,000 USDC Delivered</span>
+<span>·</span>
+<span>Ref: commit 4e99f1a</span>
+</div>
+</div>
+<!-- Milestone 2 -->
+<div class="rounded-lg bg-surface-container p-space-sm space-y-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary-container text-[18px]">hourglass_top</span>
+<span class="font-code-md text-code-md text-on-surface font-semibold">Milestone 2: GitHub App &amp; Multi-Crate</span>
+</div>
+<span class="font-code-sm text-code-sm text-primary-container font-semibold px-2 py-0.5 rounded-full bg-surface-variant">MONTH 2</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Full automated GitHub App release, verified HMAC-SHA256 oracle relayers, open testnet testing across top 15 Rust crates in Stellar ecosystem.
+          </p>
+<div class="flex items-center gap-space-xs font-code-sm text-code-sm text-outline pt-0.5">
+<span class="text-primary-container">20,000 USDC Target</span>
+<span>·</span>
+<span>Deliverables: SDK + GitHub App</span>
+</div>
+</div>
+<!-- Milestone 3 -->
+<div class="rounded-lg bg-surface-container p-space-sm space-y-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]">flag</span>
+<span class="font-code-md text-code-md text-on-surface font-semibold">Milestone 3: Mainnet &amp; Public Pools</span>
+</div>
+<span class="font-code-sm text-code-sm text-secondary font-semibold px-2 py-0.5 rounded-full bg-surface-variant">MONTH 3</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Soroban mainnet audited rollout, Drips DAO governance split contracts, public ecosystem pool integrations, and developer documentation portal.
+          </p>
+<div class="flex items-center gap-space-xs font-code-sm text-code-sm text-outline pt-0.5">
+<span class="text-secondary">15,000 USDC Target</span>
+<span>·</span>
+<span>Deliverables: Mainnet Audit + UI</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Projected Impact & Telemetry Metrics Grid -->
+<div class="rounded-xl bg-surface-container-low p-space-md shadow-md space-y-space-sm">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[20px]">insights</span>
+<h2 class="font-headline-sm text-headline-sm">Projected Ecosystem Impact</h2>
+</div>
+<div class="grid grid-cols-2 gap-space-xs">
+<div class="rounded-lg bg-surface-container p-space-sm flex flex-col justify-between">
+<span class="font-code-sm text-code-sm text-on-surface-variant uppercase">Weekly Velocity</span>
+<div class="flex items-baseline gap-1 my-1">
+<span class="font-headline-sm text-headline-sm text-primary-container">~48,000</span>
+<span class="font-code-sm text-code-sm text-primary">XLM</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline">Across ~120 upstream libs</span>
+</div>
+<div class="rounded-lg bg-surface-container p-space-sm flex flex-col justify-between">
+<span class="font-code-sm text-code-sm text-on-surface-variant uppercase">Stream Update Fee</span>
+<div class="flex items-baseline gap-1 my-1">
+<span class="font-headline-sm text-headline-sm text-tertiary-container">94</span>
+<span class="font-code-sm text-code-sm text-tertiary">Stroops</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline">Zero state bloat via TTL</span>
+</div>
+</div>
+<!-- Open Source Pledge Verification -->
+<div class="rounded-lg bg-surface-container-high/60 p-space-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-container text-[20px]">workspace_premium</span>
+<div class="flex flex-col">
+<span class="font-code-md text-code-md font-semibold text-on-surface">Dual License Verified</span>
+<span class="font-code-sm text-code-sm text-outline">Apache-2.0 · MIT Commons Permissive</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary-container text-[20px]">done_all</span>
+</div>
+</div>
+<!-- Reviewer Actions & Interactive Export Tools -->
+<div class="rounded-xl bg-surface-container-low p-space-md shadow-md space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[20px]">ios_share</span>
+<h2 class="font-headline-sm text-headline-sm">Committee Review Actions</h2>
+</div>
+<span class="font-code-sm text-code-sm text-tertiary-container font-medium">Ready For Vote</span>
+</div>
+<!-- Glowing Cyan Primary Action CTA -->
+<button class="w-full py-3.5 px-space-md rounded-xl bg-primary-container text-on-primary font-headline-sm text-headline-sm font-semibold flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:brightness-110 active:scale-[0.98] transition-all" id="exportDossierBtn" onclick="handleExport()">
+<span class="material-symbols-outlined text-[22px]" id="exportIcon">download_for_offline</span>
+<span id="exportText">Export Proposal Dossier (PDF / Markdown)</span>
+</button>
+<!-- Secondary Quick Review Links -->
+<div class="flex flex-col gap-space-xs pt-1">
+<a class="w-full py-2.5 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-between transition-colors" href="#inspect-wasm" onclick="inspectContract(event)">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">code</span>
+<span class="font-code-md text-code-md">Inspect Soroban Contract WASM</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline">v2.4.1</span>
+</a>
+<a class="w-full py-2.5 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-between transition-colors" href="#verify-sim" onclick="verifySim(event)">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-container text-[18px]">play_circle</span>
+<span class="font-code-md text-code-md">Verify Testnet Sim (#sim-8849c)</span>
+</div>
+<span class="font-code-sm text-code-sm text-tertiary-container">Passed (100%)</span>
+</a>
+<a class="w-full py-2.5 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-between transition-colors" href="#share-committee" onclick="shareDossier(event)">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">group</span>
+<span class="font-code-md text-code-md">Share with Review Committee</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Notification Toast Element (Micro-Interaction) -->
+<div class="fixed bottom-24 left-4 right-4 z-50 transform translate-y-32 opacity-0 transition-all duration-300 pointer-events-none" id="actionToast">
+<div class="bg-surface-container-highest/95 backdrop-blur-md text-primary-container px-4 py-3 rounded-xl shadow-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]" id="toastIcon">check_circle</span>
+<span class="font-code-md text-code-md text-on-surface" id="toastMessage">Action completed successfully</span>
+</div>
+</div>
+</div>
+<!-- Micro-Interactions Script -->
+<script>
+    function showToast(message, iconName = 'check_circle') {
+      const toast = document.getElementById('actionToast');
+      const toastMessage = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+      
+      if (!toast || !toastMessage || !toastIcon) return;
+
+      toastMessage.textContent = message;
+      toastIcon.textContent = iconName;
+
+      toast.classList.remove('translate-y-32', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-32', 'opacity-0');
+      }, 2600);
+    }
+
+    function copyAddress() {
+      const address = "CC7Q9A4XG89L61N04KP88XP";
+      navigator.clipboard?.writeText(address).catch(() => {});
+      const label = document.getElementById('copyLabel');
+      if (label) {
+        label.textContent = "Copied!";
+        setTimeout(() => { label.textContent = "Copy Key"; }, 2000);
+      }
+      showToast("Applicant Public Key copied to clipboard", "content_copy");
+    }
+
+    function handleExport() {
+      const btn = document.getElementById('exportDossierBtn');
+      const icon = document.getElementById('exportIcon');
+      const text = document.getElementById('exportText');
+
+      if (btn && icon && text) {
+        icon.textContent = "hourglass_bottom";
+        text.textContent = "Compiling Dossier Packet...";
+        btn.classList.add('opacity-90');
+
+        setTimeout(() => {
+          icon.textContent = "check";
+          text.textContent = "Dossier Exported (flowpulse_proposal.pdf)";
+          showToast("Dossier compiled: PDF & Markdown bundle generated", "file_download_done");
+          setTimeout(() => {
+            icon.textContent = "download_for_offline";
+            text.textContent = "Export Proposal Dossier (PDF / Markdown)";
+            btn.classList.remove('opacity-90');
+          }, 2400);
+        }, 1200);
+      }
+    }
+
+    function inspectContract(e) {
+      e.preventDefault();
+      showToast("Fetching Soroban WASM byte metadata (Hash: 0x9f4a...2a1b)", "code");
+    }
+
+    function verifySim(e) {
+      e.preventDefault();
+      showToast("Simulation #sim-8849c loaded: 0 host faults, 100% deterministic", "verified");
+    }
+
+    function shareDossier(e) {
+      e.preventDefault();
+      if (navigator.share) {
+        navigator.share({
+          title: 'FlowPulse Drips Proposal',
+          text: 'Proposal summary for FlowPulse autonomous streaming on Soroban',
+          url: window.location.href,
+        }).catch(() => {});
+      } else {
+        showToast("Review link copied for committee sharing", "share");
+      }
+    }
+  </script>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.5)]" data-active-classes="text-primary-container bg-surface-variant/40"><div class="h-20 px-space-xs grid grid-cols-4 items-center"><a class="min-h-[44px] py-1 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors" data-path="live-streams" href="#"><span class="material-symbols-outlined text-[22px]">bolt</span><span class="font-code-sm text-code-sm tracking-tight text-center truncate w-full px-0.5">Live Streams</span></a><a class="min-h-[44px] py-1 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors" data-path="cascades" href="#"><span class="material-symbols-outlined text-[22px]">layers</span><span class="font-code-sm text-code-sm tracking-tight text-center truncate w-full px-0.5">Cascades</span></a><a class="min-h-[44px] py-1 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors" data-path="cicd-repos" href="#"><span class="material-symbols-outlined text-[22px]">terminal</span><span class="font-code-sm text-code-sm tracking-tight text-center truncate w-full px-0.5">CI/CD Repos</span></a><a class="min-h-[44px] py-1 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors" data-path="earnings" href="#"><span class="material-symbols-outlined text-[22px]">account_balance_wallet</span><span class="font-code-sm text-code-sm tracking-tight text-center truncate w-full px-0.5">Earnings</span></a></div></nav></body></html>

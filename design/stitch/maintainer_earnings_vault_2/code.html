@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#ffffff;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-container-lowest": "#ffffff",
+          "surface-dim": "#d6dae2",
+          "outline-variant": "#c2c6d6",
+          "surface-variant": "#dee3eb",
+          "secondary": "#0056c3",
+          "inverse-surface": "#2c3137",
+          "on-secondary-container": "#fefcff",
+          "surface-container": "#f0f4fc",
+          "on-secondary-fixed-variant": "#004299",
+          "on-surface": "#171c22",
+          "surface-container-high": "#e4e8f0",
+          "tertiary-fixed-dim": "#ffb693",
+          "inverse-on-surface": "#edf1f9",
+          "secondary-fixed": "#d9e2ff",
+          "on-primary": "#ffffff",
+          "surface-tint": "#005bc0",
+          "on-primary-fixed": "#001a41",
+          "tertiary": "#1a7f37",
+          "on-error-container": "#93000a",
+          "on-tertiary": "#ffffff",
+          "on-primary-container": "#ecefff",
+          "error-container": "#ffdad6",
+          "surface-bright": "#f7f9ff",
+          "on-error": "#ffffff",
+          "on-tertiary-fixed": "#351000",
+          "primary": "#0969da",
+          "tertiary-container": "#1a7f37",
+          "on-tertiary-fixed-variant": "#7a2f00",
+          "primary-fixed": "#0969da",
+          "tertiary-fixed": "#ffdbcc",
+          "on-tertiary-container": "#ffffff",
+          "secondary-fixed-dim": "#afc6ff",
+          "on-secondary": "#ffffff",
+          "inverse-primary": "#adc6ff",
+          "on-background": "#171c22",
+          "background": "#ffffff",
+          "on-secondary-fixed": "#001944",
+          "on-primary-fixed-variant": "#004493",
+          "surface": "#ffffff",
+          "surface-container-low": "#f7f9ff",
+          "surface-container-highest": "#dee3eb",
+          "primary-container": "#0969da",
+          "secondary-container": "#1f6feb",
+          "outline": "#727785",
+          "error": "#ba1a1a",
+          "on-surface-variant": "#57606a",
+          "primary-fixed-dim": "#0969da"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "margin-mobile": "1rem",
+          "space-lg": "1.5rem",
+          "space-sm": "0.5rem",
+          "space-xs": "0.25rem",
+          "gutter-mobile": "0.75rem",
+          "space-xl": "2.5rem",
+          "margin": "2rem",
+          "gutter": "1.5rem",
+          "space-md": "1rem"
+        },
+        "fontFamily": {
+          "code-lg": ["JetBrains Mono"],
+          "headline-sm": ["Space Grotesk"],
+          "body-lg": ["Geist"],
+          "display-lg": ["Space Grotesk"],
+          "body-md": ["Geist"],
+          "code-sm": ["JetBrains Mono"],
+          "code-md": ["JetBrains Mono"],
+          "display-lg-mobile": ["Space Grotesk"],
+          "headline-lg": ["Space Grotesk"],
+          "body-sm": ["Geist"],
+          "headline-md": ["Space Grotesk"],
+          "label-md": ["JetBrains Mono"]
+        },
+        "fontSize": {
+          "code-lg": ["15px", { "lineHeight": "22px", "fontWeight": "500" }],
+          "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+          "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+          "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+          "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+          "code-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" }],
+          "code-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+          "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+          "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+          "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+          "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+          "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+        }
+      }
+    }
+  }
+</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-surface text-on-surface font-body-md flex flex-col min-h-screen selection:bg-primary selection:text-white"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-md border-b border-[#d0d7de]"><div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="FlowPulse Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WHhUV56vebTBvPJK68DHOZgt7gdm9Tx_KC3LC7tXcijtHhBh6YQS8SMmwMhgX46NqqJp-eFOPc4vmWAdMj1HirFVQjBNSWvfflENS8Y945lDxAHIbf7APuzsAhYq8gwcAvt0RNVt86JFqmbKjlgRihiFFzfDzgEzfJh6Jh6fhaXjvc-cgFQvhL4OUp4WDt2hBIUYhYzEWRE35VSyFYyyjTqz5sGb7RgYkL3mqoODWb"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-[#0f172a] truncate tracking-tight font-semibold">FlowPulse</span></div><div class="flex items-center gap-1.5"><span class="inline-block w-1.5 h-1.5 rounded-full bg-[#1a7f37] animate-pulse"></span><span class="font-code-sm text-code-sm text-[#57606a] truncate uppercase tracking-wider">Soroban Mainnet · Active</span></div></div></div><div class="flex items-center gap-space-sm flex-shrink-0"><div class="hidden sm:flex flex-col items-end"><span class="font-code-sm text-code-sm text-primary font-medium">Earnings</span></div><button aria-label="Account profile" class="w-11 h-11 rounded-full p-0.5 flex items-center justify-center bg-surface-container border border-[#d0d7de] active:scale-95 transition-transform" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz4gj-U3t3oqr7THxxZbOcKADhEl5nMjRjHuid1FbAT60Trl6PWVbSwu0BmYhuWJPEk8sEmDrkSfH9U8lCd2_Bqt70TitFli5afF3bsUoywP-TxO1q2KtsJxPxXtFezoA-GV5eysfh2OayG2H7-HeBoL_euU8cvM_40Hr8ofUlqG95Yp_krAZ1ItV0_FV1nZkPqFbiNx8cPvQINXitsV2VLN_YMAsbsYpgpSd9L7E"/></button></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface flex-1"><div class="flex flex-col w-full px-gutter-mobile py-space-sm space-y-space-md">
+<!-- Maintainer Accrual Vault Hero -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low border border-[#d0d7de] p-space-md shadow-sm">
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-primary/5 rounded-full blur-2xl pointer-events-none"></div>
+<div class="absolute -left-12 -bottom-12 w-48 h-48 bg-[#1a7f37]/5 rounded-full blur-2xl pointer-events-none"></div>
+<div class="relative flex flex-col space-y-space-md">
+<!-- Status pill & Protocol badge -->
+<div class="flex items-center justify-between">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-[#d0d7de] shadow-xs">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1a7f37] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-[#1a7f37]"></span>
+</span>
+<span class="font-code-sm text-code-sm text-[#1a7f37] font-semibold tracking-wider uppercase">Live Accrual Active</span>
+</div>
+<div class="inline-flex items-center gap-1 text-[#57606a] font-code-sm text-code-sm font-medium">
+<span class="material-symbols-outlined text-[15px] text-primary">verified</span>
+<span>Soroban v22.1</span>
+</div>
+</div>
+<!-- Balance Ticker -->
+<div class="flex flex-col space-y-1">
+<span class="font-label-md text-label-md uppercase tracking-wider text-[#57606a]">Unclaimed Streaming Balance</span>
+<div class="flex items-baseline space-x-2">
+<span class="font-headline-lg text-headline-lg tracking-tight text-[#0f172a]" id="streaming-xlm">3,489.1248</span>
+<span class="font-code-md text-code-md text-primary font-semibold">XLM</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="font-code-sm text-code-sm text-[#57606a]" id="streaming-usd">≈ $453.58 USDC</span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded bg-[#1a7f37]/10 text-[#1a7f37] border border-[#1a7f37]/20 font-code-sm text-code-sm font-medium">
+            +0.042 XLM/min
+          </span>
+</div>
+</div>
+<!-- Quick Action Claim CTA -->
+<div class="flex flex-col space-y-2 pt-space-xs">
+<button class="relative group w-full py-3.5 px-space-md rounded-xl bg-primary text-white font-headline-sm text-headline-sm font-semibold shadow-sm hover:bg-[#0056c3] active:scale-[0.98] transition-all flex items-center justify-center gap-2" id="claim-btn">
+<span class="material-symbols-outlined text-[20px] font-bold">bolt</span>
+<span>Instant Claim to Stellar Wallet</span>
+</button>
+<div class="flex items-center justify-between px-1">
+<span class="font-code-sm text-code-sm text-[#57606a]">Est. Soroban Fee: <strong class="text-[#0f172a] font-code-sm text-code-sm">0.00001 XLM</strong></span>
+<span class="font-code-sm text-code-sm text-primary flex items-center gap-0.5 font-medium">
+<span class="material-symbols-outlined text-[13px]">speed</span> Sub-second Finality
+          </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Maintainer Impact Metrics (2x2 Grid) -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="p-space-md rounded-xl bg-white border border-[#d0d7de] shadow-xs flex flex-col justify-between space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md uppercase text-[#57606a]">Lifetime In</span>
+<span class="material-symbols-outlined text-[18px] text-[#1a7f37]">savings</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-[#0f172a]">28,450 <span class="font-code-sm text-code-sm text-[#57606a]">XLM</span></div>
+<p class="font-code-sm text-code-sm text-[#57606a]">All pipelines</p>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-white border border-[#d0d7de] shadow-xs flex flex-col justify-between space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md uppercase text-[#57606a]">Downstream</span>
+<span class="material-symbols-outlined text-[18px] text-primary">call_split</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-[#1a7f37]">7,890 <span class="font-code-sm text-code-sm text-[#1a7f37]/80">XLM</span></div>
+<p class="font-code-sm text-code-sm text-[#57606a]">27.7% dripped out</p>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-white border border-[#d0d7de] shadow-xs flex flex-col justify-between space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md uppercase text-[#57606a]">Sponsors</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">handshake</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-[#0f172a]">14</div>
+<p class="font-code-sm text-code-sm text-[#57606a]">Dapps &amp; Web3 DAOs</p>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-white border border-[#d0d7de] shadow-xs flex flex-col justify-between space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md uppercase text-[#57606a]">Drips Score</span>
+<span class="material-symbols-outlined text-[18px] text-primary">military_tech</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-[#0f172a]">98.4<span class="font-code-sm text-code-sm text-[#57606a]">/100</span></div>
+<div class="inline-flex items-center gap-1 font-code-sm text-code-sm text-[#1a7f37] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#1a7f37]"></span>
+<span>Platinum Tier</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Revenue Source Breakdown Section -->
+<div class="p-space-md rounded-xl bg-white border border-[#d0d7de] space-y-space-md shadow-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary text-[20px]">pie_chart</span>
+<h2 class="font-headline-sm text-headline-sm text-[#0f172a]">Revenue Sources</h2>
+</div>
+<span class="font-code-sm text-code-sm text-[#57606a] uppercase">Current Epoch</span>
+</div>
+<!-- Multi-segment visual bar -->
+<div class="h-3 w-full rounded-full bg-surface-container overflow-hidden flex border border-[#e1e4e8]">
+<div class="h-full bg-primary" style="width: 45%;" title="Drips Protocol Grants"></div>
+<div class="h-full bg-[#1f6feb]" style="width: 35%;" title="CI/CD Triggers"></div>
+<div class="h-full bg-[#1a7f37]" style="width: 20%;" title="Downstream Splits"></div>
+</div>
+<!-- Breakdown items -->
+<div class="flex flex-col space-y-2.5">
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low border border-[#e1e4e8]">
+<div class="flex items-center space-x-2.5 min-w-0">
+<span class="w-2.5 h-2.5 rounded-full bg-primary flex-shrink-0"></span>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm font-medium text-[#0f172a] truncate">Drips Protocol Grants</span>
+<span class="font-code-sm text-code-sm text-[#57606a]">Public Goods Pool</span>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<div class="font-code-md text-code-md text-[#0f172a] font-semibold">$204.11</div>
+<span class="font-code-sm text-code-sm text-[#57606a]">45%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low border border-[#e1e4e8]">
+<div class="flex items-center space-x-2.5 min-w-0">
+<span class="w-2.5 h-2.5 rounded-full bg-[#1f6feb] flex-shrink-0"></span>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm font-medium text-[#0f172a] truncate">GitHub Actions CI/CD</span>
+<span class="font-code-sm text-code-sm text-[#57606a]">Automated PR Bounties</span>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<div class="font-code-md text-code-md text-[#0f172a] font-semibold">$158.75</div>
+<span class="font-code-sm text-code-sm text-[#57606a]">35%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low border border-[#e1e4e8]">
+<div class="flex items-center space-x-2.5 min-w-0">
+<span class="w-2.5 h-2.5 rounded-full bg-[#1a7f37] flex-shrink-0"></span>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm font-medium text-[#0f172a] truncate">Dependency Splits</span>
+<span class="font-code-sm text-code-sm text-[#57606a]">Upstream Cascades</span>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<div class="font-code-md text-code-md text-[#0f172a] font-semibold">$90.72</div>
+<span class="font-code-sm text-code-sm text-[#57606a]">20%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Connected Wallet & Stellar Smart Rule -->
+<div class="p-space-md rounded-xl bg-white border border-[#d0d7de] space-y-space-md shadow-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary text-[20px]">account_balance_wallet</span>
+<h2 class="font-headline-sm text-headline-sm text-[#0f172a]">Connected Wallet</h2>
+</div>
+<div class="flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-[#d8e2ff] text-[#004299]">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-code-sm text-code-sm font-medium">Freighter</span>
+</div>
+</div>
+<!-- Public Key Card -->
+<div class="p-space-sm rounded-lg bg-surface-container-low border border-[#e1e4e8] flex items-center justify-between">
+<div class="flex items-center space-x-2 min-w-0">
+<span class="material-symbols-outlined text-[#57606a] text-[18px]">key</span>
+<span class="font-code-md text-code-md text-primary font-medium truncate">GB8X...42MW</span>
+</div>
+<button class="px-2.5 py-1 rounded bg-white border border-[#d0d7de] text-[#24292f] hover:text-primary font-code-sm text-code-sm flex items-center gap-1 active:scale-95 transition-transform shadow-xs" onclick="navigator.clipboard?.writeText('GB8X7L2K49VNZQMA42MW')">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy</span>
+</button>
+</div>
+<!-- Soroban Forwarding Rule with Toggle -->
+<div class="p-space-sm rounded-lg bg-surface-container-low border border-[#e1e4e8] flex items-start justify-between gap-3">
+<div class="flex flex-col space-y-1 min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[#1a7f37] text-[16px]">sync_alt</span>
+<span class="font-body-sm text-body-sm font-semibold text-[#0f172a]">Auto-Drip Cascades</span>
+</div>
+<p class="font-body-sm text-body-sm text-[#57606a] leading-relaxed">
+          Forward 20% of all incoming claims to upstream package maintainers automatically.
+        </p>
+</div>
+<!-- Tactical Toggle switch -->
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-1">
+<input checked="" class="sr-only peer" id="auto-drip-toggle" type="checkbox"/>
+<div class="w-11 h-6 bg-[#d0d7de] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<!-- Recent Payout History List -->
+<div class="p-space-md rounded-xl bg-white border border-[#d0d7de] space-y-space-md shadow-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary text-[20px]">history</span>
+<h2 class="font-headline-sm text-headline-sm text-[#0f172a]">Payout Ledger</h2>
+</div>
+<a class="font-code-sm text-code-sm text-primary font-medium hover:underline" href="#">View All</a>
+</div>
+<div class="flex flex-col space-y-2">
+<!-- Item 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low border border-[#e1e4e8] flex items-center justify-between">
+<div class="flex items-center space-x-3 min-w-0">
+<div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">outbox</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm font-medium text-[#0f172a] truncate">Instant Claim to Freighter</span>
+<div class="flex items-center space-x-1.5">
+<span class="font-code-sm text-code-sm text-[#57606a]">2 hrs ago</span>
+<span class="text-[#c2c6d6] text-[8px]">●</span>
+<span class="font-code-sm text-code-sm text-primary font-medium">Tx: 0x88f...12e</span>
+</div>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<div class="font-code-md text-code-md text-[#0f172a] font-semibold">+1,200 XLM</div>
+<span class="inline-flex items-center font-code-sm text-code-sm text-[#1a7f37] font-medium gap-1">
+<span class="material-symbols-outlined text-[12px]">check_circle</span> Settled
+          </span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low border border-[#e1e4e8] flex items-center justify-between">
+<div class="flex items-center space-x-3 min-w-0">
+<div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">autorenew</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm font-medium text-[#0f172a] truncate">Automated Weekly Drip</span>
+<div class="flex items-center space-x-1.5">
+<span class="font-code-sm text-code-sm text-[#57606a]">3 days ago</span>
+<span class="text-[#c2c6d6] text-[8px]">●</span>
+<span class="font-code-sm text-code-sm text-[#57606a]">Stellar Cron</span>
+</div>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<div class="font-code-md text-code-md text-[#0f172a] font-semibold">+850 XLM</div>
+<span class="inline-flex items-center font-code-sm text-code-sm text-[#1a7f37] font-medium gap-1">
+<span class="material-symbols-outlined text-[12px]">check_circle</span> Settled
+          </span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low border border-[#e1e4e8] flex items-center justify-between">
+<div class="flex items-center space-x-3 min-w-0">
+<div class="w-9 h-9 rounded-lg bg-[#1a7f37]/10 flex items-center justify-center text-[#1a7f37] flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">commit</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm font-medium text-[#0f172a] truncate">PR Merge Bounty #184</span>
+<div class="flex items-center space-x-1.5">
+<span class="font-code-sm text-code-sm text-[#57606a]">5 days ago</span>
+<span class="text-[#c2c6d6] text-[8px]">●</span>
+<span class="font-code-sm text-code-sm text-[#57606a]">CI Trigger</span>
+</div>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<div class="font-code-md text-code-md text-[#0f172a] font-semibold">+150 XLM</div>
+<span class="inline-flex items-center font-code-sm text-code-sm text-[#1a7f37] font-medium gap-1">
+<span class="material-symbols-outlined text-[12px]">check_circle</span> Settled
+          </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive script for counter micro-increment and tactile claim simulation -->
+<script>
+    (function() {
+      let xlmBalance = 3489.1248;
+      const xlmEl = document.getElementById('streaming-xlm');
+      const usdEl = document.getElementById('streaming-usd');
+      const claimBtn = document.getElementById('claim-btn');
+
+      // Micro-increment stream ticker
+      setInterval(() => {
+        xlmBalance += 0.0007;
+        if (xlmEl) {
+          xlmEl.textContent = xlmBalance.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+        }
+        if (usdEl) {
+          const usdVal = (xlmBalance * 0.130005).toFixed(2);
+          usdEl.textContent = `≈ $${usdVal} USDC`;
+        }
+      }, 1000);
+
+      // Claim button interactive tactile response
+      if (claimBtn) {
+        claimBtn.addEventListener('click', () => {
+          const originalHTML = claimBtn.innerHTML;
+          claimBtn.disabled = true;
+          claimBtn.innerHTML = `
+            <span class="material-symbols-outlined text-[20px] animate-spin">refresh</span>
+            <span>Signing Soroban Tx...</span>
+          `;
+          setTimeout(() => {
+            claimBtn.innerHTML = `
+              <span class="material-symbols-outlined text-[20px]">check_circle</span>
+              <span>Claimed to GB8X...42MW!</span>
+            `;
+            setTimeout(() => {
+              claimBtn.disabled = false;
+              claimBtn.innerHTML = originalHTML;
+              xlmBalance = 0.0012;
+            }, 2500);
+          }, 1500);
+        });
+      }
+    })();
+  </script>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-md border-t border-[#d0d7de] shadow-sm"><div class="h-20 px-space-xs grid grid-cols-4 items-center"><a class="min-h-[44px] py-1 px-1 rounded-lg flex flex-col items-center justify-center gap-0.5 text-[#57606a] hover:text-primary transition-colors" data-path="live-streams" href="#"><span class="material-symbols-outlined text-[22px]">bolt</span><span class="font-code-sm text-code-sm tracking-tight text-center truncate w-full px-0.5">Live Streams</span></a><a class="min-h-[44px] py-1 px-1 rounded-lg flex flex-col items-center justify-center gap-0.5 text-[#57606a] hover:text-primary transition-colors" data-path="cascades" href="#"><span class="material-symbols-outlined text-[22px]">layers</span><span class="font-code-sm text-code-sm tracking-tight text-center truncate w-full px-0.5">Cascades</span></a><a class="min-h-[44px] py-1 px-1 rounded-lg flex flex-col items-center justify-center gap-0.5 text-[#57606a] hover:text-primary transition-colors" data-path="cicd-repos" href="#"><span class="material-symbols-outlined text-[22px]">terminal</span><span class="font-code-sm text-code-sm tracking-tight text-center truncate w-full px-0.5">CI/CD Repos</span></a><a aria-current="page" class="min-h-[44px] py-1 px-1 rounded-lg flex flex-col items-center justify-center gap-0.5 transition-colors text-primary bg-[#f0f4fc] font-semibold" data-path="earnings" href="#"><span class="material-symbols-outlined text-[22px]">account_balance_wallet</span><span class="font-code-sm text-code-sm tracking-tight text-center truncate w-full px-0.5">Earnings</span></a></div></nav></body></html>

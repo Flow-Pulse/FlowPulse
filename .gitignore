@@ -1,0 +1,17 @@
+# Rust / Soroban
+contracts/target/
+contracts/**/test_snapshots/
+.soroban/
+.stellar/
+
+# Frontend
+node_modules/
+frontend/dist/
+*.tsbuildinfo
+.env
+.env.local
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

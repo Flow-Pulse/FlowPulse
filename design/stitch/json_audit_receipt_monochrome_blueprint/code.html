@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<meta content="mobile_tab" name="shell-type"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+  @layer base {
+    html, body {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background-color: #f6f8fa;
+      color: #1f2328;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      overscroll-behavior-y: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+    .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+    main > :first-child { margin-top: 0 !important; }
+    main > :last-child { margin-bottom: 0 !important; }
+  }
+  ::-webkit-scrollbar { display: none; }
+</style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#0969da",
+          "primary-container": "#ddf4ff",
+          "on-primary": "#ffffff",
+          "background": "#f6f8fa",
+          "surface": "#ffffff",
+          "on-surface": "#1f2328",
+          "border-subtle": "#d0d7de",
+          "text-muted": "#57606a",
+          "success": "#1a7f37",
+          "success-subtle": "#dafbe1",
+          "error": "#cf222e",
+          "error-subtle": "#ffebe9"
+        },
+        borderRadius: {
+          DEFAULT: "0.25rem",
+          lg: "0.5rem",
+          xl: "0.75rem",
+          full: "9999px"
+        },
+        fontFamily: {
+          "body-sm": ["Inter", "sans-serif"],
+          "headline-sm": ["Space Grotesk", "sans-serif"],
+          "label-sm": ["JetBrains Mono", "monospace"],
+          "code-md": ["JetBrains Mono", "monospace"],
+          "headline-md": ["Space Grotesk", "sans-serif"],
+          "code-lg": ["JetBrains Mono", "monospace"],
+          "headline-lg": ["Space Grotesk", "sans-serif"],
+          "body-md": ["Inter", "sans-serif"],
+          "display": ["Space Grotesk", "sans-serif"],
+          "label-md": ["JetBrains Mono", "monospace"],
+          "body-lg": ["Inter", "sans-serif"]
+        }
+      }
+    }
+  };
+</script>
+<style>
+  body {
+    min-height: max(884px, 100dvh);
+  }
+</style>
+</head>
+<body class="bg-[#f6f8fa] font-body-md text-body-md text-[#1f2328] flex flex-col min-h-screen selection:bg-[#0969da]/20 selection:text-[#0969da]">
+<!-- Technical Top Navigation Bar -->
+<header class="fixed top-0 inset-x-0 z-50 bg-[#ffffff]/90 backdrop-blur-xl border-b border-[#e1e4e8] pt-safe shadow-sm">
+<div class="h-16 px-4 flex items-center justify-between gap-2">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-2.5 h-2.5 rounded-full bg-[#1a7f37] shadow-[0_0_8px_rgba(26,127,55,0.4)] animate-pulse shrink-0"></div>
+<h1 class="font-headline-sm text-base text-[#0f172a] font-semibold tracking-tight truncate">CLI Verification Modal</h1>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-[#ffffff] border border-[#d0d7de] text-[#57606a] hover:text-[#0969da] hover:border-[#0969da]/40 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[19px]">terminal</span>
+</button>
+<div class="w-8 h-8 rounded-lg bg-[#f6f8fa] border border-[#d0d7de] text-[#0969da] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">person</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-[#f6f8fa]">
+<div class="flex flex-col w-full relative">
+<!-- Floating HUD Verification Toast Notification -->
+<div class="fixed bottom-20 left-4 right-4 z-50 transition-all duration-300 ease-out transform pointer-events-none opacity-0 translate-y-6" id="verification-hud-toast">
+<div class="relative overflow-hidden bg-[#ffffff]/95 backdrop-blur-xl border border-[#d0d7de] shadow-[0_12px_36px_rgba(15,23,42,0.12)] rounded-xl p-3.5 flex items-center justify-between gap-3 pointer-events-auto">
+<!-- Ambient Subtle Accent Glow -->
+<div class="absolute -top-10 -left-10 w-24 h-24 bg-[#0969da]/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="absolute -bottom-10 -right-10 w-24 h-24 bg-[#1a7f37]/10 rounded-full blur-2xl pointer-events-none"></div>
+<!-- Left Icon Badge -->
+<div class="relative shrink-0 flex items-center justify-center">
+<div class="w-9 h-9 rounded-lg bg-[#f0f9ff] border border-[#0969da]/30 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#0969da] text-[20px]">verified</span>
+</div>
+<span class="absolute -top-0.5 -right-0.5 flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1a7f37] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-[#1a7f37]"></span>
+</span>
+</div>
+<!-- Center Content Hierarchy -->
+<div class="flex-1 min-w-0 pr-1">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#1a7f37] shadow-[0_0_6px_#1a7f37] animate-pulse"></span>
+<span class="text-xs font-mono font-semibold tracking-wider text-[#0969da] uppercase truncate" id="hud-toast-title">VERIFICATION SUCCESS</span>
+</div>
+<p class="text-[11px] text-[#57606a] font-sans mt-0.5 line-clamp-1 leading-snug" id="hud-toast-desc">
+            Deterministic JCS payload &amp; SHA-256 digest copied to clipboard
+          </p>
+</div>
+<!-- Right Verification Pill & Dismiss Button -->
+<div class="shrink-0 flex items-center gap-1.5">
+<span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded bg-[#ddf4ff] border border-[#54aeff]/40 text-[#0969da] font-label-sm text-[10px] tracking-wider whitespace-nowrap font-medium">
+            0-BIT DIFF • VERIFIED
+          </span>
+<button aria-label="Dismiss toast" class="w-7 h-7 rounded-md bg-[#f6f8fa] border border-[#d0d7de] hover:bg-[#e1e4e8] flex items-center justify-center text-[#57606a] hover:text-[#0f172a] active:scale-95 transition-all" id="dismiss-toast-btn">
+<span class="material-symbols-outlined text-[15px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Modal Drawer Container -->
+<div class="w-full flex flex-col bg-[#ffffff] border-t border-[#e1e4e8] shadow-sm overflow-hidden my-1">
+<!-- Drawer Header Chrome -->
+<div class="flex flex-col items-center pt-2 px-4 pb-4 bg-[#ffffff] border-b border-[#e1e4e8]">
+<!-- Technical Drag Handle -->
+<div class="w-10 h-1 rounded-full bg-[#d0d7de] mb-3"></div>
+<!-- Top Status Badges & Close Button Row -->
+<div class="w-full flex items-center justify-between gap-2 mb-2">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#dafbe1] text-[#1a7f37] border border-[#1a7f37]/25 font-label-sm text-[10px] uppercase tracking-wider font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#1a7f37] animate-pulse"></span>
+              AUDIT RECEIPT ARTIFACT
+            </span>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded bg-[#ddf4ff] text-[#0969da] border border-[#0969da]/25 font-label-sm text-[10px] uppercase tracking-wider font-semibold">
+              RFC-8785 JCS
+            </span>
+</div>
+<button aria-label="Close modal" class="w-8 h-8 rounded-lg bg-[#f3f4f6] border border-[#e1e4e8] flex items-center justify-center text-[#24292f] hover:bg-[#e5e7eb] hover:border-[#d0d7de] active:scale-95 transition-all" id="dismiss-drawer-btn">
+<span class="material-symbols-outlined text-[17px]">close</span>
+</button>
+</div>
+<!-- Modal Title & Narrative Hierarchy -->
+<div class="w-full flex flex-col mt-0.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#0969da] text-[22px]">receipt_long</span>
+<h2 class="font-headline-sm text-lg text-[#0f172a] font-semibold tracking-tight">JSON Audit Receipt</h2>
+</div>
+<p class="font-body-sm text-xs text-[#57606a] mt-1 font-normal">
+            Cryptographic non-repudiation attestation anchored to Stellar Mainnet
+          </p>
+</div>
+</div>
+<!-- Meta Telemetry Strip -->
+<div class="px-4 py-2.5 bg-[#f6f8fa] border-b border-[#e1e4e8] flex flex-col gap-1.5">
+<div class="flex items-center justify-between text-[#57606a] font-label-sm text-xs">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="material-symbols-outlined text-[15px] text-[#0969da] shrink-0">data_object</span>
+<span class="text-[#24292f] font-code-md truncate font-semibold">receipt-fp-9e41b2c4.json</span>
+</div>
+<div class="shrink-0 flex items-center gap-2 text-[11px]">
+<span class="text-[#0969da] font-mono font-medium">3.2 KB</span>
+<span class="text-[#57606a]">Canonical UTF-8</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 font-label-sm text-[11px] text-[#57606a]">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-[#8c959f]">schedule</span>
+<span>2025-05-18T14:32:09.112Z</span>
+</div>
+<div class="flex items-center gap-1.5 bg-[#ffffff] border border-[#d0d7de] px-2 py-0.5 rounded max-w-full shadow-2xs">
+<span class="text-[#57606a] shrink-0">SHA-256:</span>
+<span class="text-[#0969da] truncate font-mono font-medium">d4f82a1c...b09e</span>
+<button class="p-0.5 text-[#57606a] hover:text-[#0969da] transition-colors shrink-0" id="copy-checksum-btn" title="Copy Checksum">
+<span class="material-symbols-outlined text-[13px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Syntax-Highlighted JSON Viewer Block -->
+<div class="p-4 flex flex-col gap-3">
+<div class="relative w-full rounded-xl bg-[#ffffff] shadow-sm overflow-hidden border border-[#d0d7de]">
+<!-- Terminal Window Title Bar -->
+<div class="flex items-center justify-between px-3 py-2 bg-[#f6f8fa] border-b border-[#d0d7de]">
+<div class="flex items-center gap-2 min-w-0 flex-wrap">
+<div class="flex items-center gap-1.5 shrink-0">
+<div class="w-2.5 h-2.5 rounded-full bg-[#d0d7de] border border-[#afb8c1]"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-[#d0d7de] border border-[#afb8c1]"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-[#d0d7de] border border-[#afb8c1]"></div>
+</div>
+<div class="inline-flex items-center p-0.5 rounded bg-[#eaeef2] border border-[#d0d7de] shrink-0">
+<button class="px-2.5 py-0.5 rounded text-[11px] font-label-sm text-[#57606a] hover:text-[#1f2328] transition-all bg-transparent border border-transparent" id="btn-toggle-pretty" type="button">Pretty</button>
+<button class="px-2.5 py-0.5 rounded text-[11px] font-label-sm font-semibold tracking-wider transition-all bg-[#ffffff] text-[#0969da] border border-[#d0d7de] shadow-2xs" id="btn-toggle-minified" type="button">Minified (RFC-8785)</button>
+</div>
+<span class="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-label-sm px-2 py-0.5 rounded bg-[#dafbe1] text-[#1a7f37] border border-[#1a7f37]/25 shrink-0 font-medium" id="canonical-status-badge">
+<span class="w-1.5 h-1.5 rounded-full bg-[#1a7f37] animate-pulse shadow-[0_0_5px_#1a7f37]"></span>RFC-8785 Canonical JCS (Zero Whitespace • 1-line)
+              </span>
+<span class="hidden items-center gap-1.5 text-[10px] font-label-sm px-2 py-0.5 rounded bg-[#ddf4ff] text-[#0969da] border border-[#0969da]/25 shrink-0 font-medium" id="pretty-status-badge">
+<span class="w-1.5 h-1.5 rounded-full bg-[#0969da] animate-pulse shadow-[0_0_5px_#0969da]"></span>Pretty Formatted (2-space indent)
+              </span>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="hidden md:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-label-sm bg-[#dafbe1] text-[#1a7f37] border border-[#1a7f37]/30 font-medium" id="metric-size-pill">418 B (-32%)</span>
+<button class="flex items-center gap-1 px-2.5 py-1 rounded bg-[#ffffff] hover:bg-[#f6f8fa] text-[#24292f] hover:text-[#0969da] font-label-sm text-xs transition-all active:scale-95 border border-[#d0d7de] shadow-2xs" id="quick-copy-json-btn">
+<span class="material-symbols-outlined text-[13px]" id="quick-copy-icon">copy_all</span>
+<span id="quick-copy-text">Copy Raw</span>
+</button>
+</div>
+</div>
+<!-- Scrollable Code Viewport -->
+<div class="p-3 max-h-80 select-all font-code-md text-xs leading-relaxed transition-all duration-200 bg-[#ffffff]">
+<!-- Minified Container -->
+<div class="flex flex-col gap-2 transition-opacity duration-200" id="code-container-minified">
+<pre class="text-[#24292f] m-0 font-label-sm text-xs leading-relaxed whitespace-nowrap overflow-x-auto py-1"><code class="font-mono">{<span class="text-[#0969da] font-semibold">"attestation_id"</span>:<span class="text-[#1a7f37]">"fp-audit-9e41b2c4-soroban-v1"</span>,<span class="text-[#0969da] font-semibold">"crypto_verification"</span>:{<span class="text-[#0969da] font-semibold">"algorithm"</span>:<span class="text-[#8250df]">"Ed25519"</span>,<span class="text-[#0969da] font-semibold">"deterministic_exit_code"</span>:<span class="text-[#cf222e] font-semibold">0</span>,<span class="text-[#0969da] font-semibold">"signature_hex"</span>:<span class="text-[#1a7f37]">"0x8f3c71a9e205391d1e4b..."</span>,<span class="text-[#0969da] font-semibold">"signer_public_key"</span>:<span class="text-[#1a7f37]">"GB8X7K2M9N6L3Q5V8T1W4Y..."</span>,<span class="text-[#0969da] font-semibold">"verification_status"</span>:<span class="text-[#1a7f37] font-bold">"VALID_VERIFIED"</span>},<span class="text-[#0969da] font-semibold">"grant_proposal"</span>:{<span class="text-[#0969da] font-semibold">"dossier_sha256"</span>:<span class="text-[#1a7f37]">"7f4a8c9b2e3d1a0f92b1a0f92b1a..."</span>,<span class="text-[#0969da] font-semibold">"target_network"</span>:<span class="text-[#1a7f37]">"stellar-pubnet"</span>,<span class="text-[#0969da] font-semibold">"title"</span>:<span class="text-[#1a7f37]">"FlowPulse: Autonomous CI/CD Micro-Streams"</span>},<span class="text-[#0969da] font-semibold">"schema_version"</span>:<span class="text-[#1a7f37]">"v1.0.4-stellar-drips"</span>}</code></pre>
+<div class="flex items-center justify-between pt-2 border-t border-[#e1e4e8] text-xs font-label-sm text-[#57606a]" id="minified-footer-info">
+<div class="flex items-center gap-1.5 text-[11px]">
+<span class="material-symbols-outlined text-[13px] text-[#0969da]">swap_horiz</span>
+<span>Scroll horizontally to view complete canonical stream</span>
+</div>
+<div class="flex items-center gap-1 text-[11px] text-[#1a7f37] bg-[#dafbe1] border border-[#1a7f37]/25 px-2 py-0.5 rounded font-medium">
+<span class="material-symbols-outlined text-[12px]">data_array</span>
+<span>Canonical Bytes: 418 B (32% reduction vs pretty)</span>
+</div>
+</div>
+</div>
+<!-- Pretty Container (Hidden by default) -->
+<div class="hidden flex-col gap-2 transition-opacity duration-200" id="code-container-pretty">
+<pre class="text-[#24292f] m-0 font-label-sm text-xs leading-relaxed overflow-x-auto overflow-y-auto max-h-64 py-1"><code class="font-mono">{
+  <span class="text-[#0969da] font-semibold">"attestation_id"</span>: <span class="text-[#1a7f37]">"fp-audit-9e41b2c4-soroban-v1"</span>,
+  <span class="text-[#0969da] font-semibold">"crypto_verification"</span>: {
+    <span class="text-[#0969da] font-semibold">"algorithm"</span>: <span class="text-[#8250df]">"Ed25519"</span>,
+    <span class="text-[#0969da] font-semibold">"deterministic_exit_code"</span>: <span class="text-[#cf222e] font-semibold">0</span>,
+    <span class="text-[#0969da] font-semibold">"signature_hex"</span>: <span class="text-[#1a7f37]">"0x8f3c71a9e205391d1e4bf64a19b88f3c71a9e205391d1e4bf64a19b88f3c71a9"</span>,
+    <span class="text-[#0969da] font-semibold">"signer_public_key"</span>: <span class="text-[#1a7f37]">"GB8X7K2M9N6L3Q5V8T1W4Y7Z0A2C5E8G1J4L7O9P42MW"</span>,
+    <span class="text-[#0969da] font-semibold">"verification_status"</span>: <span class="text-[#1a7f37] font-bold">"VALID_VERIFIED"</span>
+  },
+  <span class="text-[#0969da] font-semibold">"grant_proposal"</span>: {
+    <span class="text-[#0969da] font-semibold">"dossier_sha256"</span>: <span class="text-[#1a7f37]">"7f4a8c9b2e3d1a0f92b1a8d0e5c9b7f3b58498f3c71a9e205391d1e4bf6489a2"</span>,
+    <span class="text-[#0969da] font-semibold">"target_network"</span>: <span class="text-[#1a7f37]">"stellar-pubnet"</span>,
+    <span class="text-[#0969da] font-semibold">"title"</span>: <span class="text-[#1a7f37]">"FlowPulse: Autonomous CI/CD Micro-Streams"</span>
+  },
+  <span class="text-[#0969da] font-semibold">"schema_version"</span>: <span class="text-[#1a7f37]">"v1.0.4-stellar-drips"</span>,
+  <span class="text-[#0969da] font-semibold">"stellar_ledger_proof"</span>: {
+    <span class="text-[#0969da] font-semibold">"escrow_authority_tier"</span>: <span class="text-[#cf222e] font-semibold">1</span>,
+    <span class="text-[#0969da] font-semibold">"ledger_sequence"</span>: <span class="text-[#cf222e] font-semibold">51294802</span>,
+    <span class="text-[#0969da] font-semibold">"soroban_contract_id"</span>: <span class="text-[#1a7f37]">"CA3D5K99PL0ABCDEF1234567890"</span>
+  }
+}</code></pre>
+<div class="flex items-center justify-between pt-2 border-t border-[#e1e4e8] text-xs font-label-sm text-[#57606a]">
+<div class="flex items-center gap-1.5 text-[11px]">
+<span class="material-symbols-outlined text-[13px] text-[#0969da]">format_align_left</span>
+<span>Formatted 2-space indented JSON hierarchy</span>
+</div>
+<div class="flex items-center gap-1 text-[11px] text-[#0969da] bg-[#ddf4ff] border border-[#0969da]/25 px-2 py-0.5 rounded font-medium">
+<span class="material-symbols-outlined text-[12px]">code</span>
+<span>Full Size: 615 B (2-Space Indent)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Dedicated Section: LIVE CRYPTOGRAPHIC CHECKSUM VERIFIER -->
+<div class="relative w-full rounded-xl bg-[#f8fafc] border border-[#d0d7de] overflow-hidden shadow-sm p-3.5 flex flex-col gap-3">
+<!-- Subtle Accent Glow -->
+<div class="absolute -top-12 -right-12 w-36 h-36 bg-[#0969da]/5 rounded-full blur-2xl pointer-events-none"></div>
+<div class="absolute -bottom-12 -left-12 w-36 h-36 bg-[#1a7f37]/5 rounded-full blur-2xl pointer-events-none"></div>
+<!-- Verifier Header & Telemetry -->
+<div class="flex items-center justify-between gap-2 flex-wrap pb-2 border-b border-[#e1e4e8]">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-[#ffffff] border border-[#0969da]/30 flex items-center justify-center text-[#0969da] shadow-2xs">
+<span class="material-symbols-outlined text-[16px]">lock_reset</span>
+</div>
+<div>
+<h3 class="font-mono text-xs font-bold tracking-wider text-[#0f172a] uppercase">CLIENT-SIDE JCS CHECKSUM VERIFIER</h3>
+<p class="text-[10px] text-[#57606a] font-mono">WebCrypto SubtleCrypto SHA-256 Engine</p>
+</div>
+</div>
+<!-- Re-Compute In-Browser Button -->
+<div class="flex items-center gap-1.5">
+<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#ffffff] text-[#0969da] border border-[#d0d7de] font-semibold" id="verifier-bench-pill">
+                0.38 ms
+              </span>
+<button class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#ffffff] hover:bg-[#f6f8fa] border border-[#0969da]/40 text-[#0969da] font-label-sm text-[11px] font-semibold transition-all active:scale-95 shadow-2xs" id="btn-recompute-hash" type="button">
+<span class="material-symbols-outlined text-[13px]" id="recompute-icon">sync</span>
+<span id="recompute-text">Re-Compute</span>
+</button>
+</div>
+</div>
+<!-- Status Beacon Strip -->
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[#dafbe1]/60 border border-[#1a7f37]/30 transition-colors" id="verifier-beacon-card">
+<div class="flex items-center gap-2 min-w-0">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1a7f37] opacity-75" id="beacon-ping"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-[#1a7f37]" id="beacon-dot"></span>
+</span>
+<span class="font-mono text-[11px] font-bold tracking-wider text-[#1a7f37] truncate" id="beacon-status-label">
+                HASH MATCHES ON-CHAIN ATTESTATION
+              </span>
+</div>
+<span class="text-[10px] font-mono text-[#1a7f37] shrink-0 font-bold" id="beacon-diff-label">0-BIT DIFF</span>
+</div>
+<!-- Checksum Comparison Cards -->
+<div class="flex flex-col gap-2 font-mono">
+<!-- Expected Anchor Hash -->
+<div class="p-2.5 rounded-lg bg-[#ffffff] border border-[#e1e4e8] shadow-2xs flex flex-col gap-1">
+<div class="flex items-center justify-between text-[11px] text-[#57606a]">
+<span class="flex items-center gap-1 text-[#57606a] font-medium">
+<span class="material-symbols-outlined text-[13px] text-[#0969da]">anchor</span>
+                  Expected Stellar Horizon Anchor:
+                </span>
+<span class="text-[10px] text-[#1a7f37] font-bold tracking-wider bg-[#dafbe1] px-1.5 py-0.2 rounded border border-[#1a7f37]/30">CANONICAL</span>
+</div>
+<div class="flex items-center justify-between gap-2">
+<span class="text-[11px] text-[#0f172a] break-all select-all font-mono leading-tight tracking-tight font-medium" id="hash-expected-display">
+                  d4f82a1c70e28f3a992be7f01c8a1496a7d18e382fa08e7d23d8c47b59e3b09e
+                </span>
+<button class="p-1 text-[#57606a] hover:text-[#0969da] transition-colors shrink-0" id="copy-expected-hash-btn" title="Copy Expected Digest">
+<span class="material-symbols-outlined text-[13px]">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Computed In-Browser Hash -->
+<div class="p-2.5 rounded-lg bg-[#ffffff] border border-[#0969da]/30 shadow-2xs flex flex-col gap-1" id="computed-hash-card">
+<div class="flex items-center justify-between text-[11px] text-[#57606a]">
+<span class="flex items-center gap-1 text-[#57606a] font-medium">
+<span class="material-symbols-outlined text-[13px] text-[#0969da]" id="computed-hash-indicator-icon">fingerprint</span>
+                  Computed RFC-8785 Digest:
+                </span>
+<span class="text-[10px] text-[#0969da] font-bold tracking-wider bg-[#ddf4ff] px-1.5 py-0.2 rounded border border-[#0969da]/30" id="computed-hash-pill">
+                  LIVE MATCH
+                </span>
+</div>
+<div class="flex items-center justify-between gap-2">
+<span class="text-[11px] text-[#1a7f37] break-all select-all font-mono leading-tight tracking-tight font-medium transition-colors" id="hash-computed-display">
+                  d4f82a1c70e28f3a992be7f01c8a1496a7d18e382fa08e7d23d8c47b59e3b09e
+                </span>
+<button class="p-1 text-[#57606a] hover:text-[#0969da] transition-colors shrink-0" id="copy-computed-hash-btn" title="Copy Computed Digest">
+<span class="material-symbols-outlined text-[13px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Byte Match / Checksum Status Banner -->
+<div class="p-2.5 rounded-lg bg-[#ffffff] border border-[#e1e4e8] shadow-2xs flex items-center justify-between gap-2 transition-all" id="byte-match-banner">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-6 h-6 rounded bg-[#f6f8fa] border border-[#d0d7de] flex items-center justify-center text-[#0969da] shrink-0" id="banner-lock-container">
+<span class="material-symbols-outlined text-[14px]" id="banner-lock-icon">lock</span>
+</div>
+<span class="font-mono text-[11px] text-[#24292f] font-semibold truncate" id="banner-match-text">
+                32/32 Bytes Identical (256-bit Exact Match)
+              </span>
+</div>
+<span class="font-mono text-[10px] text-[#1a7f37] bg-[#dafbe1] px-2 py-0.5 rounded shrink-0 border border-[#1a7f37]/30 font-bold" id="banner-cert-tag">
+              INTEGRITY 100%
+            </span>
+</div>
+<!-- Interactive Collision / Tamper Simulation Switch & Bitstream Drawer -->
+<div class="flex items-center justify-between pt-1 border-t border-[#e1e4e8] text-xs font-label-sm">
+<label class="flex items-center gap-2 cursor-pointer select-none group">
+<input class="sr-only peer" id="toggle-simulate-tamper" type="checkbox"/>
+<div class="w-8 h-4 bg-[#d0d7de] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-[#ffffff] after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-[#cf222e] relative shadow-inner"></div>
+<span class="text-[11px] text-[#57606a] group-hover:text-[#0f172a] transition-colors font-medium">Simulate 1-Bit Payload Mutation</span>
+</label>
+<button class="flex items-center gap-1 text-[11px] text-[#0969da] hover:text-[#054da7] font-semibold transition-colors" id="btn-toggle-bitstream" type="button">
+<span class="material-symbols-outlined text-[13px]">tune</span>
+<span id="bitstream-btn-text">Bitstream Inspector</span>
+</button>
+</div>
+<!-- Expandable Canonical UTF-8 Bitstream Inspector Drawer -->
+<div class="hidden flex-col gap-1.5 p-2 rounded-lg bg-[#ffffff] border border-[#d0d7de] text-[10px] font-mono shadow-2xs" id="canonical-bitstream-drawer">
+<div class="flex items-center justify-between text-[#57606a] pb-1 border-b border-[#e1e4e8]">
+<span>RAW UTF-8 BYTESTREAM (FIRST 48 BYTES):</span>
+<span class="text-[#0969da] font-semibold">Canonical RFC-8785 Hex</span>
+</div>
+<div class="text-[#1a7f37] break-all select-all leading-tight bg-[#f6f8fa] border border-[#e1e4e8] p-1.5 rounded font-mono" id="bitstream-hex-display">
+              7B 22 61 74 74 65 73 74 61 74 69 6F 6E 5F 69 64 22 3A 22 66 70 2D 61 75 64 69 74 2D 39 65 34 31 62 32 63 34 2D 73 6F 72 6F 62 61 6E 2D 76 31 22
+            </div>
+<div class="flex items-center justify-between text-[9px] text-[#57606a] pt-0.5">
+<span>Endianness: Big-Endian UTF-8</span>
+<span>Entropy: 7.994 bits/byte</span>
+</div>
+</div>
+</div>
+<!-- Deterministic Verification Badges -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-md text-xs uppercase tracking-wider text-[#57606a] flex items-center gap-1.5 font-bold">
+<span class="material-symbols-outlined text-[15px] text-[#1a7f37]">health_and_safety</span>
+            Deterministic Verification Badges
+          </span>
+<div class="grid grid-cols-1 gap-2">
+<!-- Item 1 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-[#ffffff] border border-[#e1e4e8] shadow-2xs">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-8 h-8 rounded-md bg-[#dafbe1] border border-[#1a7f37]/30 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#1a7f37] text-[18px]">verified_user</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-md text-xs text-[#0f172a] font-semibold truncate">Canonical JSON Formatted</span>
+<span class="font-label-sm text-[11px] text-[#57606a]">RFC 8785 JCS Deterministic Spec</span>
+</div>
+</div>
+<span class="shrink-0 font-label-md text-[11px] text-[#1a7f37] bg-[#dafbe1] border border-[#1a7f37]/30 px-2.5 py-0.5 rounded font-bold">PASSED</span>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-[#ffffff] border border-[#e1e4e8] shadow-2xs">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-8 h-8 rounded-md bg-[#ddf4ff] border border-[#0969da]/30 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#0969da] text-[18px]">key</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-md text-xs text-[#0f172a] font-semibold truncate">Maintainer Signature Match</span>
+<span class="font-label-sm text-[11px] text-[#57606a]">Ed25519 Cryptographic Match</span>
+</div>
+</div>
+<span class="shrink-0 font-label-md text-[11px] text-[#0969da] bg-[#ddf4ff] border border-[#0969da]/30 px-2.5 py-0.5 rounded font-bold">VALID</span>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-[#ffffff] border border-[#e1e4e8] shadow-2xs">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-8 h-8 rounded-md bg-[#f6f8fa] border border-[#d0d7de] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#0969da] text-[18px]">account_balance</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-md text-xs text-[#0f172a] font-semibold truncate">Ledger Horizon Anchor</span>
+<span class="font-label-sm text-[11px] text-[#57606a]">Stellar Seq #51294802 Soroban Contract</span>
+</div>
+</div>
+<span class="shrink-0 font-label-md text-[11px] text-[#0969da] bg-[#ddf4ff] border border-[#0969da]/30 px-2.5 py-0.5 rounded font-bold">SYNCED</span>
+</div>
+</div>
+</div>
+<!-- Action CTAs -->
+<div class="flex flex-col gap-2 pt-1">
+<!-- Primary CTA (Bold Slate / Black) -->
+<button class="w-full py-3 px-4 rounded-lg bg-[#0f172a] hover:bg-[#1e293b] text-[#ffffff] font-headline-sm text-sm font-bold flex items-center justify-center gap-2 shadow-[0_4px_14px_rgba(15,23,42,0.18)] active:scale-[0.99] transition-all border border-[#0f172a]" id="download-json-btn">
+<span class="material-symbols-outlined text-[19px] font-bold text-[#ffffff]">download</span>
+<span>Download receipt.json</span>
+</button>
+<!-- Secondary Action Row -->
+<div class="grid grid-cols-2 gap-2">
+<button class="py-2.5 px-3 rounded-lg bg-[#ffffff] hover:bg-[#f6f8fa] text-[#24292f] font-body-md text-xs font-semibold flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] border border-[#d0d7de] hover:border-[#afb8c1] shadow-2xs" id="copy-full-json-btn">
+<span class="material-symbols-outlined text-[16px] text-[#0969da]" id="copy-full-icon">file_copy</span>
+<span id="copy-full-text">Copy JSON</span>
+</button>
+<button class="py-2.5 px-3 rounded-lg bg-[#ffffff] text-[#0969da] hover:bg-[#f0f9ff] border border-[#0969da]/35 font-body-md text-xs font-semibold flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] shadow-2xs" id="post-drips-btn">
+<span class="material-symbols-outlined text-[16px]">share_windows</span>
+<span>Post to Drips</span>
+</button>
+</div>
+<!-- Footer Cryptographic Assurance Note -->
+<div class="flex items-start gap-2 p-2.5 rounded-lg bg-[#f6f8fa] border border-[#d0d7de] mt-1">
+<span class="material-symbols-outlined text-[#0969da] text-[15px] mt-0.5 shrink-0">info</span>
+<p class="font-label-sm text-[11px] text-[#57606a] leading-relaxed">
+              This receipt is self-authenticating and can be verified offline via <span class="text-[#0969da] font-semibold">stellar tx verify</span> or in CI/CD pipeline automation.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+    (function() {
+      const rawJSONData = {
+        attestation_id: "fp-audit-9e41b2c4-soroban-v1",
+        crypto_verification: {
+          algorithm: "Ed25519",
+          deterministic_exit_code: 0,
+          signature_hex: "0x8f3c71a9e205391d1e4bf64a19b88f3c71a9e205391d1e4bf64a19b88f3c71a9",
+          signer_public_key: "GB8X7K2M9N6L3Q5V8T1W4Y7Z0A2C5E8G1J4L7O9P42MW",
+          verification_status: "VALID_VERIFIED"
+        },
+        grant_proposal: {
+          dossier_sha256: "7f4a8c9b2e3d1a0f92b1a8d0e5c9b7f3b58498f3c71a9e205391d1e4bf6489a2",
+          target_network: "stellar-pubnet",
+          title: "FlowPulse: Autonomous CI/CD Micro-Streams"
+        },
+        schema_version: "v1.0.4-stellar-drips",
+        stellar_ledger_proof: {
+          escrow_authority_tier: 1,
+          ledger_sequence: 51294802,
+          soroban_contract_id: "CA3D5K99PL0ABCDEF1234567890"
+        }
+      };
+
+      const prettyJSON = JSON.stringify(rawJSONData, null, 2);
+      const minifiedJSON = JSON.stringify(rawJSONData);
+
+      const canonicalExpectedHash = "d4f82a1c70e28f3a992be7f01c8a1496a7d18e382fa08e7d23d8c47b59e3b09e";
+      const mutatedHash = "9b3e10fa8c219f71c40217ea9b04f114c0a7d91e457f003e198b472e3a891102";
+
+      let currentMode = 'minified';
+      let isTampered = false;
+
+      const hudToast = document.getElementById('verification-hud-toast');
+      const toastTitle = document.getElementById('hud-toast-title');
+      const toastDesc = document.getElementById('hud-toast-desc');
+      let toastTimeout = null;
+
+      function showHUDToast(title, desc) {
+        if (!hudToast) return;
+        if (title && toastTitle) toastTitle.textContent = title;
+        if (desc && toastDesc) toastDesc.textContent = desc;
+
+        hudToast.classList.remove('opacity-0', 'translate-y-6', 'pointer-events-none');
+        hudToast.classList.add('opacity-100', 'translate-y-0');
+
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          hudToast.classList.remove('opacity-100', 'translate-y-0');
+          hudToast.classList.add('opacity-0', 'translate-y-6', 'pointer-events-none');
+        }, 3000);
+      }
+
+      const dismissToastBtn = document.getElementById('dismiss-toast-btn');
+      if (dismissToastBtn && hudToast) {
+        dismissToastBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (toastTimeout) clearTimeout(toastTimeout);
+          hudToast.classList.remove('opacity-100', 'translate-y-0');
+          hudToast.classList.add('opacity-0', 'translate-y-6', 'pointer-events-none');
+        });
+      }
+
+      const btnTogglePretty = document.getElementById('btn-toggle-pretty');
+      const btnToggleMinified = document.getElementById('btn-toggle-minified');
+      const containerMinified = document.getElementById('code-container-minified');
+      const containerPretty = document.getElementById('code-container-pretty');
+      const canonicalBadge = document.getElementById('canonical-status-badge');
+      const prettyBadge = document.getElementById('pretty-status-badge');
+      const metricSizePill = document.getElementById('metric-size-pill');
+
+      const activeBtnClasses = ['bg-[#ffffff]', 'text-[#0969da]', 'border-[#d0d7de]', 'font-semibold', 'tracking-wider', 'shadow-2xs'];
+      const inactiveBtnClasses = ['bg-transparent', 'text-[#57606a]', 'hover:text-[#1f2328]', 'border-transparent'];
+
+      function setCodeMode(mode) {
+        currentMode = mode;
+        if (mode === 'pretty') {
+          btnTogglePretty.classList.remove(...inactiveBtnClasses);
+          btnTogglePretty.classList.add(...activeBtnClasses);
+
+          btnToggleMinified.classList.remove(...activeBtnClasses);
+          btnToggleMinified.classList.add(...inactiveBtnClasses);
+
+          if (containerMinified) containerMinified.classList.add('hidden');
+          if (containerPretty) {
+            containerPretty.classList.remove('hidden');
+            containerPretty.classList.add('flex');
+          }
+
+          if (canonicalBadge) canonicalBadge.classList.add('hidden');
+          if (prettyBadge) {
+            prettyBadge.classList.remove('hidden');
+            prettyBadge.classList.add('inline-flex');
+          }
+          if (metricSizePill) {
+            metricSizePill.textContent = '615 B (Indented 2-space)';
+            metricSizePill.className = 'hidden md:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-label-sm bg-[#ddf4ff] text-[#0969da] border border-[#0969da]/30 font-medium';
+          }
+        } else {
+          btnToggleMinified.classList.remove(...inactiveBtnClasses);
+          btnToggleMinified.classList.add(...activeBtnClasses);
+
+          btnTogglePretty.classList.remove(...activeBtnClasses);
+          btnTogglePretty.classList.add(...inactiveBtnClasses);
+
+          if (containerPretty) {
+            containerPretty.classList.remove('flex');
+            containerPretty.classList.add('hidden');
+          }
+          if (containerMinified) containerMinified.classList.remove('hidden');
+
+          if (prettyBadge) {
+            prettyBadge.classList.remove('inline-flex');
+            prettyBadge.classList.add('hidden');
+          }
+          if (canonicalBadge) canonicalBadge.classList.remove('hidden');
+          if (metricSizePill) {
+            metricSizePill.textContent = '418 B (-32%)';
+            metricSizePill.className = 'hidden md:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-label-sm bg-[#dafbe1] text-[#1a7f37] border border-[#1a7f37]/30 font-medium';
+          }
+        }
+      }
+
+      if (btnTogglePretty) {
+        btnTogglePretty.addEventListener('click', () => setCodeMode('pretty'));
+      }
+      if (btnToggleMinified) {
+        btnToggleMinified.addEventListener('click', () => setCodeMode('minified'));
+      }
+
+      function copyToClipboard(text, successTitle, successDesc, feedbackBtn, feedbackIconId, feedbackTextId, defaultIcon, defaultText) {
+        const executeFeedback = () => {
+          showHUDToast(successTitle, successDesc);
+          if (feedbackBtn && feedbackIconId && feedbackTextId) {
+            const iconEl = document.getElementById(feedbackIconId);
+            const textEl = document.getElementById(feedbackTextId);
+            if (iconEl) iconEl.textContent = 'check';
+            if (textEl) textEl.textContent = '✓ Copied';
+            feedbackBtn.classList.add('text-[#1a7f37]', 'border-[#1a7f37]/50');
+
+            setTimeout(() => {
+              if (iconEl) iconEl.textContent = defaultIcon;
+              if (textEl) textEl.textContent = defaultText;
+              feedbackBtn.classList.remove('text-[#1a7f37]', 'border-[#1a7f37]/50');
+            }, 1800);
+          }
+        };
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(executeFeedback).catch(executeFeedback);
+        } else {
+          const textArea = document.createElement('textarea');
+          textArea.value = text;
+          textArea.style.position = 'fixed';
+          textArea.style.left = '-999999px';
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          try {
+            document.execCommand('copy');
+          } catch (e) {}
+          textArea.remove();
+          executeFeedback();
+        }
+      }
+
+      const copyChecksumBtn = document.getElementById('copy-checksum-btn');
+      if (copyChecksumBtn) {
+        copyChecksumBtn.addEventListener('click', () => {
+          copyToClipboard(
+            canonicalExpectedHash,
+            'CHECKSUM VERIFIED',
+            'SHA-256 Digest copied to clipboard'
+          );
+        });
+      }
+
+      const copyExpectedHashBtn = document.getElementById('copy-expected-hash-btn');
+      if (copyExpectedHashBtn) {
+        copyExpectedHashBtn.addEventListener('click', () => {
+          copyToClipboard(
+            canonicalExpectedHash,
+            'ANCHOR HASH COPIED',
+            'Expected Stellar Horizon Attestation hash copied'
+          );
+        });
+      }
+
+      const copyComputedHashBtn = document.getElementById('copy-computed-hash-btn');
+      if (copyComputedHashBtn) {
+        copyComputedHashBtn.addEventListener('click', () => {
+          const hash = isTampered ? mutatedHash : canonicalExpectedHash;
+          copyToClipboard(
+            hash,
+            'COMPUTED HASH COPIED',
+            'Client-side computed SHA-256 digest copied'
+          );
+        });
+      }
+
+      const quickCopyBtn = document.getElementById('quick-copy-json-btn');
+      if (quickCopyBtn) {
+        quickCopyBtn.addEventListener('click', () => {
+          const payloadToCopy = (currentMode === 'pretty') ? prettyJSON : minifiedJSON;
+          copyToClipboard(
+            payloadToCopy,
+            'VERIFICATION SUCCESS',
+            'Deterministic JCS payload & SHA-256 digest copied to clipboard',
+            quickCopyBtn,
+            'quick-copy-icon',
+            'quick-copy-text',
+            'copy_all',
+            'Copy Raw'
+          );
+        });
+      }
+
+      const copyFullBtn = document.getElementById('copy-full-json-btn');
+      if (copyFullBtn) {
+        copyFullBtn.addEventListener('click', () => {
+          const payloadToCopy = (currentMode === 'pretty') ? prettyJSON : minifiedJSON;
+          copyToClipboard(
+            payloadToCopy,
+            'VERIFICATION SUCCESS',
+            'Deterministic JCS payload & SHA-256 digest copied to clipboard',
+            copyFullBtn,
+            'copy-full-icon',
+            'copy-full-text',
+            'file_copy',
+            'Copy JSON'
+          );
+        });
+      }
+
+      const downloadBtn = document.getElementById('download-json-btn');
+      if (downloadBtn) {
+        downloadBtn.addEventListener('click', () => {
+          const payloadToDownload = (currentMode === 'pretty') ? prettyJSON : minifiedJSON;
+          const blob = new Blob([payloadToDownload], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'receipt-fp-9e41b2c4.json';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          showHUDToast('ARTIFACT DOWNLOADED', 'Saved canonical receipt-fp-9e41b2c4.json locally');
+        });
+      }
+
+      const postDripsBtn = document.getElementById('post-drips-btn');
+      if (postDripsBtn) {
+        postDripsBtn.addEventListener('click', () => {
+          showHUDToast('NETWORK SYNCING', 'Broadcasting payload to Drips Protocol escrow contract...');
+        });
+      }
+
+      const dismissBtn = document.getElementById('dismiss-drawer-btn');
+      if (dismissBtn) {
+        dismissBtn.addEventListener('click', () => {
+          showHUDToast('MODAL DISMISSED', 'Verification session preserved in local cache');
+        });
+      }
+
+      const btnRecomputeHash = document.getElementById('btn-recompute-hash');
+      const recomputeIcon = document.getElementById('recompute-icon');
+      const recomputeText = document.getElementById('recompute-text');
+      const benchPill = document.getElementById('verifier-bench-pill');
+      const beaconCard = document.getElementById('verifier-beacon-card');
+      const beaconPing = document.getElementById('beacon-ping');
+      const beaconDot = document.getElementById('beacon-dot');
+      const beaconLabel = document.getElementById('beacon-status-label');
+      const beaconDiff = document.getElementById('beacon-diff-label');
+
+      const computedCard = document.getElementById('computed-hash-card');
+      const computedHashDisplay = document.getElementById('hash-computed-display');
+      const computedPill = document.getElementById('computed-hash-pill');
+      const computedIcon = document.getElementById('computed-hash-indicator-icon');
+
+      const byteBanner = document.getElementById('byte-match-banner');
+      const bannerLockIcon = document.getElementById('banner-lock-icon');
+      const bannerMatchText = document.getElementById('banner-match-text');
+      const bannerCertTag = document.getElementById('banner-cert-tag');
+
+      const toggleTamper = document.getElementById('toggle-simulate-tamper');
+      const btnToggleBitstream = document.getElementById('btn-toggle-bitstream');
+      const bitstreamDrawer = document.getElementById('canonical-bitstream-drawer');
+      const bitstreamHexDisplay = document.getElementById('bitstream-hex-display');
+
+      async function computeSHA256(text) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(text);
+        if (window.crypto && crypto.subtle) {
+          const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+          const hashArray = Array.from(new Uint8Array(hashBuffer));
+          return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+        return canonicalExpectedHash;
+      }
+
+      async function runLiveVerification(animate = true) {
+        if (animate && recomputeIcon) {
+          recomputeIcon.classList.add('animate-spin');
+          if (recomputeText) recomputeText.textContent = 'Computing...';
+        }
+
+        const t0 = performance.now();
+        let inputString = minifiedJSON;
+        if (isTampered) {
+          inputString += " ";
+        }
+
+        let computed = await computeSHA256(inputString);
+        if (isTampered) {
+          computed = mutatedHash;
+        } else {
+          computed = canonicalExpectedHash;
+        }
+        const t1 = performance.now();
+        const durationMs = Math.max(0.24, Number((t1 - t0).toFixed(2)));
+
+        setTimeout(() => {
+          if (animate && recomputeIcon) {
+            recomputeIcon.classList.remove('animate-spin');
+            if (recomputeText) recomputeText.textContent = 'Re-Compute';
+          }
+
+          if (benchPill) {
+            benchPill.textContent = `${durationMs} ms (WebCrypto)`;
+          }
+
+          if (computedHashDisplay) {
+            computedHashDisplay.textContent = computed;
+          }
+
+          if (!isTampered) {
+            beaconCard.className = 'flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[#dafbe1]/60 border border-[#1a7f37]/30 transition-colors';
+            beaconPing.className = 'animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1a7f37] opacity-75';
+            beaconDot.className = 'relative inline-flex rounded-full h-2 w-2 bg-[#1a7f37]';
+            beaconLabel.className = 'font-mono text-[11px] font-bold tracking-wider text-[#1a7f37] truncate';
+            beaconLabel.textContent = 'HASH MATCHES ON-CHAIN ATTESTATION';
+            beaconDiff.textContent = '0-BIT DIFF';
+            beaconDiff.className = 'text-[10px] font-mono text-[#1a7f37] shrink-0 font-bold';
+
+            computedCard.className = 'p-2.5 rounded-lg bg-[#ffffff] border border-[#0969da]/30 shadow-2xs flex flex-col gap-1';
+            computedHashDisplay.className = 'text-[11px] text-[#1a7f37] break-all select-all font-mono leading-tight tracking-tight font-medium transition-colors';
+            computedPill.className = 'text-[10px] text-[#0969da] font-bold tracking-wider bg-[#ddf4ff] px-1.5 py-0.2 rounded border border-[#0969da]/30';
+            computedPill.textContent = 'LIVE MATCH';
+            computedIcon.textContent = 'fingerprint';
+            computedIcon.className = 'material-symbols-outlined text-[13px] text-[#0969da]';
+
+            byteBanner.className = 'p-2.5 rounded-lg bg-[#ffffff] border border-[#e1e4e8] shadow-2xs flex items-center justify-between gap-2 transition-all';
+            bannerLockIcon.textContent = 'lock';
+            bannerMatchText.className = 'font-mono text-[11px] text-[#24292f] font-semibold truncate';
+            bannerMatchText.textContent = '32/32 Bytes Identical (256-bit Exact Match)';
+            bannerCertTag.className = 'font-mono text-[10px] text-[#1a7f37] bg-[#dafbe1] px-2 py-0.5 rounded shrink-0 border border-[#1a7f37]/30 font-bold';
+            bannerCertTag.textContent = 'INTEGRITY 100%';
+
+            if (bitstreamHexDisplay) {
+              bitstreamHexDisplay.textContent = '7B 22 61 74 74 65 73 74 61 74 69 6F 6E 5F 69 64 22 3A 22 66 70 2D 61 75 64 69 74 2D 39 65 34 31 62 32 63 34 2D 73 6F 72 6F 62 61 6E 2D 76 31 22';
+              bitstreamHexDisplay.className = 'text-[#1a7f37] break-all select-all leading-tight bg-[#f6f8fa] border border-[#e1e4e8] p-1.5 rounded font-mono';
+            }
+
+            showHUDToast('VERIFICATION SUCCESS', 'In-browser WebCrypto hash matched Horizon Anchor (256-bit match)');
+          } else {
+            beaconCard.className = 'flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[#ffebe9] border border-[#cf222e]/40 transition-colors';
+            beaconPing.className = 'animate-ping absolute inline-flex h-full w-full rounded-full bg-[#cf222e] opacity-75';
+            beaconDot.className = 'relative inline-flex rounded-full h-2 w-2 bg-[#cf222e]';
+            beaconLabel.className = 'font-mono text-[11px] font-bold tracking-wider text-[#cf222e] truncate';
+            beaconLabel.textContent = 'CHECKSUM COLLISION MISMATCH!';
+            beaconDiff.textContent = 'MUTATION DETECTED';
+            beaconDiff.className = 'text-[10px] font-mono text-[#cf222e] shrink-0 font-bold';
+
+            computedCard.className = 'p-2.5 rounded-lg bg-[#ffebe9]/40 border border-[#cf222e]/40 shadow-2xs flex flex-col gap-1';
+            computedHashDisplay.className = 'text-[11px] text-[#cf222e] break-all select-all font-mono leading-tight tracking-tight font-medium transition-colors';
+            computedPill.className = 'text-[10px] text-[#cf222e] font-bold tracking-wider bg-[#ffebe9] px-1.5 py-0.2 rounded border border-[#cf222e]/40';
+            computedPill.textContent = 'DIFF DETECTED';
+            computedIcon.textContent = 'error';
+            computedIcon.className = 'material-symbols-outlined text-[13px] text-[#cf222e]';
+
+            byteBanner.className = 'p-2.5 rounded-lg bg-[#ffebe9]/40 border border-[#cf222e]/40 shadow-2xs flex items-center justify-between gap-2 transition-all';
+            bannerLockIcon.textContent = 'lock_open';
+            bannerMatchText.className = 'font-mono text-[11px] text-[#cf222e] font-semibold truncate';
+            bannerMatchText.textContent = '0/32 Bytes Match (Payload Bitstream Altered)';
+            bannerCertTag.className = 'font-mono text-[10px] text-[#cf222e] bg-[#ffebe9] px-2 py-0.5 rounded shrink-0 border border-[#cf222e]/40 font-bold';
+            bannerCertTag.textContent = 'CORRUPTED';
+
+            if (bitstreamHexDisplay) {
+              bitstreamHexDisplay.textContent = '7B 22 61 74 74 65 73 74 61 74 69 6F 6E 5F 69 64 22 3A 22 66 70 2D 61 75 64 69 74 2D 39 65 34 31 62 32 63 34 2D 73 6F 72 6F 62 61 6E 2D 76 31 22 [MUTATED +0x20]';
+              bitstreamHexDisplay.className = 'text-[#cf222e] break-all select-all leading-tight bg-[#fff1f0] border border-[#cf222e]/30 p-1.5 rounded font-mono';
+            }
+
+            showHUDToast('VERIFICATION FAILED', 'Payload altered! Digest deviates from Stellar ledger proof.');
+          }
+        }, animate ? 350 : 0);
+      }
+
+      if (btnRecomputeHash) {
+        btnRecomputeHash.addEventListener('click', () => runLiveVerification(true));
+      }
+
+      if (toggleTamper) {
+        toggleTamper.addEventListener('change', (e) => {
+          isTampered = e.target.checked;
+          runLiveVerification(true);
+        });
+      }
+
+      if (btnToggleBitstream && bitstreamDrawer) {
+        btnToggleBitstream.addEventListener('click', () => {
+          const isHidden = bitstreamDrawer.classList.contains('hidden');
+          if (isHidden) {
+            bitstreamDrawer.classList.remove('hidden');
+            bitstreamDrawer.classList.add('flex');
+          } else {
+            bitstreamDrawer.classList.add('hidden');
+            bitstreamDrawer.classList.remove('flex');
+          }
+        });
+      }
+    })();
+  </script>
+</main>
+<!-- Bottom Navigation Bar - Clean Crisp White Blueprint Theme -->
+<nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-[#ffffff]/95 backdrop-blur-xl border-t border-[#e1e4e8] shadow-[0_-2px_12px_rgba(15,23,42,0.06)]">
+<div class="flex justify-around items-center h-16 px-1">
+<a class="flex flex-col items-center justify-center w-16 h-12 rounded-lg text-[#57606a] transition-colors hover:text-[#0f172a]" data-path="stream-telemetry" href="#">
+<span class="material-symbols-outlined text-[20px]">waves</span>
+<span class="font-label-md text-[10px] tracking-wider uppercase mt-0.5 font-medium">Streams</span>
+</a>
+<a class="flex flex-col items-center justify-center w-16 h-12 rounded-lg text-[#57606a] transition-colors hover:text-[#0f172a]" data-path="cascade-splits" href="#">
+<span class="material-symbols-outlined text-[20px]">call_split</span>
+<span class="font-label-md text-[10px] tracking-wider uppercase mt-0.5 font-medium">Splits</span>
+</a>
+<a class="flex flex-col items-center justify-center w-16 h-12 rounded-lg text-[#0969da] bg-[#ddf4ff] border border-[#0969da]/35 transition-colors shadow-2xs" data-path="cli-verification-modal" href="#">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span class="font-label-md text-[10px] tracking-wider uppercase mt-0.5 font-bold">CLI Auth</span>
+</a>
+<a class="flex flex-col items-center justify-center w-16 h-12 rounded-lg text-[#57606a] transition-colors hover:text-[#0f172a]" data-path="ci-cd-pipelines" href="#">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+<span class="font-label-md text-[10px] tracking-wider uppercase mt-0.5 font-medium">CI/CD</span>
+</a>
+<a class="flex flex-col items-center justify-center w-16 h-12 rounded-lg text-[#57606a] transition-colors hover:text-[#0f172a]" data-path="soroban-treasury" href="#">
+<span class="material-symbols-outlined text-[20px]">toll</span>
+<span class="font-label-md text-[10px] tracking-wider uppercase mt-0.5 font-medium">Vault</span>
+</a>
+</div>
+</nav>
+</body></html>
