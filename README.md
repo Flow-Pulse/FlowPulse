@@ -1,3 +1,5 @@
+<p align="center"><img src="design/logo/flowpulse-social.png" alt="FlowPulse" width="720"></p>
+
 # FlowPulse
 
 **Per-second funding streams and recursive dependency splits for open-source maintainers, on Stellar Soroban.**

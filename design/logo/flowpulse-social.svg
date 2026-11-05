@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16213b"/><stop offset="1" stop-color="#0b1220"/></linearGradient>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a7af0"/><stop offset="1" stop-color="#0646a8"/></linearGradient>
+    <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#58a6ff" stroke-opacity=".10" stroke-width="1.5"/></pattern>
+  </defs>
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="640" fill="url(#g)"/>
+  <g stroke="#58a6ff" stroke-opacity=".5" stroke-width="2"><path d="M80 64v32M64 80h32"/><path d="M1200 544v32M1184 560h32"/></g>
+  <g transform="translate(112 160) scale(0.625)">
+    <rect width="512" height="512" rx="112" fill="url(#tile)"/>
+    <g fill="none" stroke="#fff" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"><path d="M80 272h66l34-106 52 198 38-124 22 32h34"/><path d="M326 272c36 0 42-80 98-80M326 272h98M326 272c36 0 42 80 98 80"/></g><g fill="#7ee2a8"><circle cx="426" cy="192" r="19"/><circle cx="426" cy="272" r="19"/><circle cx="426" cy="352" r="19"/></g>
+  </g>
+  <text x="496" y="300" font-family="Space Grotesk, Geist, Arial, sans-serif" font-size="104" font-weight="700" letter-spacing="-3" fill="#ffffff">FlowPulse</text>
+  <text x="500" y="364" font-family="Geist, Arial, sans-serif" font-size="32" fill="#c9d6ea">Per-second funding streams &amp; dependency</text>
+  <text x="500" y="406" font-family="Geist, Arial, sans-serif" font-size="32" fill="#c9d6ea">cascades for open-source maintainers.</text>
+  <g font-family="JetBrains Mono, monospace" font-size="22" font-weight="500">
+    <rect x="500" y="448" width="262" height="40" rx="6" fill="#0969da" fill-opacity=".18" stroke="#58a6ff" stroke-opacity=".5"/>
+    <text x="518" y="475" fill="#7cb7ff">STELLAR · SOROBAN</text>
+    <rect x="778" y="448" width="142" height="40" rx="6" fill="#3fb950" fill-opacity=".15" stroke="#3fb950" stroke-opacity=".5"/>
+    <text x="796" y="475" fill="#7ee2a8">RFC-8785</text>
+    <rect x="936" y="448" width="181" height="40" rx="6" fill="#ffffff" fill-opacity=".06" stroke="#ffffff" stroke-opacity=".25"/>
+    <text x="954" y="475" fill="#c9d6ea">OPEN SOURCE</text>
+  </g>
+</svg>
