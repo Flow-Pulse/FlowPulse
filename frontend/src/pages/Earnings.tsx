@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useApp } from "../state";
 import { useStreams } from "../hooks/useStreams";
 import { splitter, status, streamedAt, streamedAtSmooth, withdrawableAt } from "../lib/contracts";
-import { config, XLM_SAC } from "../lib/config";
+import { config, XLM_SAC, tokenMeta, SUPPORTED_TOKENS } from "../lib/config";
 import { sv } from "../lib/soroban";
 import { fromUnits, shortAddr, timeAgo } from "../lib/format";
 import { loadReceipts, parseReceipt, type Receipt } from "../lib/receipts";
@@ -48,6 +48,7 @@ export function EarningsPage() {
   const nowSec = now / 1000;
   const [balance, setBalance] = useState<string | null>(null);
   const [hasTable, setHasTable] = useState(false);
+  const [tokenFilter, setTokenFilter] = useState<string>("all");
   const [fwd, setFwd] = useState<number>(() => {
     try {
       return Number(localStorage.getItem(FWD_KEY) ?? "0");
@@ -71,8 +72,12 @@ export function EarningsPage() {
   }, [address, version]);
 
   const mine = scope === "mine";
-  const incoming = mine ? streams.filter((s) => s.recipient === address && s.token === XLM_SAC) : [];
-  const outgoing = mine ? streams.filter((s) => s.sender === address && s.token === XLM_SAC) : [];
+  const incoming = mine
+    ? streams.filter((s) => s.recipient === address && (tokenFilter === "all" || s.token === tokenFilter))
+    : [];
+  const outgoing = mine
+    ? streams.filter((s) => s.sender === address && (tokenFilter === "all" || s.token === tokenFilter))
+    : [];
 
   const unclaimedSmooth = incoming.reduce((a, s) => a + Math.max(0, streamedAtSmooth(s, now) - Number(s.withdrawn)), 0);
   const unclaimed = incoming.reduce((a, s) => a + withdrawableAt(s, nowSec), 0n);
@@ -141,12 +146,33 @@ export function EarningsPage() {
             <span className="chip-ok"><Pip tone="ok" pulse={rateIn > 0n} /> {rateIn > 0n ? "LIVE ACCRUAL" : "IDLE"}</span>
             <span className="chip"><Icon name="verified" className="!text-[14px] text-cobalt" /> Soroban p30</span>
           </div>
-          <div className="label">Unclaimed streaming balance</div>
+          <div className="flex items-center justify-between gap-2">
+            <div className="label">Unclaimed streaming balance</div>
+            <div className="flex gap-1">
+              <button
+                type="button"
+                onClick={() => setTokenFilter("all")}
+                className={`rounded-full border px-2 py-0.5 font-mono text-[10px] ${tokenFilter === "all" ? "border-cobalt bg-cobalt text-white" : "border-line bg-vellum text-ink-2"}`}
+              >
+                All
+              </button>
+              {SUPPORTED_TOKENS.map((t) => (
+                <button
+                  key={t.contractId}
+                  type="button"
+                  onClick={() => setTokenFilter(t.contractId)}
+                  className={`rounded-full border px-2 py-0.5 font-mono text-[10px] ${tokenFilter === t.contractId ? "border-cobalt bg-cobalt text-white" : "border-line bg-vellum text-ink-2"}`}
+                >
+                  {t.code}
+                </button>
+              ))}
+            </div>
+          </div>
           <div className="mt-1 flex items-baseline gap-2">
             <span className="tnum font-display text-4xl font-semibold tracking-tight text-ink md:text-5xl">
               {(unclaimedSmooth / 1e7).toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 4 })}
             </span>
-            <span className="font-mono text-sm text-cobalt">XLM</span>
+            <span className="font-mono text-sm text-cobalt">{tokenFilter === "all" ? "XLM/USDC" : tokenMeta(tokenFilter).code}</span>
           </div>
           <div className="mt-1 flex flex-wrap items-center gap-2 font-mono text-xs text-lead">
             <span className="chip-ok">+{fromUnits(rateIn * 60n, 7, 4)} XLM/min</span>
