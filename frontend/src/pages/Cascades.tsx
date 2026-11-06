@@ -4,7 +4,7 @@ import { useApp } from "../state";
 import { splitter, type Payout } from "../lib/contracts";
 import { config, XLM_SAC } from "../lib/config";
 import { cleanError, sv } from "../lib/soroban";
-import { equalWeights, fetchRepoManifest, parseManifest, registryUrl, resolveMaintainerFundingAddress, type Dependency, type Manifest } from "../lib/manifest";
+import { equalWeights, fetchRepoManifest, parseManifest, registryUrl, resolveMaintainerFundingAddress, suggestDependencyWeights, type Dependency, type Manifest } from "../lib/manifest";
 import { fromUnits, shortAddr, toUnits } from "../lib/format";
 import { Banner } from "../components/Shell";
 import { CopyButton, Empty, Field, Icon, SectionTitle, Spinner } from "../components/ui";
@@ -44,6 +44,7 @@ export function CascadesPage() {
   const [onChain, setOnChain] = useState<Row[] | null>(null);
   const [loadingChain, setLoadingChain] = useState(false);
   const [includeDev, setIncludeDev] = useState(false);
+  const [suggestingWeights, setSuggestingWeights] = useState(false);
 
   // Preview / distribute
   const [owner, setOwner] = useState(config.readSource); // demo table until a wallet connects
@@ -315,9 +316,28 @@ export function CascadesPage() {
             icon="lan"
             aside={
               rows.length > 0 && (
-                <button className="btn-ghost px-2 py-1 text-xs" onClick={() => setRows((rs) => { const w = equalWeights(rs.length, 9000); return rs.map((r, i) => ({ ...r, bps: w[i] })); })}>
-                  <Icon name="balance" className="!text-[16px]" /> Equalize
-                </button>
+                <div className="flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    className="btn-ghost px-2 py-1 text-xs"
+                    disabled={suggestingWeights}
+                    onClick={async () => {
+                      setSuggestingWeights(true);
+                      try {
+                        const w = await suggestDependencyWeights(rows.map((r) => ({ name: r.label, ecosystem: r.ecosystem ?? "cargo" })));
+                        setRows((rs) => rs.map((r, i) => ({ ...r, bps: w[i] ?? r.bps })));
+                      } finally {
+                        setSuggestingWeights(false);
+                      }
+                    }}
+                    title="Suggest proportional weights based on download counts"
+                  >
+                    {suggestingWeights ? <Spinner className="size-3" /> : <Icon name="auto_graph" className="!text-[16px]" />} Suggest weights
+                  </button>
+                  <button className="btn-ghost px-2 py-1 text-xs" onClick={() => setRows((rs) => { const w = equalWeights(rs.length, 9000); return rs.map((r, i) => ({ ...r, bps: w[i] })); })}>
+                    <Icon name="balance" className="!text-[16px]" /> Equalize
+                  </button>
+                </div>
               )
             }
           >

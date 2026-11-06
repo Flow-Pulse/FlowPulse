@@ -557,3 +557,137 @@ export async function resolveMaintainerFundingAddress(
     return null;
   }
 }
+
+
+// ---------- Download Count Weight Suggestion ----------
+
+/**
+ * Pure weight allocator based on package downloads using the Hamilton-Hare Largest Remainder Method.
+ * Guarantees that the sum of allocated basis points strictly equals `targetBps` with no drift.
+ * Ensures each package receives at least `minFloorBps` when feasible.
+ * Falls back gracefully to `equalWeights` when all downloads are 0 or empty.
+ */
+export function allocateWeightsByDownloads(
+  downloads: number[],
+  targetBps = 9000,
+  minFloorBps = 50
+): number[] {
+  const n = downloads.length;
+  if (n === 0) return [];
+  if (n === 1) return [targetBps];
+
+  // If even allocating the minimum floor exceeds targetBps, scale down floor
+  const effectiveFloor = n * minFloorBps <= targetBps ? minFloorBps : Math.floor(targetBps / n);
+
+  // Clean downloads array (replace negatives or NaNs with 0)
+  const cleanDownloads = downloads.map((d) => (typeof d === "number" && !isNaN(d) && d > 0 ? d : 0));
+  const totalDownloads = cleanDownloads.reduce((acc, d) => acc + d, 0);
+
+  // If no package has any downloads, distribute evenly
+  if (totalDownloads <= 0) {
+    return equalWeights(n, targetBps);
+  }
+
+  const unreservedBps = targetBps - n * effectiveFloor;
+  if (unreservedBps <= 0) {
+    return equalWeights(n, targetBps);
+  }
+
+  // Initial floor allocation
+  const alloc = new Array<number>(n).fill(effectiveFloor);
+
+  // Calculate proportional quotas and split into integer and fractional parts
+  const fractions: { index: number; remainder: number; downloads: number }[] = [];
+  let allocatedAboveFloor = 0;
+
+  for (let i = 0; i < n; i++) {
+    const rawQuota = (cleanDownloads[i] / totalDownloads) * unreservedBps;
+    const intQuota = Math.floor(rawQuota);
+    const remainder = rawQuota - intQuota;
+
+    alloc[i] += intQuota;
+    allocatedAboveFloor += intQuota;
+    fractions.push({ index: i, remainder, downloads: cleanDownloads[i] });
+  }
+
+  let remainingBps = unreservedBps - allocatedAboveFloor;
+
+  // Hamilton-Hare largest remainder distribution:
+  // Sort descending by remainder fraction. Tie-break by highest download count, then original index.
+  fractions.sort((a, b) => {
+    if (Math.abs(b.remainder - a.remainder) > 1e-9) {
+      return b.remainder - a.remainder;
+    }
+    if (b.downloads !== a.downloads) {
+      return b.downloads - a.downloads;
+    }
+    return a.index - b.index;
+  });
+
+  for (let i = 0; i < remainingBps && i < fractions.length; i++) {
+    alloc[fractions[i].index] += 1;
+  }
+
+  return alloc;
+}
+
+/**
+ * Fetches all-time total downloads for a Rust crate from crates.io.
+ */
+export async function fetchCrateDownloads(name: string): Promise<number> {
+  try {
+    const res = await fetch(`https://crates.io/api/v1/crates/${encodeURIComponent(name)}`);
+    if (!res.ok) return 0;
+    const json = await res.json();
+    return Number(json?.crate?.downloads) || 0;
+  } catch {
+    return 0;
+  }
+}
+
+/**
+ * Fetches last-month download counts for an npm package from api.npmjs.org.
+ */
+export async function fetchNpmDownloads(name: string): Promise<number> {
+  try {
+    const res = await fetch(`https://api.npmjs.org/downloads/point/last-month/${encodeURIComponent(name)}`);
+    if (!res.ok) return 0;
+    const json = await res.json();
+    return Number(json?.downloads) || 0;
+  } catch {
+    return 0;
+  }
+}
+
+/**
+ * Fetches download counts for a dependency across crates.io or npm.
+ */
+export async function fetchPackageDownloads(dep: Pick<Dependency, "name" | "ecosystem">): Promise<number> {
+  if (dep.ecosystem === "cargo") {
+    return fetchCrateDownloads(dep.name);
+  } else {
+    return fetchNpmDownloads(dep.name);
+  }
+}
+
+/**
+ * Queries download metrics for a list of dependencies in parallel and calculates
+ * proportional split weights in basis points (strictly summing to `targetBps`).
+ */
+export async function suggestDependencyWeights(
+  deps: Pick<Dependency, "name" | "ecosystem">[],
+  targetBps = 9000,
+  minFloorBps = 50
+): Promise<number[]> {
+  if (deps.length === 0) return [];
+  if (deps.length === 1) return [targetBps];
+
+  try {
+    const downloadCounts = await Promise.all(
+      deps.map((dep) => fetchPackageDownloads(dep).catch(() => 0))
+    );
+    return allocateWeightsByDownloads(downloadCounts, targetBps, minFloorBps);
+  } catch {
+    return equalWeights(deps.length, targetBps);
+  }
+}
