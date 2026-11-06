@@ -47,6 +47,8 @@ In the app, open the wallet menu and use **Friendbot** to fund your Freighter ac
 
 ## How it works
 
+> Detailed contract architecture, mathematical formulas, and sequence/flow diagrams are documented in [`docs/architecture.md`](docs/architecture.md).
+
 ### StreamRouter
 Accrual is a pure function of ledger close time, so no keeper, cron, or oracle is needed:
 
