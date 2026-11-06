@@ -1,0 +1,44 @@
+name: "FlowPulse Bounty Stream Evaluator"
+description: "Evaluates merged pull requests against .flowpulse.yml rules, extracts the contributor's Stellar address, and opens an automated per-second micro-stream bounty."
+author: "FlowPulse"
+
+branding:
+  icon: "bolt"
+  color: "blue"
+
+inputs:
+  config-path:
+    description: "Path to the FlowPulse bounty rule configuration file"
+    required: false
+    default: ".flowpulse.yml"
+  dry-run:
+    description: "When true, evaluates rules and logs decisions without submitting on-chain transactions"
+    required: false
+    default: "true"
+  stellar-secret-key:
+    description: "Stellar secret key (S...) of the repository sponsor account for funding bounty streams"
+    required: false
+  network:
+    description: "Stellar network ('testnet' or 'mainnet')"
+    required: false
+    default: "testnet"
+
+outputs:
+  matched:
+    description: "Boolean indicating whether the pull request matched a bounty rule"
+  rule-name:
+    description: "Name of the matched bounty rule"
+  recipient:
+    description: "Extracted recipient Stellar address"
+  amount:
+    description: "Bounty payout amount"
+  token:
+    description: "Payout token code (e.g. XLM, USDC)"
+  duration-hours:
+    description: "Stream duration in hours"
+  status:
+    description: "Execution status ('dry_run_success', 'submitted', 'not_matched', 'error')"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"

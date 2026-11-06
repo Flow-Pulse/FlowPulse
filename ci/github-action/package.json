@@ -1,0 +1,12 @@
+{
+  "name": "@flowpulse/github-action",
+  "version": "0.1.0",
+  "description": "Headless GitHub Action that evaluates FlowPulse bounty rules on merged pull requests",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@stellar/stellar-sdk": "^17.4.0"
+  }
+}
