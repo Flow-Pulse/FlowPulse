@@ -22,10 +22,47 @@ export const config = {
 /** Native XLM Stellar Asset Contract on testnet. */
 export const XLM_SAC = Asset.native().contractId(Networks.TESTNET);
 
-export const TOKENS: Record<string, { code: string; decimals: number }> = {
-  [XLM_SAC]: { code: "XLM", decimals: 7 },
+/** Circle USDC testnet issuer & Stellar Asset Contract */
+export const USDC_ISSUER = "GBBD47IF6LWK7P7MDEVSCWR7DPUWV3NY3DTQEVFL4NAT4AQH3ZLLFLA5";
+export const USDC_ASSET = new Asset("USDC", USDC_ISSUER);
+export const USDC_SAC = USDC_ASSET.contractId(Networks.TESTNET);
+
+export interface TokenInfo {
+  contractId: string;
+  code: string;
+  decimals: number;
+  name: string;
+  issuer?: string;
+}
+
+export const TOKENS: Record<string, TokenInfo> = {
+  [XLM_SAC]: {
+    contractId: XLM_SAC,
+    code: "XLM",
+    decimals: 7,
+    name: "Stellar Lumens",
+  },
+  [USDC_SAC]: {
+    contractId: USDC_SAC,
+    code: "USDC",
+    decimals: 7,
+    name: "USD Coin (Testnet)",
+    issuer: USDC_ISSUER,
+  },
 };
 
-export function tokenMeta(address: string) {
-  return TOKENS[address] ?? { code: address.slice(0, 4) + "…", decimals: 7 };
+export const SUPPORTED_TOKENS: TokenInfo[] = [
+  TOKENS[XLM_SAC],
+  TOKENS[USDC_SAC],
+];
+
+export function tokenMeta(address: string): TokenInfo {
+  return (
+    TOKENS[address] ?? {
+      contractId: address,
+      code: address.slice(0, 4) + "…",
+      decimals: 7,
+      name: "Unknown SAC Token",
+    }
+  );
 }

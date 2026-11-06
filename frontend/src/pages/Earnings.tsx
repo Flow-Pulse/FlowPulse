@@ -2,34 +2,53 @@ import { useEffect, useMemo, useState } from "react";
 import { useApp } from "../state";
 import { useStreams } from "../hooks/useStreams";
 import { splitter, status, streamedAt, streamedAtSmooth, withdrawableAt } from "../lib/contracts";
-import { config, XLM_SAC } from "../lib/config";
+import { config, XLM_SAC, tokenMeta, SUPPORTED_TOKENS } from "../lib/config";
 import { sv } from "../lib/soroban";
 import { fromUnits, shortAddr, timeAgo } from "../lib/format";
 import { loadReceipts, parseReceipt, type Receipt } from "../lib/receipts";
+import { fetchContractEvents, mergeEventsWithReceipts, type DecodedPayoutEvent } from "../lib/events";
 import { xlmBalance } from "../lib/wallet";
 import { Banner } from "../components/Shell";
 import { CopyButton, Empty, Icon, Pip, SectionTitle, useNow } from "../components/ui";
 
 const FWD_KEY = "flowpulse.autoforward.v1";
 
-function useReceipts() {
-  const [list, setList] = useState<Receipt[]>(loadReceipts);
+function usePayoutLedger(address?: string) {
+  const [receipts, setReceipts] = useState<Receipt[]>(loadReceipts);
+  const [rpcEvents, setRpcEvents] = useState<DecodedPayoutEvent[]>([]);
+  const [loadingRpc, setLoadingRpc] = useState(false);
+
   useEffect(() => {
-    const on = () => setList(loadReceipts());
+    const on = () => setReceipts(loadReceipts());
     window.addEventListener("flowpulse:receipts", on);
     return () => window.removeEventListener("flowpulse:receipts", on);
   }, []);
-  return list;
+
+  useEffect(() => {
+    if (!address) {
+      setRpcEvents([]);
+      return;
+    }
+    setLoadingRpc(true);
+    fetchContractEvents(address)
+      .then((evs) => setRpcEvents(evs))
+      .catch(() => {})
+      .finally(() => setLoadingRpc(false));
+  }, [address]);
+
+  const items = useMemo(() => mergeEventsWithReceipts(rpcEvents, receipts), [rpcEvents, receipts]);
+  return { items, loadingRpc, receiptCount: receipts.length };
 }
 
 export function EarningsPage() {
   const { address, connect, runTx, openReceipt, toast, version } = useApp();
   const { streams, scope } = useStreams();
-  const receipts = useReceipts();
+  const { items: ledgerItems, loadingRpc, receiptCount } = usePayoutLedger(address ?? undefined);
   const now = useNow(100);
   const nowSec = now / 1000;
   const [balance, setBalance] = useState<string | null>(null);
   const [hasTable, setHasTable] = useState(false);
+  const [tokenFilter, setTokenFilter] = useState<string>("all");
   const [fwd, setFwd] = useState<number>(() => {
     try {
       return Number(localStorage.getItem(FWD_KEY) ?? "0");
@@ -53,8 +72,12 @@ export function EarningsPage() {
   }, [address, version]);
 
   const mine = scope === "mine";
-  const incoming = mine ? streams.filter((s) => s.recipient === address && s.token === XLM_SAC) : [];
-  const outgoing = mine ? streams.filter((s) => s.sender === address && s.token === XLM_SAC) : [];
+  const incoming = mine
+    ? streams.filter((s) => s.recipient === address && (tokenFilter === "all" || s.token === tokenFilter))
+    : [];
+  const outgoing = mine
+    ? streams.filter((s) => s.sender === address && (tokenFilter === "all" || s.token === tokenFilter))
+    : [];
 
   const unclaimedSmooth = incoming.reduce((a, s) => a + Math.max(0, streamedAtSmooth(s, now) - Number(s.withdrawn)), 0);
   const unclaimed = incoming.reduce((a, s) => a + withdrawableAt(s, nowSec), 0n);
@@ -123,12 +146,33 @@ export function EarningsPage() {
             <span className="chip-ok"><Pip tone="ok" pulse={rateIn > 0n} /> {rateIn > 0n ? "LIVE ACCRUAL" : "IDLE"}</span>
             <span className="chip"><Icon name="verified" className="!text-[14px] text-cobalt" /> Soroban p30</span>
           </div>
-          <div className="label">Unclaimed streaming balance</div>
+          <div className="flex items-center justify-between gap-2">
+            <div className="label">Unclaimed streaming balance</div>
+            <div className="flex gap-1">
+              <button
+                type="button"
+                onClick={() => setTokenFilter("all")}
+                className={`rounded-full border px-2 py-0.5 font-mono text-[10px] ${tokenFilter === "all" ? "border-cobalt bg-cobalt text-white" : "border-line bg-vellum text-ink-2"}`}
+              >
+                All
+              </button>
+              {SUPPORTED_TOKENS.map((t) => (
+                <button
+                  key={t.contractId}
+                  type="button"
+                  onClick={() => setTokenFilter(t.contractId)}
+                  className={`rounded-full border px-2 py-0.5 font-mono text-[10px] ${tokenFilter === t.contractId ? "border-cobalt bg-cobalt text-white" : "border-line bg-vellum text-ink-2"}`}
+                >
+                  {t.code}
+                </button>
+              ))}
+            </div>
+          </div>
           <div className="mt-1 flex items-baseline gap-2">
             <span className="tnum font-display text-4xl font-semibold tracking-tight text-ink md:text-5xl">
               {(unclaimedSmooth / 1e7).toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 4 })}
             </span>
-            <span className="font-mono text-sm text-cobalt">XLM</span>
+            <span className="font-mono text-sm text-cobalt">{tokenFilter === "all" ? "XLM/USDC" : tokenMeta(tokenFilter).code}</span>
           </div>
           <div className="mt-1 flex flex-wrap items-center gap-2 font-mono text-xs text-lead">
             <span className="chip-ok">+{fromUnits(rateIn * 60n, 7, 4)} XLM/min</span>
@@ -211,26 +255,86 @@ export function EarningsPage() {
         </section>
 
         <section>
-          <SectionTitle icon="history" aside={<span className="label">{receipts.length} receipts</span>}>
+          <SectionTitle
+            icon="history"
+            aside={
+              <span className="flex items-center gap-1.5 font-mono text-[11px] text-lead">
+                {loadingRpc && <Pip tone="ok" pulse />}
+                <span>{ledgerItems.length} transactions</span>
+                <span className="text-line">·</span>
+                <span>{receiptCount} local receipts</span>
+              </span>
+            }
+          >
             Payout ledger
           </SectionTitle>
-          {receipts.length === 0 ? (
-            <Empty icon="receipt_long" title="No receipts yet">Every transaction you sign here produces an RFC-8785 audit receipt, stored in this browser.</Empty>
+          {ledgerItems.length === 0 ? (
+            <Empty icon="receipt_long" title="No history found">
+              {loadingRpc
+                ? "Querying Soroban contract events from RPC..."
+                : "No on-chain events or local receipts found for this address."}
+            </Empty>
           ) : (
             <div className="panel divide-y divide-line-faint">
-              {receipts.slice(0, 20).map((r) => (
-                <button key={r.receipt.tx_hash} onClick={() => openReceipt(r)} className="flex w-full items-center gap-3 p-3 text-left hover:bg-vellum">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-sm border border-line bg-vellum">
-                    <Icon name={ICON[r.receipt.function] ?? "receipt_long"} className="text-cobalt" />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div className="truncate text-sm font-medium text-ink">{LABEL[r.receipt.function] ?? r.receipt.function}</div>
-                    <div className="truncate font-mono text-[11px] text-lead">
-                      {timeAgo(Date.parse(r.receipt.ledger_close_time))} · tx {r.receipt.tx_hash.slice(0, 8)}…
+              {ledgerItems.slice(0, 30).map((item) => (
+                <div
+                  key={item.key}
+                  className="flex w-full items-center justify-between gap-3 p-3 text-left transition-colors hover:bg-vellum"
+                >
+                  <button
+                    type="button"
+                    className="flex min-w-0 flex-1 items-center gap-3 text-left outline-none"
+                    onClick={() => {
+                      if (item.receipt) {
+                        openReceipt(item.receipt);
+                      } else if (item.txHash) {
+                        window.open(`${config.explorer}/tx/${item.txHash}`, "_blank");
+                      }
+                    }}
+                  >
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-sm border border-line bg-vellum">
+                      <Icon name={ICON[item.functionName] ?? "receipt_long"} className="text-cobalt" />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="truncate text-sm font-medium text-ink">
+                          {LABEL[item.functionName] ?? item.title}
+                        </span>
+                        {item.amount && (
+                          <span className="font-mono text-xs font-semibold text-cobalt">
+                            {fromUnits(BigInt(item.amount), 7, 2)} XLM
+                          </span>
+                        )}
+                      </div>
+                      <div className="truncate font-mono text-[11px] text-lead">
+                        {timeAgo(item.timestamp)} · tx {item.txHash ? `${item.txHash.slice(0, 8)}…` : "unrecorded"}
+                      </div>
                     </div>
+                  </button>
+
+                  <div className="flex shrink-0 items-center gap-2">
+                    {item.receipt ? (
+                      <button
+                        type="button"
+                        onClick={() => openReceipt(item.receipt!)}
+                        className="chip-ok flex items-center gap-1 text-[10px]"
+                        title="Click to view RFC-8785 signed receipt"
+                      >
+                        <Icon name="verified" className="!text-[12px]" /> Receipt
+                      </button>
+                    ) : (
+                      <a
+                        href={`${config.explorer}/tx/${item.txHash}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="chip flex items-center gap-1 text-[10px] text-lead hover:text-ink-2"
+                        title="View transaction on Stellar Expert"
+                      >
+                        <Icon name="link" className="!text-[12px]" /> RPC Event ↗
+                      </a>
+                    )}
                   </div>
-                  <span className="chip-ok"><Icon name="check_circle" className="!text-[14px]" /> Settled</span>
-                </button>
+                </div>
               ))}
             </div>
           )}

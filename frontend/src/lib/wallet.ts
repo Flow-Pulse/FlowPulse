@@ -5,7 +5,7 @@ import {
   requestAccess,
   signTransaction,
 } from "@stellar/freighter-api";
-import { config } from "./config";
+import { config, XLM_SAC, USDC_SAC, USDC_ISSUER } from "./config";
 
 export async function freighterInstalled(): Promise<boolean> {
   try {
@@ -71,6 +71,55 @@ export async function xlmBalance(address: string): Promise<string | null> {
     const j = await res.json();
     const native = j.balances?.find((b: { asset_type: string }) => b.asset_type === "native");
     return native?.balance ?? "0";
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Checks whether an account has an established trustline for a classic asset (e.g. USDC).
+ * Returns true if trustline exists, false if explicitly absent, and true if lookup fails (to not block offline/simulation).
+ */
+export async function hasTrustline(
+  address: string,
+  assetCode: string,
+  issuer: string
+): Promise<boolean> {
+  try {
+    const res = await fetch(`${config.horizonUrl}/accounts/${address}`);
+    if (!res.ok) return true;
+    const j = await res.json();
+    if (!Array.isArray(j.balances)) return true;
+    return j.balances.some(
+      (b: { asset_code?: string; asset_issuer?: string }) =>
+        b.asset_code === assetCode && b.asset_issuer === issuer
+    );
+  } catch {
+    return true;
+  }
+}
+
+/**
+ * Fetches balance for any supported token (XLM, USDC) from Horizon.
+ */
+export async function tokenBalance(address: string, tokenAddress: string): Promise<string | null> {
+  if (tokenAddress === XLM_SAC) {
+    return xlmBalance(address);
+  }
+  try {
+    const res = await fetch(`${config.horizonUrl}/accounts/${address}`);
+    if (!res.ok) return null;
+    const j = await res.json();
+    if (!Array.isArray(j.balances)) return null;
+
+    if (tokenAddress === USDC_SAC) {
+      const b = j.balances.find(
+        (x: { asset_code?: string; asset_issuer?: string }) =>
+          x.asset_code === "USDC" && x.asset_issuer === USDC_ISSUER
+      );
+      return b?.balance ?? "0";
+    }
+    return null;
   } catch {
     return null;
   }

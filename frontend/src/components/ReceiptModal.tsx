@@ -3,6 +3,7 @@ import { useApp } from "../state";
 import { canonical, downloadJson, jsonSafe, verifyReceipt, type Receipt, type Verification } from "../lib/receipts";
 import { config } from "../lib/config";
 import { shortAddr } from "../lib/format";
+import { encodeQr, qrToSvgPath } from "../lib/qr";
 import { CopyButton, Icon, Sheet, Spinner } from "./ui";
 
 /** Flip one bit of the first character of the function name to show tamper detection. */
@@ -44,6 +45,21 @@ export function ReceiptModal() {
       setV(null);
     }
   }, [receipt]);
+
+  const explorerUrl = useMemo(
+    () => (receipt ? `${config.explorer}/tx/${receipt.receipt.tx_hash}` : ""),
+    [receipt]
+  );
+
+  const qrData = useMemo(() => {
+    if (!explorerUrl) return null;
+    try {
+      const matrix = encodeQr(explorerUrl);
+      return { size: matrix.size, path: qrToSvgPath(matrix) };
+    } catch {
+      return null;
+    }
+  }, [explorerUrl]);
 
   if (!receipt || !subject) return null;
   const body = mode === "pretty" ? JSON.stringify(jsonSafe(subject), null, 2) : canonical(subject.receipt);
@@ -190,13 +206,51 @@ export function ReceiptModal() {
         />
       </div>
 
+      {/* Mobile Verification QR Code */}
+      <div className="panel mb-4 p-4">
+        <div className="flex flex-col items-center gap-4 sm:flex-row">
+          <div className="flex size-28 shrink-0 items-center justify-center rounded-sm border border-line bg-white p-1.5 shadow-xs">
+            {qrData ? (
+              <svg
+                viewBox={`-2 -2 ${qrData.size + 4} ${qrData.size + 4}`}
+                className="size-full fill-ink"
+                shapeRendering="crispEdges"
+                aria-label="Transaction explorer QR Code"
+              >
+                <path d={qrData.path} />
+              </svg>
+            ) : (
+              <Spinner className="size-6 text-lead" />
+            )}
+          </div>
+          <div className="min-w-0 flex-1 space-y-1 text-center sm:text-left">
+            <div className="flex items-center justify-center gap-1.5 font-display text-sm font-semibold text-ink sm:justify-start">
+              <Icon name="qr_code_2" className="text-cobalt" /> Mobile explorer verification
+            </div>
+            <p className="text-xs text-lead">
+              Scan with your phone camera to inspect and verify this transaction on Stellar Expert testnet explorer.
+            </p>
+            <div className="pt-1">
+              <a
+                className="inline-flex items-center gap-1 truncate font-mono text-[11px] text-cobalt hover:underline"
+                target="_blank"
+                rel="noreferrer"
+                href={explorerUrl}
+              >
+                {explorerUrl} <Icon name="open_in_new" className="!text-[12px]" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {allGood !== undefined && (
         <div className="grid grid-cols-2 gap-2">
           <button className="btn-primary col-span-2" onClick={() => downloadJson(`receipt-${r.tx_hash.slice(0, 12)}.json`, receipt)}>
             <Icon name="download" /> Download receipt.json
           </button>
           <CopyButton value={JSON.stringify(receipt, null, 2)} label="Copy JSON" className="!py-2 !text-sm" />
-          <a className="btn-secondary" target="_blank" rel="noreferrer" href={`${config.explorer}/tx/${r.tx_hash}`}>
+          <a className="btn-secondary" target="_blank" rel="noreferrer" href={explorerUrl}>
             <Icon name="open_in_new" /> View on explorer
           </a>
         </div>
