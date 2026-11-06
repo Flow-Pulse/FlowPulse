@@ -250,11 +250,12 @@ function StreamCard({ s, me, now }: { s: Stream; me: string | null; now: number 
       </div>
       {topUp && (
         <TopUpSheet
+          tokenAddress={s.token}
           onClose={() => setTopUp(false)}
           onSubmit={async (units) => {
-            const r = await call("top_up", "Top up stream", [sv.u64(s.id), sv.i128(units)], {
+            const r = await call("top_up", `Top up ${t.code} stream`, [sv.u64(s.id), sv.i128(units)], {
               id: s.id.toString(),
-              amount: `${units} stroops (${fromUnits(units)} XLM)`,
+              amount: `${units} stroops (${fromUnits(units, t.decimals)} ${t.code})`,
             });
             if (r) setTopUp(false);
           }}
@@ -264,17 +265,18 @@ function StreamCard({ s, me, now }: { s: Stream; me: string | null; now: number 
   );
 }
 
-function TopUpSheet({ onClose, onSubmit }: { onClose: () => void; onSubmit: (units: bigint) => void }) {
+function TopUpSheet({ tokenAddress, onClose, onSubmit }: { tokenAddress: string; onClose: () => void; onSubmit: (units: bigint) => void }) {
+  const t = tokenMeta(tokenAddress);
   const [v, setV] = useState("50");
   let units: bigint | null = null;
   try {
-    units = toUnits(v);
+    units = toUnits(v, t.decimals);
   } catch {
     units = null;
   }
   return (
-    <Sheet open onClose={onClose} title="Top up stream">
-      <label className="label mb-1.5 block">Amount (XLM)</label>
+    <Sheet open onClose={onClose} title={`Top up ${t.code} stream`}>
+      <label className="label mb-1.5 block">Amount ({t.code})</label>
       <input className="input mb-3 font-mono" value={v} onChange={(e) => setV(e.target.value)} inputMode="decimal" />
       <button className="btn-primary w-full" disabled={!units || units <= 0n} onClick={() => units && onSubmit(units)}>
         Review &amp; sign

@@ -5,6 +5,7 @@ import { fundWithFriendbot, xlmBalance } from "../lib/wallet";
 import { fromUnits, shortAddr } from "../lib/format";
 import { config } from "../lib/config";
 import { CopyButton, Icon, Pip, Spinner } from "./ui";
+import { applyTheme, getStoredTheme, type Theme } from "../lib/theme";
 
 export type Route = "streams" | "cascades" | "ci" | "earnings";
 
@@ -43,6 +44,32 @@ function useNetwork() {
     };
   }, []);
   return { ledger, fee, online };
+}
+
+
+function ThemeToggle() {
+  const [theme, setThemeState] = useState<Theme>(() => getStoredTheme());
+
+  const cycle = () => {
+    const next: Theme = theme === "system" ? "dark" : theme === "dark" ? "light" : "system";
+    setThemeState(next);
+    applyTheme(next);
+  };
+
+  const icon = theme === "dark" ? "dark_mode" : theme === "light" ? "light_mode" : "settings_brightness";
+  const title = `Theme: ${theme} (click to cycle system/dark/light)`;
+
+  return (
+    <button
+      type="button"
+      className="btn-ghost size-8 p-1 text-lead hover:text-ink-2"
+      onClick={cycle}
+      title={title}
+      aria-label={title}
+    >
+      <Icon name={icon} className="!text-[18px]" />
+    </button>
+  );
 }
 
 function WalletButton() {
@@ -151,7 +178,7 @@ export function Shell({ route, onRoute, children }: { route: Route; onRoute: (r:
               </a>
             ))}
           </nav>
-          <WalletButton />
+          <div className="flex items-center gap-2"><ThemeToggle /><WalletButton /></div>
         </div>
       </header>
 

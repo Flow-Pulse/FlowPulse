@@ -1,0 +1,13 @@
+version: 1
+rules:
+  - name: Core architecture bounty
+    label: bounty-approved
+    amount: 150
+    token: XLM
+    duration_hours: 48
+
+  - name: Documentation and diagrams
+    label: area: docs
+    amount: 50
+    token: XLM
+    duration_hours: 24

@@ -1,0 +1,32 @@
+{
+  "action": "closed",
+  "number": 42,
+  "pull_request": {
+    "number": 42,
+    "title": "feat(core): implement high-throughput stream buffer",
+    "html_url": "https://github.com/Flow-Pulse/FlowPulse/pull/42",
+    "state": "closed",
+    "merged": true,
+    "merged_at": "2026-11-06T15:30:00Z",
+    "user": {
+      "login": "stellar-dev",
+      "id": 123456
+    },
+    "body": "### Summary\nOptimizes stream buffering across contracts.\n\n### Bounty Payout\nstellar: GBZXN7PIRZGNMHGA7MUUUF4GWPY5AYPV6LY4UV2GL6VJGIQRXFDNMADI",
+    "labels": [
+      {
+        "name": "bounty-approved"
+      },
+      {
+        "name": "area: contracts"
+      }
+    ]
+  },
+  "repository": {
+    "name": "FlowPulse",
+    "full_name": "Flow-Pulse/FlowPulse",
+    "owner": {
+      "login": "Flow-Pulse"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+name: FlowPulse Bounty Stream
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  evaluate-bounty:
+    name: Evaluate Merge Bounty
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Evaluate FlowPulse Bounty Rules
+        id: bounty
+        uses: ./ci/github-action
+        with:
+          config-path: ".flowpulse.yml"
+          dry-run: "true"
+          stellar-secret-key: ${{ secrets.STELLAR_SPONSOR_KEY }}
+          network: "testnet"
+
+      - name: Log Payout Decision
+        if: steps.bounty.outputs.matched == 'true'
+        run: |
+          echo "Bounty matched: ${{ steps.bounty.outputs.rule-name }}"
+          echo "Recipient: ${{ steps.bounty.outputs.recipient }}"
+          echo "Amount: ${{ steps.bounty.outputs.amount }} ${{ steps.bounty.outputs.token }}"
+          echo "Stream duration: ${{ steps.bounty.outputs.duration-hours }}h"
