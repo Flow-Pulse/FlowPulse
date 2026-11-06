@@ -4,7 +4,7 @@ import { useApp } from "../state";
 import { splitter, type Payout } from "../lib/contracts";
 import { config, XLM_SAC } from "../lib/config";
 import { cleanError, sv } from "../lib/soroban";
-import { equalWeights, fetchRepoManifest, parseManifest, registryUrl, type Dependency, type Manifest } from "../lib/manifest";
+import { equalWeights, fetchRepoManifest, parseManifest, registryUrl, resolveMaintainerFundingAddress, type Dependency, type Manifest } from "../lib/manifest";
 import { fromUnits, shortAddr, toUnits } from "../lib/format";
 import { Banner } from "../components/Shell";
 import { CopyButton, Empty, Field, Icon, SectionTitle, Spinner } from "../components/ui";
@@ -15,6 +15,7 @@ interface Row {
   recipient: string;
   bps: number;
   ecosystem?: Dependency["ecosystem"];
+  resolvedFromFunding?: boolean;
 }
 
 const MAX_SPLITS = 32;
@@ -78,12 +79,37 @@ export function CascadesPage() {
     const deps = m.deps.filter((d) => includeDev || d.kind === "normal" || d.kind === "peer").slice(0, MAX_SPLITS);
     // Default: 90% across deps, 10% reserve for the project itself.
     const w = equalWeights(deps.length, 9000);
-    setRows(
-      deps.map((d, i) => {
-        const existing = rows.find((r) => r.label === d.name);
-        return { key: `${d.name}-${i}`, label: d.name, recipient: existing?.recipient ?? "", bps: w[i], ecosystem: d.ecosystem };
-      }),
-    );
+    const initialRows: Row[] = deps.map((d, i) => {
+      const existing = rows.find((r) => r.label === d.name);
+      return {
+        key: `${d.name}-${i}`,
+        label: d.name,
+        recipient: existing?.recipient ?? "",
+        bps: w[i],
+        ecosystem: d.ecosystem,
+        resolvedFromFunding: existing?.resolvedFromFunding,
+      };
+    });
+    setRows(initialRows);
+
+    // Non-blocking auto-resolution of maintainer Stellar addresses from FUNDING.json
+    deps.forEach(async (d, i) => {
+      if (initialRows[i].recipient) return;
+      try {
+        const addr = await resolveMaintainerFundingAddress(d);
+        if (addr) {
+          setRows((current) =>
+            current.map((r, idx) =>
+              idx === i && !r.recipient
+                ? { ...r, recipient: addr, resolvedFromFunding: true }
+                : r
+            )
+          );
+        }
+      } catch {
+        // Silent and non-blocking
+      }
+    });
   }
 
   function parse() {
@@ -333,6 +359,23 @@ export function CascadesPage() {
                         <a className="chip hover:border-ink" href={registryUrl({ name: r.label, ecosystem: r.ecosystem })} target="_blank" rel="noreferrer">
                           {r.ecosystem === "cargo" ? "crate" : "npm"} ↗
                         </a>
+                      )}
+                      {r.resolvedFromFunding && (
+                        <span className="chip-ok flex items-center gap-1 text-[10px]" title="Prefilled from repository FUNDING.json">
+                          <Icon name="verified" className="!text-[12px]" /> resolved from FUNDING.json
+                        </span>
+                      )}
+                      {!r.recipient && (
+                        <button
+                          type="button"
+                          className="btn-ghost px-1.5 py-0.5 text-[10px] text-cobalt hover:underline"
+                          onClick={async () => {
+                            const addr = await resolveMaintainerFundingAddress({ name: r.label, ecosystem: r.ecosystem ?? "cargo" });
+                            if (addr) update(i, { recipient: addr, resolvedFromFunding: true });
+                          }}
+                        >
+                          <Icon name="search" className="!text-[12px]" /> Resolve FUNDING.json
+                        </button>
                       )}
                       <div className="flex items-center rounded-sm border border-cobalt/30 bg-cobalt/5">
                         <input

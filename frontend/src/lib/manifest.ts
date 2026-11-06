@@ -423,3 +423,137 @@ export async function fetchRepoManifest(repo: string): Promise<{ text: string; f
   }
   throw new Error(`No Cargo.toml or package.json at the root of ${slug}`);
 }
+
+
+// ---------- FUNDING.json Resolution ----------
+
+export const STELLAR_ADDR_REGEX = /^G[A-Z2-7]{55}$/;
+
+/**
+ * Extracts a normalized "owner/repo" slug from various GitHub repository URL formats.
+ */
+export function extractGitHubRepoSlug(url: string): string | null {
+  if (!url || typeof url !== "string") return null;
+  const clean = url
+    .replace(/^git\+/, "")
+    .replace(/^ssh:\/\/git@github\.com\/?/, "https://github.com/")
+    .replace(/^git@github\.com:/, "https://github.com/")
+    .replace(/\.git$/, "")
+    .trim();
+
+  const m = clean.match(/^https?:\/\/github\.com\/([A-Za-z0-9_.-]+)\/([A-Za-z0-9_.-]+)\/?$/);
+  if (m) {
+    return `${m[1]}/${m[2]}`;
+  }
+  return null;
+}
+
+/**
+ * Safely parses a FUNDING.json file string and extracts an Ed25519 Stellar public key address (G...).
+ */
+export function extractStellarAddressFromFundingJson(text: string): string | null {
+  try {
+    const data = JSON.parse(text);
+    if (!data || typeof data !== "object") return null;
+
+    if (typeof data.stellar === "string" && STELLAR_ADDR_REGEX.test(data.stellar.trim())) {
+      return data.stellar.trim();
+    }
+    if (typeof data.address === "string" && STELLAR_ADDR_REGEX.test(data.address.trim())) {
+      return data.address.trim();
+    }
+    if (data.drips && typeof data.drips === "object") {
+      if (typeof data.drips.stellar === "string" && STELLAR_ADDR_REGEX.test(data.drips.stellar.trim())) {
+        return data.drips.stellar.trim();
+      }
+    }
+    if (Array.isArray(data.accounts)) {
+      for (const item of data.accounts) {
+        if (
+          item &&
+          typeof item === "object" &&
+          (item.network === "stellar" || item.chain === "stellar" || item.platform === "stellar") &&
+          typeof item.address === "string" &&
+          STELLAR_ADDR_REGEX.test(item.address.trim())
+        ) {
+          return item.address.trim();
+        }
+      }
+    }
+    if (data.accounts && typeof data.accounts === "object" && !Array.isArray(data.accounts)) {
+      if (typeof data.accounts.stellar === "string" && STELLAR_ADDR_REGEX.test(data.accounts.stellar.trim())) {
+        return data.accounts.stellar.trim();
+      }
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Queries registry metadata (crates.io / npm) to find the GitHub repository URL for a package.
+ */
+export async function fetchDependencyRepoSlug(
+  dep: Pick<Dependency, "name" | "ecosystem">
+): Promise<string | null> {
+  try {
+    if (dep.ecosystem === "cargo") {
+      const res = await fetch(`https://crates.io/api/v1/crates/${encodeURIComponent(dep.name)}`);
+      if (!res.ok) return null;
+      const json = await res.json();
+      const repoUrl = json?.crate?.repository;
+      return repoUrl ? extractGitHubRepoSlug(repoUrl) : null;
+    } else {
+      const res = await fetch(`https://registry.npmjs.org/${encodeURIComponent(dep.name)}`);
+      if (!res.ok) return null;
+      const json = await res.json();
+      const repo = json?.repository;
+      const repoUrl = typeof repo === "string" ? repo : repo?.url;
+      return repoUrl ? extractGitHubRepoSlug(repoUrl) : null;
+    }
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Attempts to fetch and extract a Stellar address from FUNDING.json in a GitHub repository.
+ */
+export async function fetchFundingJsonAddress(repoSlug: string): Promise<string | null> {
+  const candidatePaths = [
+    `https://raw.githubusercontent.com/${repoSlug}/HEAD/.github/FUNDING.json`,
+    `https://raw.githubusercontent.com/${repoSlug}/HEAD/FUNDING.json`,
+  ];
+
+  for (const url of candidatePaths) {
+    try {
+      const res = await fetch(url);
+      if (res.ok) {
+        const text = await res.text();
+        const addr = extractStellarAddressFromFundingJson(text);
+        if (addr) return addr;
+      }
+    } catch {
+      // Continue to next path
+    }
+  }
+  return null;
+}
+
+/**
+ * Non-blocking maintainer address resolver: checks crates.io / npm for repository,
+ * then checks GitHub repository for FUNDING.json. Silently returns null on failure.
+ */
+export async function resolveMaintainerFundingAddress(
+  dep: Pick<Dependency, "name" | "ecosystem">,
+  knownRepoSlug?: string
+): Promise<string | null> {
+  try {
+    const slug = knownRepoSlug || (await fetchDependencyRepoSlug(dep));
+    if (!slug) return null;
+    return await fetchFundingJsonAddress(slug);
+  } catch {
+    return null;
+  }
+}
