@@ -2,6 +2,35 @@
 
 /* Architectural Drafting Standard — see design/systems/architectural_drafting_standard/DESIGN.md */
 @theme {
+  --color-paper: var(--color-paper);
+  --color-vellum: var(--color-vellum);
+  --color-canvas: var(--color-canvas);
+  --color-line: var(--color-line);
+  --color-line-faint: var(--color-line-faint);
+  --color-ink: var(--color-ink);
+  --color-ink-2: var(--color-ink-2);
+  --color-lead: var(--color-lead);
+  --color-cobalt: var(--color-cobalt);
+  --color-cobalt-hover: var(--color-cobalt-hover);
+  --color-cobalt-active: var(--color-cobalt-active);
+  --color-ok: var(--color-ok);
+  --color-ok-bg: var(--color-ok-bg);
+  --color-err: var(--color-err);
+  --color-err-bg: var(--color-err-bg);
+  --color-warn: var(--color-warn);
+  --color-warn-bg: var(--color-warn-bg);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+}
+
+:root {
   --color-paper: #ffffff;
   --color-vellum: #f6f8fa;
   --color-canvas: #f7f9ff;
@@ -19,15 +48,48 @@
   --color-err-bg: #ffebe9;
   --color-warn: #9a6700;
   --color-warn-bg: #fff8c5;
+}
 
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --color-paper: #161b22;
+    --color-vellum: #0d1117;
+    --color-canvas: #090d13;
+    --color-line: #30363d;
+    --color-line-faint: #21262d;
+    --color-ink: #f0f6fc;
+    --color-ink-2: #c9d1d9;
+    --color-lead: #8b949e;
+    --color-cobalt: #58a6ff;
+    --color-cobalt-hover: #79c0ff;
+    --color-cobalt-active: #388bfd;
+    --color-ok: #3fb950;
+    --color-ok-bg: #032b13;
+    --color-err: #f85149;
+    --color-err-bg: #3d1214;
+    --color-warn: #d29922;
+    --color-warn-bg: #342403;
+  }
+}
 
-  --radius-xs: 0.125rem;
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
+:root.dark {
+  --color-paper: #161b22;
+  --color-vellum: #0d1117;
+  --color-canvas: #090d13;
+  --color-line: #30363d;
+  --color-line-faint: #21262d;
+  --color-ink: #f0f6fc;
+  --color-ink-2: #c9d1d9;
+  --color-lead: #8b949e;
+  --color-cobalt: #58a6ff;
+  --color-cobalt-hover: #79c0ff;
+  --color-cobalt-active: #388bfd;
+  --color-ok: #3fb950;
+  --color-ok-bg: #032b13;
+  --color-err: #f85149;
+  --color-err-bg: #3d1214;
+  --color-warn: #d29922;
+  --color-warn-bg: #342403;
 }
 
 @layer base {
@@ -96,8 +158,8 @@
     @apply border-b border-line-faint last:border-b-0 hover:bg-vellum;
   }
   .floating {
-    border: 1px solid var(--color-ink);
-    box-shadow: 2px 2px 0 0 rgb(15 23 42 / 0.08);
+    border: 1px solid var(--color-line);
+    box-shadow: 2px 2px 0 0 rgb(15 23 42 / 0.15);
   }
 }
 
