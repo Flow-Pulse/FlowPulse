@@ -1,4 +1,5 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, useRef, type ReactNode } from "react";
+import { handleFocusTrap, FOCUSABLE_SELECTOR } from "../lib/focus";
 
 export function Icon({ name, className = "", fill = false }: { name: string; className?: string; fill?: boolean }) {
   return (
@@ -60,20 +61,66 @@ export function Sheet({
   children: ReactNode;
   wide?: boolean;
 }) {
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+
+    // Capture the trigger element before opening
+    triggerRef.current = document.activeElement as HTMLElement | null;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+
+      if (dialogRef.current) {
+        handleFocusTrap({
+          container: dialogRef.current,
+          event: e,
+          activeElement: document.activeElement,
+        });
+      }
+    };
+
     window.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+
+    // Focus into dialog on open
+    const timer = setTimeout(() => {
+      if (dialogRef.current) {
+        const focusables = dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
+        if (focusables.length > 0) {
+          focusables[0].focus();
+        } else {
+          dialogRef.current.focus();
+        }
+      }
+    }, 0);
+
     return () => {
+      clearTimeout(timer);
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
+      // Restore focus to trigger element on close
+      triggerRef.current?.focus();
     };
   }, [open, onClose]);
+
   if (!open) return null;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center md:items-center" role="dialog" aria-modal="true">
+    <div
+      ref={dialogRef}
+      className="fixed inset-0 z-50 flex items-end justify-center md:items-center"
+      role="dialog"
+      aria-modal="true"
+      tabIndex={-1}
+    >
       <button aria-label="Close" className="absolute inset-0 bg-ink/30" onClick={onClose} />
       <div
         className={`floating relative max-h-[92vh] w-full overflow-y-auto rounded-t-lg bg-paper md:rounded-lg ${
