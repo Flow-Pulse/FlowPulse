@@ -5,6 +5,7 @@ import { signWithFreighter } from "../lib/wallet";
 import { makeReceipt, saveReceipt } from "../lib/receipts";
 import { config } from "../lib/config";
 import { fromUnits, shortAddr } from "../lib/format";
+import { toStellarCliCommand } from "../lib/cli";
 import { CopyButton, Icon, KV, Sheet, Spinner } from "./ui";
 
 type Phase = "simulating" | "ready" | "failed" | "signing" | "submitting" | "done" | "error";
@@ -78,6 +79,13 @@ export function TxDrawer() {
   const fee = sim?.minResourceFee ? fromUnits(BigInt(sim.minResourceFee) + 100n, 7) : null;
   const busy = phase === "signing" || phase === "submitting" || phase === "simulating";
 
+  const cliCommand = toStellarCliCommand({
+    contractId: req.contractId,
+    method: req.method,
+    args: req.args,
+    source: address ?? undefined,
+  });
+
   return (
     <Sheet
       open
@@ -122,6 +130,10 @@ export function TxDrawer() {
               ))}
             </div>
             <div className="font-mono text-sm text-ink">)</div>
+            <div className="mt-3 flex items-center justify-between border-t border-line-faint pt-2">
+              <span className="font-mono text-[10px] text-lead">Stellar CLI command</span>
+              <CopyButton value={cliCommand} label="Copy CLI command" className="!py-0.5 text-[11px]" />
+            </div>
           </div>
 
           {/* Simulation */}
