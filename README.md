@@ -47,6 +47,8 @@ In the app, open the wallet menu and use **Friendbot** to fund your Freighter ac
 
 ## How it works
 
+> For detailed flowcharts, mathematical accrual proofs, and sequence diagrams, see [docs/architecture.md](docs/architecture.md).
+
 ### StreamRouter
 Accrual is a pure function of ledger close time, so no keeper, cron, or oracle is needed:
 
@@ -73,6 +75,7 @@ To verify one: canonicalize `receipt` with any RFC-8785 implementation, SHA-256 
 ## Repository layout
 
 ```
+docs/                 architecture specification & Mermaid diagrams
 contracts/            Soroban smart contracts (Rust)
   stream_router/      per-second streams
   cascade_splitter/   recursive split tables
