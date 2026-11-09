@@ -43,6 +43,7 @@ export function CascadesPage() {
   const [onChain, setOnChain] = useState<Row[] | null>(null);
   const [loadingChain, setLoadingChain] = useState(false);
   const [includeDev, setIncludeDev] = useState(false);
+  const [includeTransitive, setIncludeTransitive] = useState(false);
 
   // Preview / distribute
   const [owner, setOwner] = useState(config.readSource); // demo table until a wallet connects
@@ -89,7 +90,7 @@ export function CascadesPage() {
   function parse() {
     setParseError(null);
     try {
-      const m = parseManifest(text);
+      const m = parseManifest(text, "", { includeTransitive });
       if (m.deps.length === 0) throw new Error("No dependencies found");
       applyManifest(m);
     } catch (e) {
@@ -101,9 +102,9 @@ export function CascadesPage() {
     setParseError(null);
     setFetching(true);
     try {
-      const { text: t } = await fetchRepoManifest(repo.trim());
+      const { text: t, file } = await fetchRepoManifest(repo.trim(), { includeTransitive });
       setText(t);
-      const m = parseManifest(t);
+      const m = parseManifest(t, file, { includeTransitive });
       if (m.deps.length === 0) throw new Error("No dependencies found");
       applyManifest(m);
     } catch (e) {
@@ -239,7 +240,7 @@ export function CascadesPage() {
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     spellCheck={false}
-                    aria-label="Cargo.toml or package.json"
+                    aria-label="Cargo.toml, package.json, Cargo.lock, or package-lock.json"
                   />
                   <div className="flex flex-wrap gap-2">
                     <button className="btn-primary" onClick={parse}>
@@ -272,6 +273,10 @@ export function CascadesPage() {
               <label className="flex items-center gap-2 text-sm text-ink-2">
                 <input type="checkbox" className="size-4 accent-cobalt" checked={includeDev} onChange={(e) => setIncludeDev(e.target.checked)} />
                 Include dev / build dependencies
+              </label>
+              <label className="flex items-center gap-2 text-sm text-ink-2">
+                <input type="checkbox" className="size-4 accent-cobalt" checked={includeTransitive} onChange={(e) => setIncludeTransitive(e.target.checked)} />
+                Include transitive dependencies (lockfile, up to 32)
               </label>
               {parseError && <div className="text-sm text-err">{parseError}</div>}
               {manifest && (
